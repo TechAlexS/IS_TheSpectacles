@@ -34,7 +34,6 @@ import javax.sql.DataSource;
 				rs = prep.executeQuery();
 
 	 			while (rs.next()) {
-	 				
 	            	bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 	            	bean.setAddress(rs.getString("indirizzo"));
 	            	bean.setStatus(rs.getInt("attivo"));
@@ -43,6 +42,8 @@ import javax.sql.DataSource;
 	            	bean.setCap(rs.getInt("cap"));
 	            	bean.setEmail(rs.getString("email"));
 	            	bean.setTelefono(rs.getString("telefono"));
+	            	bean.setName(rs.getString("nome"));
+	            	bean.setName(rs.getString("surname"));
 	 			}
 
 	 		} finally {
@@ -79,6 +80,8 @@ import javax.sql.DataSource;
 	            	bean.setCap(rs.getInt("cap"));
 	            	bean.setEmail(rs.getString("email"));
 	            	bean.setTelefono(rs.getString("telefono"));
+	            	bean.setName(rs.getString("nome"));
+	            	bean.setSurname(rs.getString("cognome"));
 	 			}
 
 	 		} finally {
@@ -111,6 +114,8 @@ import javax.sql.DataSource;
             	bean.setCap(rs.getInt("cap"));
             	bean.setEmail(rs.getString("email"));
             	bean.setTelefono(rs.getString("telefono"));
+            	bean.setName(rs.getString("nome"));
+            	bean.setSurname(rs.getString("cognome"));
 				
 				indirizzi.add(bean);
 		}
@@ -154,7 +159,7 @@ import javax.sql.DataSource;
 		public void doUpdate(IndirizziBean indirizzo) throws SQLException {
 			Connection con = null;
 			PreparedStatement prep = null;
-			String sql = "UPDATE indirizzo SET idIndirizzo=?, indirizzo=?, attivo=?, citta=?, provincia=?, cap=?, email=?, telefono=?";
+			String sql = "UPDATE indirizzo SET idIndirizzo=?, indirizzo=?, attivo=?, citta=?, provincia=?, cap=?, email=?, telefono=?, nome=?, cognome=?";
 
 			try {
 				con = ds.getConnection();
@@ -168,6 +173,8 @@ import javax.sql.DataSource;
 				prep.setInt(6, indirizzo.getCap());
 				prep.setString(7, indirizzo.getEmail());
 				prep.setString(8, indirizzo.getTelefono());
+				prep.setString(9, indirizzo.getName());
+				prep.setString(10, indirizzo.getSurname());
 			
 				prep.executeUpdate();
 
@@ -201,7 +208,7 @@ import javax.sql.DataSource;
 			PreparedStatement prep = null;
 		
 			String insertSQL = "INSERT INTO " + IndirizziDao.TABLE_NAME
-					+ " (indirizzo, attivo, citta, provincia, cap, email, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					+ " (indirizzo, attivo, citta, provincia, cap, email, telefono, nome, cognome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
 				con = ds.getConnection();
 				prep = con.prepareStatement(insertSQL);
@@ -216,6 +223,8 @@ import javax.sql.DataSource;
 				prep.setInt(5, indirizzo.getCap());
 				prep.setString(6, indirizzo.getEmail());
 				prep.setString(7, indirizzo.getTelefono());
+				prep.setString(8,indirizzo.getName());
+				prep.setString(9,indirizzo.getSurname());
 			
 				prep.executeUpdate();
 

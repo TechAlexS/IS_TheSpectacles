@@ -60,7 +60,6 @@ public class ServletAddAddress extends HttpServlet {
 		
 		int status=0;
 		
-		/*
 		try {
 			IndirizziBean indirizzo= new IndirizziBean();
 			indirizzo.setName(nome);
@@ -81,15 +80,6 @@ public class ServletAddAddress extends HttpServlet {
 			System.out.println("Errore Servelt aggiungi indirizzo: " + e.getMessage());
 		}
 		
-		*/
-		
-		IndirizziBean indirizzo=new IndirizziBean(1,via,0,citta,provincia,cap,email,telefono,nome,cognome);
-		try {
-			indDao.doSave(indirizzo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		RequestDispatcher dis= getServletContext().getRequestDispatcher("/Indirizzo");
 		dis.forward(request, response);
