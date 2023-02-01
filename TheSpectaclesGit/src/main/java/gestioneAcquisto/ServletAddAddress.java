@@ -40,13 +40,16 @@ public class ServletAddAddress extends HttpServlet {
 		
 		
 		System.out.println("Sono nella Servlet aggiungi indirizzo: \n");
+		System.out.println("\n"+request.getParameter("user_name"));
+		System.out.println("\n"+request.getParameter("user_surname"));
 		System.out.println("\n"+request.getParameter("user_address"));
 		System.out.println("\n"+request.getParameter("city"));
 		System.out.println("\n"+request.getParameter("user_country"));
 		System.out.println("\n"+request.getParameter("zipcode"));
 		System.out.println("\n"+request.getParameter("user_phone"));
 
-
+		String nome=request.getParameter("user_name");
+		String cognome=request.getParameter("user_surname");
 		String telefono= request.getParameter("user_phone");
 		String via=  request.getParameter("user_address");
 		String citta= request.getParameter("city");
@@ -57,9 +60,11 @@ public class ServletAddAddress extends HttpServlet {
 		
 		int status=0;
 		
-		
+		/*
 		try {
 			IndirizziBean indirizzo= new IndirizziBean();
+			indirizzo.setName(nome);
+			indirizzo.setSurname(cognome);
 			indirizzo.setAddress(via);
 			indirizzo.setCap(cap);
 			indirizzo.setCity(citta);
@@ -76,6 +81,15 @@ public class ServletAddAddress extends HttpServlet {
 			System.out.println("Errore Servelt aggiungi indirizzo: " + e.getMessage());
 		}
 		
+		*/
+		
+		IndirizziBean indirizzo=new IndirizziBean(1,via,0,citta,provincia,cap,email,telefono,nome,cognome);
+		try {
+			indDao.doSave(indirizzo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		RequestDispatcher dis= getServletContext().getRequestDispatcher("/Indirizzo");
 		dis.forward(request, response);

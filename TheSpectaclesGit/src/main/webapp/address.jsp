@@ -57,6 +57,7 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
               <thead>
                 <tr>
                   <th>Nome</th>
+                  <th>Cognome</th>
                   <th>Indirizzo</th>
                   <th>Città</th>
                   <th>CAP</th>
@@ -65,20 +66,13 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
                 </tr>
               </thead>
                <tbody>
-         
-             
-                  
                   <%if (indirizzi != null && indirizzi.size() != 0) {
 						Iterator<?> it = indirizzi.iterator();
 						while (it.hasNext()) {
-							IndirizziBean bean = (IndirizziBean) it.next();%>
-                
-                  
-                 
-                  
-                
+							IndirizziBean bean = (IndirizziBean) it.next();%>      
                 <tr>
-                  <td><%= auth.getFirstName() %> <%= auth.getLastName() %></td>
+                  <td><%= bean.getName() %></td>
+                  <td><%= bean.getSurname() %></td>
                   <td><%= bean.getAddress() %></td>
                   <td><%= bean.getCity() %>, <%= bean.getProvince() %> </td>
                   <td><%= bean.getCap() %></td>

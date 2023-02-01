@@ -12,13 +12,15 @@ public class IndirizziBean implements Serializable {
 	int cap;
 	String email;
 	String telefono;
+	String name;
+	String surname;
 	
 	public IndirizziBean() {
 		
 	}
 	
 	public IndirizziBean(int idIndirizzo, String address, int status, String city, String province, int cap,
-			String email,String telefono) {
+			String email,String telefono,String name,String surname) {
 		
 		this.idIndirizzo = idIndirizzo;
 		this.address = address;
@@ -28,6 +30,8 @@ public class IndirizziBean implements Serializable {
 		this.cap = cap;
 		this.email = email;
 		this.telefono = telefono;
+		this.name=name;
+		this.surname=surname;
 	}
 
 	public int getIdIndirizzo() {
@@ -93,8 +97,24 @@ public class IndirizziBean implements Serializable {
 		this.telefono = telefono;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String nome) {
+		this.name=nome;
+	}
+	
+	public String getSurname() {
+		return surname;
+	}
+	
+	public void setSurname(String cognome) {
+		this.surname=cognome;
+	}
+	
 	public String toString() {
-		return "Indirizzi [idIndirizzo=" + idIndirizzo + ", address=" + address + ", status=" + status + ", city="
+		return "Indirizzi [idIndirizzo=" + idIndirizzo + "name=" + name + "surname=" + surname + ", address=" + address + ", status=" + status + ", city="
 				+ city + ", province=" + province + ", cap=" + cap + ", email=" + email + ", telefono=" + telefono + "]";
 	}
 	

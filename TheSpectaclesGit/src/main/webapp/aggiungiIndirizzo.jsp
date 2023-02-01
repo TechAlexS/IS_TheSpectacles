@@ -35,7 +35,14 @@ UtenteBean auth = (UtenteBean) request.getSession().getAttribute("auth");
                <div class="block billing-details">
                   <h4 class="widget-title">Indirizzo</h4>
                   
-           
+                     <div class="form-group">
+                        <label for="user_name">Nome </label>
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Mario">
+                     </div>
+                     <div class="form-group">
+                        <label for="user_surname">Cognome </label>
+                        <input type="text" class="form-control" id="user_surname" name="user_surname" placeholder="Rossi">
+                     </div>           
                      <div class="form-group">
                         <label for="user_address">Via </label>
                         <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Via Le mani dal Naso">
