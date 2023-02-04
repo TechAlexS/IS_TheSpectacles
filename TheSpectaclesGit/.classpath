@@ -15,5 +15,17 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/apiguardian-api-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/byte-buddy-1.12.22.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/byte-buddy-agent-1.12.22.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/junit-jupiter-api-5.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/junit-platform-commons-1.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/mockito-core-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/mockito-junit-jupiter-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/objenesis-3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/opentest4j-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-core-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-jcl-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-test-6.0.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
