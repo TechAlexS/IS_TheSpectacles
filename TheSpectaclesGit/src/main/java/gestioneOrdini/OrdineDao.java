@@ -15,7 +15,7 @@ import gestioneUtenza.UtenteBean;
 
 import java.text.SimpleDateFormat;
 
-
+import util.ConnectionPool;
 
 
 	 public class OrdineDao {
@@ -40,7 +40,7 @@ import java.text.SimpleDateFormat;
 					" VALUES (?,?,CURRENT_TIMESTAMP(),?)";
 
 			try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(query);
 				prep.setString(1, ordine.getIdOrder().toString());
 				prep.setString(2, ordine.getEmail());
@@ -56,7 +56,7 @@ import java.text.SimpleDateFormat;
 						prep.close();
 				} finally {
 					if (con != null)
-						con.close();
+						ConnectionPool.rilasciaConnessione(con);;
 				}
 			}
 	 	
@@ -71,7 +71,7 @@ import java.text.SimpleDateFormat;
 	 		String selectSQL = "SELECT * FROM " + OrdineDao.TABLE_NAME + " WHERE idOrdine = ?";
 	 		
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, idOrdine);
 				rs = prep.executeQuery();
@@ -93,7 +93,7 @@ import java.text.SimpleDateFormat;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);;
 	 		}
 	 		
 	 		return bean;
@@ -107,7 +107,7 @@ import java.text.SimpleDateFormat;
 	 		String selectSQL = "SELECT idOrdine,data,stato,SUM(prezzo_reale) AS totale FROM ecommerce.occhiale_ordine INNER JOIN ordine on occhiale_ordine.id_ordine=ordine.idOrdine  where email=? group by idOrdine";
 	 		
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				rs = prep.executeQuery();
@@ -132,7 +132,7 @@ import java.text.SimpleDateFormat;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);;
 	 		}
 	 		System.out.println("Ordini admin \n "+ordini);
 	 		return ordini;
@@ -149,7 +149,7 @@ import java.text.SimpleDateFormat;
 				sql += " ORDER BY " + order;
 			}
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, order);
 				rs = prep.executeQuery();
@@ -166,7 +166,7 @@ import java.text.SimpleDateFormat;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);;
 			}
 			return ordine;
 		}
@@ -177,7 +177,7 @@ import java.text.SimpleDateFormat;
 			String sql = "UPDATE ordine SET idOrder=?,  email=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 
 				prep.setString(1, ordine.getIdOrder().toString());
@@ -188,7 +188,7 @@ import java.text.SimpleDateFormat;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);;
 			}
 		}
 
@@ -198,7 +198,7 @@ import java.text.SimpleDateFormat;
 			String deleteSQL = "DELETE FROM " + OrdineDao.TABLE_NAME + " WHERE CODE = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setString(1, ordine.getIdOrder().toString());
@@ -208,7 +208,7 @@ import java.text.SimpleDateFormat;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);;
 			}
 		}
 
@@ -223,7 +223,7 @@ import java.text.SimpleDateFormat;
 					query += " ORDER BY " + order;
 				}
 				try {
-					con = ds.getConnection();
+					con = ConnectionPool.getConnection();
 					prep = con.prepareStatement(query);
 					prep.setString(1, user.getEmail());
 					rs = prep.executeQuery();
@@ -239,7 +239,7 @@ import java.text.SimpleDateFormat;
 					
 				} finally {
 					prep.close();
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);;
 				}
 	
 				return ordine;
@@ -255,7 +255,7 @@ import java.text.SimpleDateFormat;
 					"SELECT idOrdine,data,email,stato,SUM(prezzo_reale) AS totale FROM ecommerce.occhiale_ordine INNER JOIN ordine on occhiale_ordine.id_ordine=ordine.idOrdine " +
 					" WHERE data >= ? AND data <= ? group by idOrdine ORDER BY data DESC LIMIT  ?, ? "; // LIMIT skip, limit
 				try {
-					con = ds.getConnection();
+					con = ConnectionPool.getConnection();
 					prep = con.prepareStatement(query);
 					
 					prep.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(init));
@@ -278,7 +278,8 @@ import java.text.SimpleDateFormat;
 					
 				} finally {
 					prep.close();
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);
+					
 				}
 	
 				return ordine;
