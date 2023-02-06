@@ -72,6 +72,8 @@ public class OcchialeBean implements Serializable  {
 
 	/**
 	 * @param idGlasses id da assegnare all'occhiale
+	 * @precondition idGlasses==NULL
+	 * @postcondition idGlasses!=NULL
 	 * @return
 	 */
 	public void setIdGlasses(String idGlasses) {
@@ -237,6 +239,7 @@ public class OcchialeBean implements Serializable  {
 	
 	/**
 	 * @param setQuantity quantità da assegnare all'occhiale
+	 * @precondition quantity>=0
 	 * @return
 	 */
 	public void setQuantity (int q) {

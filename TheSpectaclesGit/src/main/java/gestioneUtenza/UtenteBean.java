@@ -100,8 +100,8 @@ public class UtenteBean implements Serializable, Cloneable {
 
 	/**
 	 * @param email indirizzo email dell'utente
-	 * @precondition l'email non esiste
-	 * @postcondition l'email è nel DB
+	 * @precondition email==NULL
+	 * @postcondition email!=NULL
 	 * @return 
 	 */
 	public void setEmail(String email) {
