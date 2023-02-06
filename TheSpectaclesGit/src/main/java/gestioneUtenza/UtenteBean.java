@@ -20,7 +20,6 @@ public class UtenteBean implements Serializable, Cloneable {
 	
 	public UtenteBean() {
 	}
-
 	/**
 	 * @param firstName nome dell'utente
 	 * @param lastName cognome dell'utente
