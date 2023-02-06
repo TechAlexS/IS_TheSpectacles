@@ -2,42 +2,44 @@ package test_gestioneUtenza;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.sql.DataSource;
+import javax.naming.InitialContext;
+
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import util.Model;
-import util.ServletContListener;
 
-/*
-import org.mockito.Mockito;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-*/
+
+import java.sql.Connection;
 import gestioneUtenza.*;
-import util.*;
+import util.ConnectionPool;
+
 
 public class TestUtenteDao {
 	
-	private static UtenteDao  dao = new UtenteDao();
-	private final UtenteBean bean = new UtenteBean("email@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
+	
+	private UtenteDao  dao = new UtenteDao();
+	private UtenteBean bean = new UtenteBean("e@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
+	
 	
 	
 		@BeforeEach
 		public void setUp() throws Exception{
-			dao.doSave(bean);
+			 dao.doSave(bean);
 	    }
 	
 		@AfterEach
 	    public void tearDown() throws Exception{
 			dao.doDelete(bean);
+			
 	    }
+		
 		
 		@Test 
 		  void testDoRetrieveByKey() throws SQLException {
@@ -74,6 +76,4 @@ public class TestUtenteDao {
 			 assertTrue(dao.esisteEmail(bean.getEmail()));
 		  }
 		  
-		
-
 }

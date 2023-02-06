@@ -15,7 +15,7 @@ import util.Model;
 
 import java.util.Date;
 
-
+import util.*;
 
 	 public class UtenteDao implements Model<UtenteBean, DataSource>{
 
@@ -23,7 +23,8 @@ import java.util.Date;
 
 	 	private DataSource ds;
 
-		public void setDB(DataSource obj) {
+		
+	 	public void setDB(DataSource obj) {
 			this.ds=obj;
 		}
 
@@ -37,7 +38,7 @@ import java.util.Date;
 
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, keys.get(0));
 				prep.setString(2, keys.get(1));
@@ -61,7 +62,7 @@ import java.util.Date;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -76,7 +77,7 @@ import java.util.Date;
 
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				
@@ -100,7 +101,7 @@ import java.util.Date;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		if(bean!=null)
 	 			return true;
@@ -116,7 +117,7 @@ import java.util.Date;
 
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				
@@ -142,7 +143,7 @@ import java.util.Date;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -157,7 +158,7 @@ import java.util.Date;
 
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				
@@ -181,7 +182,7 @@ import java.util.Date;
 	 			
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return indirizzo;
 		}
@@ -198,7 +199,7 @@ import java.util.Date;
 				sql += " ORDER BY " + order;
 			}
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				rs = prep.executeQuery();
 			
@@ -211,7 +212,7 @@ import java.util.Date;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return occhiali;
 		}
@@ -222,7 +223,7 @@ import java.util.Date;
 			String sql = "UPDATE utente SET password=? WHERE email=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, pass);
 				prep.setString(2,email);
@@ -232,7 +233,7 @@ import java.util.Date;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			
 		}
@@ -248,7 +249,7 @@ import java.util.Date;
 			String insertSQL = "INSERT INTO " + UtenteDao.TABLE_NAME
 					+ " (firstName, lastName, birthday, email,pass, role) VALUES (?, ?, ?, ?, ?, ?)";
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(insertSQL);
 
 				prep.setString(1, utente.getFirstName());
@@ -265,7 +266,7 @@ import java.util.Date;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
