@@ -1,4 +1,4 @@
-package test_gestioneUtenza;
+package test_Dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +25,7 @@ public class TestUtenteDao {
 	
 	
 	private UtenteDao  dao = new UtenteDao();
-	private UtenteBean bean = new UtenteBean("e@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
+	private UtenteBean bean = new UtenteBean("email@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
 	
 	
 	
@@ -58,7 +58,7 @@ public class TestUtenteDao {
 
 		  @Test
 		  void testDoSave() throws SQLException {
-			  UtenteBean bean2 = new UtenteBean("email@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
+			  UtenteBean bean2 = new UtenteBean("email2@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12),0);
 		    try {
 		      dao.doSave(bean2);
 		      	ArrayList<String> param= new ArrayList<String>();

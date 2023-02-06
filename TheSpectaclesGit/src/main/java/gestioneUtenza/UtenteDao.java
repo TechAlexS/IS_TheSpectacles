@@ -114,7 +114,8 @@ import util.*;
 			ResultSet rs = null;
 			
 			String selectSQL = "SELECT * FROM " + UtenteDao.TABLE_NAME + " WHERE email = ? ";
-
+			
+			
 
 	 		try {
 	 			con = ConnectionPool.getConnection();
@@ -194,14 +195,23 @@ import util.*;
 			Connection con = null;
 			PreparedStatement prep = null;
 			ResultSet rs = null;
-			String sql = "SELECT email FROM" + UtenteDao.TABLE_NAME;
+			
+			
+			
+			String sql = "SELECT email FROM " + UtenteDao.TABLE_NAME;
 		    if(order !=null && !order.equals("")) {
 				sql += " ORDER BY " + order;
 			}
+		    
 			try {
+				System.out.println("sono in doRetrieveAll");
 				con = ConnectionPool.getConnection();
+				System.out.println(con);
 				prep = con.prepareStatement(sql);
+				System.out.println(prep);
 				rs = prep.executeQuery();
+				System.out.println(rs);
+				System.out.println("Sono dopo rs = prep.executeQuery();");
 			
 			while (rs.next()) {
 				UtenteBean bean = new UtenteBean();
@@ -239,7 +249,25 @@ import util.*;
 		}
 
 		public void doDelete(UtenteBean bean) throws SQLException {
+			
+			Connection con = null;
+			PreparedStatement prep = null;
 		
+			String insertSQL = "DELETE FROM " + UtenteDao.TABLE_NAME
+					+ " WHERE email=? ";
+			try {
+				con = ConnectionPool.getConnection();
+				prep = con.prepareStatement(insertSQL);
+				prep.setString(1,bean.getEmail());
+				prep.executeUpdate();
+				
+				System.out.println("rimosso "+bean.getEmail());
+
+			} finally {
+				prep.close();
+				ConnectionPool.rilasciaConnessione(con);
+			}
+			
 		}
 
 		public void doSave(UtenteBean utente) throws SQLException {
