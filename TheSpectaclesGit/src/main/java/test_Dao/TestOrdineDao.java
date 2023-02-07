@@ -31,7 +31,8 @@ public class TestOrdineDao {
 	
 	
 	private OrdineDao dao= new OrdineDao();
-	private OrdineBean bean = new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
+	String email="pas@gmail.com";
+	private OrdineBean bean = new OrdineBean(UUID.randomUUID(), new Date(),email,"confermato");
 	
 
 	

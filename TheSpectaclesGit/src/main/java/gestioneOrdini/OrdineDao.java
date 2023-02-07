@@ -45,10 +45,12 @@ import util.ConnectionPool;
 				prep.setString(1, ordine.getIdOrder().toString());
 				prep.setString(2, ordine.getEmail());
 				prep.setString(3, ordine.getStato());
+				
+				System.out.println("Sono in doSave prep: "+prep);
 				prep.executeUpdate();
 				
 				
-	 			
+				System.out.println("Sono in doSave: "+ordine.getEmail());
 
 	 		} finally {
 				try {
@@ -134,7 +136,7 @@ import util.ConnectionPool;
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);;
 	 		}
-	 		System.out.println("Ordini admin \n "+ordini);
+	 		
 	 		return ordini;
 		}
 		
@@ -195,7 +197,7 @@ import util.ConnectionPool;
 		public void doDelete(OrdineBean ordine) throws SQLException {
 			Connection con = null;
 			PreparedStatement prep = null;
-			String deleteSQL = "DELETE FROM " + OrdineDao.TABLE_NAME + " WHERE CODE = ?";
+			String deleteSQL = "DELETE FROM " + OrdineDao.TABLE_NAME + " idOrdine = ?";
 			
 			try {
 				con = ConnectionPool.getConnection();
