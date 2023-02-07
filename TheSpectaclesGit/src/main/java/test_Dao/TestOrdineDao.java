@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,50 +21,72 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import gestioneOrdini.*;
+import gestioneUtenza.UtenteBean;
+import gestioneUtenza.UtenteDao;
 import util.ConnectionPool;
 
 
 public class TestOrdineDao {
 
 	
-	private DataSource ds = null;
+	
 	private OrdineDao dao= new OrdineDao();
+	private OrdineBean bean = new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
+	
+
 	
 		@BeforeEach
-		public void setUp() {
-			
-			
-			
+		public void setUp() throws Exception{
+			 dao.doSave(bean);
 	    }
 	
 		@AfterEach
-	    public void tearDown(){
-			
+	    public void tearDown() throws Exception{
+			dao.doDelete(bean);
 			
 	    }
 		
 		
-	
-
-		  @Test
-		  void testConnection() throws SQLException{
-		   
-			  try {
-					Context initCtx = new InitialContext();
-					Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
-					ds = (DataSource) envCtx.lookup("jdbc/ecommerce");
-					
-					Connection connection=ds.getConnection();
-					//dao.setDB(ds);
-					assertNotNull(connection);
-
-				} catch (NamingException e) {
-					System.out.println("Error:" + e.getMessage());
-				}
-				
+		@Test 
+		  void testDoRetrieveByKey() throws SQLException {
+			
+			String id=bean.getIdOrder().toString();
+			
+		    assertTrue(dao.doRetrieveByKey(id) !=null);
 		  }
 
+		  @Test
+		  void testDoRetrieveAll() throws SQLException {
+		   
+			 assertTrue(dao.doRetrieveAll(null).size() != 0);
+		  }
+
+		  @Test
+		  void testDoSave() throws SQLException {
+			  OrdineBean bean2 = new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
+		    try {
+		      dao.doSave(bean2);
+		      String id=bean2.getIdOrder().toString();
+		      assertTrue(dao.doRetrieveByKey(id) != null);
+		    } finally {
+		      dao.doDelete(bean2);
+		    }
+		  }
+		  
+		  @Test
+		  void testDoRetrieveByUser() throws SQLException {
+		   
+			 assertTrue(dao.doRetrieveByUser(bean.getEmail())!=null);
+		  }
+		  
+		  /*
+		  @Test
+		  void testDoRetrieveByDate() throws SQLException {
+		   
+			 assertTrue(dao.doRetrieveByDate() !=null);
+		  }
+		  */
+		  
 		  
 		  
 }
