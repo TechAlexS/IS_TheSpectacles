@@ -46,11 +46,11 @@ import util.ConnectionPool;
 				prep.setString(2, ordine.getEmail());
 				prep.setString(3, ordine.getStato());
 				
-				System.out.println("Sono in doSave prep: "+prep);
+			
 				prep.executeUpdate();
 				
 				
-				System.out.println("Sono in doSave: "+ordine.getEmail());
+			
 
 	 		} finally {
 				try {
@@ -146,22 +146,23 @@ import util.ConnectionPool;
 			Connection con = null;
 			PreparedStatement prep = null;
 			ResultSet rs = null;
-			String sql = "SELECT idOrdine FROM " + OrdineDao.TABLE_NAME;
+			String sql = "SELECT * FROM " + OrdineDao.TABLE_NAME;
 			if(order !=null && !order.equals("")) {
 				sql += " ORDER BY " + order;
 			}
 			try {
 				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
-				prep.setString(1, order);
 				rs = prep.executeQuery();
+			
 			
 			while (rs.next()) {
 				OrdineBean bean = new OrdineBean();
+				
 				bean.setIdOrder(UUID.fromString(rs.getString(1)));
-				bean.setEmail(rs.getString(2));
-				bean.setDate(new Date(rs.getTimestamp(3).getTime()));
-				bean.setStato(rs.getString(4));
+ 				bean.setDate(new Date(rs.getTimestamp(2).getTime()));
+ 				bean.setEmail(rs.getString(3));
+ 				bean.setStato(rs.getString(4));
 			
 				ordine.add(bean);
 		}
@@ -197,16 +198,16 @@ import util.ConnectionPool;
 		public void doDelete(OrdineBean ordine) throws SQLException {
 			Connection con = null;
 			PreparedStatement prep = null;
-			String deleteSQL = "DELETE FROM " + OrdineDao.TABLE_NAME + " idOrdine = ?";
+			String deleteSQL = "DELETE FROM " + OrdineDao.TABLE_NAME + " WHERE idOrdine = ?";
 			
 			try {
 				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setString(1, ordine.getIdOrder().toString());
-
+			
 				prep.executeUpdate();
-				con.commit();
+				
 
 			} finally {
 				prep.close();
@@ -231,6 +232,7 @@ import util.ConnectionPool;
 					rs = prep.executeQuery();
 					while (rs.next()) {
 						OrdineBean bean = new OrdineBean();
+						
 						bean.setIdOrder(UUID.fromString(rs.getString(1)));
 						bean.setEmail(rs.getString(3));
 						bean.setDate(new Date(rs.getTimestamp(2).getTime()));

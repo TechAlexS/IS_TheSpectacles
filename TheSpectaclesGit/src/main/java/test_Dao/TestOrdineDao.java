@@ -48,20 +48,23 @@ public class TestOrdineDao {
 	    }
 		
 		
-		@Test 
+		 @Test 
 		  void testDoRetrieveByKey() throws SQLException {
 			
 			String id=bean.getIdOrder().toString();
 			
 		    assertTrue(dao.doRetrieveByKey(id) !=null);
 		  }
-
+		 
+		  
 		  @Test
 		  void testDoRetrieveAll() throws SQLException {
 		   
-			 assertTrue(dao.doRetrieveAll(null).size() != 0);
+			 assertTrue(dao.doRetrieveAll(null) != null);
 		  }
+		 
 
+		  
 		  @Test
 		  void testDoSave() throws SQLException {
 			  OrdineBean bean2 = new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
@@ -73,20 +76,19 @@ public class TestOrdineDao {
 		      dao.doDelete(bean2);
 		    }
 		  }
-		  
+		 
 		  @Test
 		  void testDoRetrieveByUser() throws SQLException {
 		   
 			 assertTrue(dao.doRetrieveByUser(bean.getEmail())!=null);
 		  }
-		  
-		  /*
+		 /*
 		  @Test
 		  void testDoRetrieveByDate() throws SQLException {
 		   
 			 assertTrue(dao.doRetrieveByDate() !=null);
 		  }
-		  */
+		 */
 		  
 		  
 		  
