@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import javax.sql.DataSource;
 
+import util.ConnectionPool;
 import util.Model;
 
 
@@ -31,7 +32,7 @@ import util.Model;
 	 		String selectSQL = "SELECT * FROM " + SpedizioneDao.TABLE_NAME + " WHERE CODE = ?";
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, keys.get(0));
 				rs = prep.executeQuery();
@@ -47,7 +48,7 @@ import util.Model;
 	 		} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -62,7 +63,7 @@ import util.Model;
 				sql += " ORDER BY " + order;
 			}*/
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, order);
 				rs = prep.executeQuery();
@@ -79,7 +80,7 @@ import util.Model;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return spedizione;
 		}
@@ -90,7 +91,7 @@ import util.Model;
 			String sql = "UPDATE spedizione SET idShipment=?, dateShipment=?, idOrder=?, shipmentType=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 
 				prep.setInt(1, spedizione.getIdShipment());
@@ -102,7 +103,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -112,7 +113,7 @@ import util.Model;
 			String deleteSQL = "DELETE FROM " + SpedizioneDao.TABLE_NAME + " WHERE CODE = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setInt(1, bean.getIdShipment());
@@ -121,7 +122,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -131,7 +132,7 @@ import util.Model;
 		
 			String insertSQL = "INSERT INTO " + SpedizioneDao.TABLE_NAME + " (idShipment, dateShipment, idOrder, shipmentType) VALUES (?, ?, ?, ?)";
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(insertSQL);
 
 				prep.setInt(1, spedizione.getIdShipment());
@@ -143,7 +144,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 	 }

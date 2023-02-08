@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.sql.DataSource;
 
+import util.ConnectionPool;
+
 
 	 public class IndirizziDao  {
 
@@ -28,7 +30,7 @@ import javax.sql.DataSource;
 	 		String selectSQL = "SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and attivo=1";
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				rs = prep.executeQuery();
@@ -49,7 +51,7 @@ import javax.sql.DataSource;
 	 		} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -64,7 +66,7 @@ import javax.sql.DataSource;
 	 		String selectSQL = "SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and indirizzo= ?";
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				prep.setString(2, via);
@@ -87,7 +89,7 @@ import javax.sql.DataSource;
 	 		} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -99,7 +101,7 @@ import javax.sql.DataSource;
 			String sql = "SELECT * FROM " + IndirizziDao.TABLE_NAME+"  WHERE email = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, email);
 				rs = prep.executeQuery();
@@ -122,7 +124,7 @@ import javax.sql.DataSource;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return indirizzi;
 		}
@@ -137,7 +139,7 @@ import javax.sql.DataSource;
 				sql += " ORDER BY " + order;
 			}*/
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, order);
 				rs = prep.executeQuery();
@@ -151,7 +153,7 @@ import javax.sql.DataSource;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return indirizzi;
 		}
@@ -162,7 +164,7 @@ import javax.sql.DataSource;
 			String sql = "UPDATE indirizzo SET idIndirizzo=?, indirizzo=?, attivo=?, citta=?, provincia=?, cap=?, email=?, telefono=?, nome=?, cognome=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 
 				prep.setInt(1, indirizzo.getIdIndirizzo());
@@ -180,7 +182,7 @@ import javax.sql.DataSource;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -190,7 +192,7 @@ import javax.sql.DataSource;
 			String deleteSQL = "DELETE FROM " + IndirizziDao.TABLE_NAME + " WHERE CODE = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setInt(1, indirizzo.getIdIndirizzo());
@@ -199,7 +201,7 @@ import javax.sql.DataSource;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -210,7 +212,7 @@ import javax.sql.DataSource;
 			String insertSQL = "INSERT INTO " + IndirizziDao.TABLE_NAME
 					+ " (indirizzo, attivo, citta, provincia, cap, email, telefono, nome, cognome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(insertSQL);
 				
 				System.out.println("Do Save "+prep);
@@ -230,7 +232,7 @@ import javax.sql.DataSource;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 	 }

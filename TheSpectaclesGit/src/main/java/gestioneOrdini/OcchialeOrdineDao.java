@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import gestioneOcchiali.OcchialeBean;
 import gestioneOcchiali.OcchialeDao;
+import util.ConnectionPool;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public class OcchialeOrdineDao {
 		String insertSQL = "INSERT INTO " + TABLE_NAME
 				+ " (id_occhiale, id_ordine, prezzo_reale, iva ,quantita) VALUES(?,?,?,?,?)";
 		try {
-			con = ds.getConnection();
+			con = ConnectionPool.getConnection();
 			ps = con.prepareStatement(insertSQL);
 
 			ps.setString(1, occhialeOrdine.getProdotto().getIdGlasses());
@@ -50,7 +51,7 @@ public class OcchialeOrdineDao {
 					ps.close();
 			} finally {
 				if (con != null)
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 	}
@@ -68,7 +69,7 @@ public class OcchialeOrdineDao {
 		ArrayList<OcchialeOrdineBean> listaProdotti = new ArrayList<>();
 		try {
 
-			con = ds.getConnection();
+			con = ConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
 			ps.setString(1, idOcchialeOrdine);
 			rs = ps.executeQuery();
@@ -88,7 +89,7 @@ public class OcchialeOrdineDao {
 		} finally {
 			rs.close();
 			ps.close();
-			con.close();
+			ConnectionPool.rilasciaConnessione(con);
 		}
 		return listaProdotti.get(0);
 	}
@@ -106,7 +107,7 @@ public class OcchialeOrdineDao {
 		}
 
 		try {
-			con = ds.getConnection();
+			con = ConnectionPool.getConnection();
 			prep = con.prepareStatement(query);
 			rs = prep.executeQuery();
 
@@ -124,7 +125,7 @@ public class OcchialeOrdineDao {
 
 			rs.close();
 			prep.close();
-			con.close();
+			ConnectionPool.rilasciaConnessione(con);
 		}
 		return occhiali;
 	}
@@ -138,7 +139,7 @@ public class OcchialeOrdineDao {
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = '" + ordine.getIdOrder() + "'";
      
 		try {
-			con = ds.getConnection();
+			con = ConnectionPool.getConnection();
 			prep = con.prepareStatement(query);
 			rs = prep.executeQuery();
 
@@ -161,7 +162,7 @@ public class OcchialeOrdineDao {
 
 			rs.close();
 			prep.close();
-			con.close();
+			ConnectionPool.rilasciaConnessione(con);
 		}
 
 		return ordini;
@@ -176,7 +177,7 @@ public class OcchialeOrdineDao {
 	String query = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = ?";
  
 	try {
-		con = ds.getConnection();
+		con = ConnectionPool.getConnection();
 		prep = con.prepareStatement(query);
 		prep.setString(1, ordine);
 		rs = prep.executeQuery();
@@ -198,7 +199,7 @@ public class OcchialeOrdineDao {
 
 		rs.close();
 		prep.close();
-		con.close();
+		ConnectionPool.rilasciaConnessione(con);
 	}
 	System.out.println("tutti gli ordini doRetrivebyOrder: "+ordini);
 	return ordini;

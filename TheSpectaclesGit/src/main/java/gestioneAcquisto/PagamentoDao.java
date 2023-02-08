@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import javax.sql.DataSource;
 
+import util.ConnectionPool;
 import util.Model;
 
 
@@ -31,7 +32,7 @@ import util.Model;
 	 		String selectSQL = "SELECT * FROM " + PagamentoDao.TABLE_NAME + " WHERE CODE = ?";
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(selectSQL);
 				prep.setString(1, keys.get(0));
 				rs = prep.executeQuery();
@@ -48,7 +49,7 @@ import util.Model;
 	 		} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return bean;
 		}
@@ -63,7 +64,7 @@ import util.Model;
 				sql += " ORDER BY " + order;
 			}*/
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1, order);
 				rs = prep.executeQuery();
@@ -81,7 +82,7 @@ import util.Model;
 		 } finally {
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return pagamento;
 		}
@@ -92,7 +93,7 @@ import util.Model;
 			String sql = "UPDATE pagamento SET idPayment=?, date=?, idPaymentType=?, idOrder=?, amount=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 
 				prep.setInt(1, pagamento.getIdPayment());
@@ -105,7 +106,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -115,7 +116,7 @@ import util.Model;
 			String deleteSQL = "DELETE FROM " + PagamentoDao.TABLE_NAME + " WHERE CODE = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setInt(1, pagamento.getIdPayment());
@@ -124,7 +125,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -134,7 +135,7 @@ import util.Model;
 		
 			String insertSQL = "INSERT INTO " + PagamentoDao.TABLE_NAME + " (idPayment, date, idPaymentType, idOrder, amount) VALUES (?, ?, ?, ?, ?)";
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(insertSQL);
 
 				prep.setInt(1, pagamento.getIdPayment());
@@ -147,7 +148,7 @@ import util.Model;
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 	 }

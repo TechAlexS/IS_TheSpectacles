@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.sql.DataSource;
 
+import util.ConnectionPool;
+
 
 	 public class OcchialeDao {
 
@@ -31,7 +33,7 @@ import javax.sql.DataSource;
 	 		
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1,keys.get(0));
 				rs = prep.executeQuery();
@@ -64,7 +66,7 @@ import javax.sql.DataSource;
 					prep.close();
 				}
 				if(con!=null) {
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);
 				}
 				
 	 		}
@@ -82,7 +84,7 @@ import javax.sql.DataSource;
 	 		
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1,keys.get(1));
 				rs = prep.executeQuery();
@@ -115,7 +117,7 @@ import javax.sql.DataSource;
 					prep.close();
 				}
 				if(con!=null) {
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);
 				}
 				
 	 		}
@@ -132,7 +134,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 	 		
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1,id);
 				rs = prep.executeQuery();
@@ -165,7 +167,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 					prep.close();
 				}
 				if(con!=null) {
-					con.close();
+					ConnectionPool.rilasciaConnessione(con);
 				}
 				
 	 		}
@@ -182,7 +184,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 	 		
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1,brand);
 				rs = prep.executeQuery();
@@ -210,7 +212,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		return occhiali;
 		}
@@ -227,7 +229,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 	 		
 
 	 		try {
-	 			con = ds.getConnection();
+	 			con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setString(1,keys.get(0));
 				rs = prep.executeQuery();
@@ -254,7 +256,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			} finally {
 	 			rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 	 		}
 	 		System.out.println("OCchiale: \n "+ bean+ "\n");
 	 		return bean;
@@ -272,7 +274,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 				sql += " ORDER BY " + order;
 			}
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				rs = prep.executeQuery();
 			
@@ -302,7 +304,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			 
 				rs.close();
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 			return occhiali;
 		}
@@ -313,7 +315,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			String sql = "UPDATE occhiale SET  nomeOcchiale=?, prezzo=?, disponibilita=?, descrizione=? WHERE idOcchiale = ?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 
 				
@@ -329,7 +331,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 		
@@ -339,7 +341,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			String sql = "UPDATE occhiale SET disponibilita=? WHERE idOcchiale=?";
 
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(sql);
 				prep.setInt(1, occhiale.getAvailability()-occhiale.getQuantity());
 				prep.setString(2,occhiale.getIdGlasses());
@@ -349,7 +351,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -359,7 +361,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			String deleteSQL = "DELETE FROM " + OcchialeDao.TABLE_NAME + " WHERE idOcchiale = ?";
 			
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(deleteSQL);
 
 				prep.setString(1, id);
@@ -369,7 +371,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 
@@ -380,7 +382,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 			String insertSQL = "INSERT INTO " + OcchialeDao.TABLE_NAME
 					+ " (idOcchiale, nomeOcchiale, marca, prezzo,disponibilita,tipo,colore,categoria,img,img2,descrizione) VALUES (?, ?, ?, ?,?,?,?,?,?,?,?)";
 			try {
-				con = ds.getConnection();
+				con = ConnectionPool.getConnection();
 				prep = con.prepareStatement(insertSQL);
 
 				prep.setString(1, occhiale.getIdGlasses());
@@ -400,7 +402,7 @@ public OcchialeBean doRetrieveOcchiale (String id) throws SQLException {
 				
 			} finally {
 				prep.close();
-				con.close();
+				ConnectionPool.rilasciaConnessione(con);
 			}
 		}
 	 }
