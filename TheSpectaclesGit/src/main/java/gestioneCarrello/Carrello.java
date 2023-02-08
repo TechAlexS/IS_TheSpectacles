@@ -6,44 +6,60 @@ import java.util.ArrayList;
 
 import gestioneOcchiali.OcchialeBean;
 
+/**
+ * Questa classe rappresenta l'entit√† Carrello.
+ * @author Mario Ranieri
+ */
 public class Carrello implements Serializable {
 	
-	private static final long serialVersionUID = 3497262402613555555L;
+	private static final long serialVersionUID=3497262402613555555L;
 	private ArrayList<OcchialeBean> car;
 	private int dimensione;
 	private float tot;
 	
-	public Carrello () {
-		car= new ArrayList<OcchialeBean>();
-		dimensione= 0;
-		tot=0;
-		
+	/**
+	 * @param car carrello
+	 * @param dimensione dimensione del carrello
+	 * @param tot totale del carrello
+	 * @return
+	 */
+	public Carrello() {
+		car=new ArrayList<OcchialeBean>();
+		dimensione=0;
+		tot=0;	
 	}
 	
 	/**
-	 * Aggiunge un prodotto nel carrello.
-	 * @param prod
+	 * Aggiunge un prodotto nel carrello
+	 * @param prod prodotto del carrello
+	 * @return
 	 */
-	public void addCarrello (OcchialeBean prod) {
+	public void addCarrello(OcchialeBean prod) {
 		car.add(prod);
-		dimensione= dimensione + 1;
+		dimensione=dimensione+1;
 	}
 	
 	/**
-	 * Elimina il prodotto che gli viene passato come parametro.
-	 * @param prod
+	 * Elimina il prodotto che gli viene passato come parametro
+	 * @param prod prodotto del carrello
+	 * @return
 	 */
-	public void deleteProduct (OcchialeBean prod) {
+	public void deleteProduct(OcchialeBean prod) {
 		
-		for (OcchialeBean p : car) {
+		for (OcchialeBean p: car) {
 			if (p.getIdGlasses().equals(prod.getIdGlasses())) {
 				car.remove(p);
-				dimensione= dimensione - 1;
+				dimensione=dimensione-1;
 			break;
 			}
 		}
 	}
 	
+	/**
+	 * Prende il prodotto tramite l'id che gli viene passato come parametro
+	 * @param id id del prodotto nel carrello
+	 * @return bean il nuovo prodotto (occhiale)
+	 */
 	public OcchialeBean prendiProdotto(String id) {
 		OcchialeBean bean=new OcchialeBean();
 		for(int i=0;i<car.size();i++) {
@@ -61,87 +77,92 @@ public class Carrello implements Serializable {
 	}
 	
 	/**
-	 * Rimuove tutto il contenuto del carrello.
+	 * Rimuove tutto il contenuto del carrello
+	 * @return
 	 */
-	public void delete () {
+	public void delete() {
 		car.removeAll(car);
-		dimensione= 0;
+		dimensione=0;
 	}
 	
 	/**
-	 * Restituisce tutto il contenuto del carrello.
+	 * Restituisce tutto il contenuto del carrello
 	 * @return prodotti nel carrello
 	 */
-	public ArrayList<OcchialeBean> getCarrello (){
+	public ArrayList<OcchialeBean> getCarrello() {
 		return new ArrayList<>(car);
 	}
 	
 	/**
-	 * Controlla se un prodotto Ë gia presente nel carrello, se Ë presente restituisce true e se non lo Ë restituisce false.
+	 * Controlla se un prodotto √® gia presente nel carrello, se √® presente restituisce true e se non lo √® restituisce false
 	 * @param code
-	 * @return true or false
+	 * @return trovato parametro che assume true o false
 	 */
 	public boolean searchProdotto (String code) {
-		
-		boolean trovato= false;
+		boolean trovato=false;
 		
 		for (int i= 0; i < car.size(); i++) {
-			if (car.get(i).getIdGlasses().equals(code))
-				trovato= true;
+			if(car.get(i).getIdGlasses().equals(code))
+				trovato=true;
 		}
-		
 		return trovato;
 	}
 	
 	/**
-	 * Restituisce il numero di elementi presenti nell'ArrayList.
-	 * @return dimensione
+	 * Restituisce il numero di elementi presenti nell'ArrayList
+	 * @return dimensione dimensione del carrello
 	 */
-	public int getDimensione () {
+	public int getDimensione() {
 		return dimensione;
 	}
 	
 	/**
-	 * Calcola il prezzo del prodotto in base alla quantit‡ scelta dal cliente e restituisce il prezzo totale.
-	 * @param quant
+	 * Calcola il prezzo del prodotto in base alla quantit√† scelta dal cliente e restituisce il prezzo totale
+	 * @param quant quantit√† degli oggetti nel carrello
 	 * @param id
-	 * @return prezzo totale
+	 * @return tot prezzo totale del carrello
 	 */
-	public float getPrezzoTotale (int quant, String id) {
+	public float getPrezzoTotale(int quant, String id) {
 		
-		for (int i= 0; i < car.size(); i++) {
-			if (car.get(i).getIdGlasses().equals(id)) {
+		for (int i=0; i<car.size(); i++) {
+			if(car.get(i).getIdGlasses().equals(id)) {
 				
-				tot= car.get(i).getPrice() * quant;
+				tot=car.get(i).getPrice()*quant;
 				car.get(i).setTotPrezzo(tot);
-				
 				System.out.println("\ntot: "+tot);
 			}
-				}
+		}
 		return tot;
 	}
 	
-	public float calcolaSpesa() {
+	/**
+	 * @return var1
+	 */
+	public float calcolaSpesa(){
 		float var1=0.00f;
 		
-		for(int i=0; i<car.size();i++) {
-			var1=var1 + car.get(i).getTotPrezzo();
+		for(int i=0; i<car.size(); i++) {
+			var1=var1+car.get(i).getTotPrezzo();
 		}
-		
 		return var1;
 	}
 	
+	/**
+	 * @param code 
+	 * @param q
+	 * @return
+	 */
 	public void insertQuantita(String code, int q) {
-		for (int i= 0; i < car.size(); i++) {
-			if (car.get(i).getIdGlasses().equals(code)) {
-				System.out.println("Disponibilit‡: "+car.get(i).getAvailability());
+		for (int i=0; i<car.size(); i++) {
+			if(car.get(i).getIdGlasses().equals(code)) {
+				System.out.println("DisponibilitÔøΩ: "+car.get(i).getAvailability());
 				System.out.println("\n Stampa if di InsertQuantita: "+(q<=car.get(i).getAvailability()));
 				if(q<=car.get(i).getAvailability())
 					car.get(i).setQuantity(q);
 				else 
 					car.get(i).setQuantity(car.get(i).getAvailability());
 			}
-			System.out.println("Quantit‡ scelta corretta in Occhiale Bean: "+car.get(i).getQuantity());
+			System.out.println("QuantitÔøΩ scelta corretta in Occhiale Bean: "+car.get(i).getQuantity());
 		}
 	}
 }

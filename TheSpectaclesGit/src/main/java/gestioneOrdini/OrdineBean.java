@@ -24,6 +24,7 @@ public class OrdineBean implements Serializable {
 	 * @return 
 	 */
 	public OrdineBean() {
+		
 		this.idOrder=null;
 		this.email=null;
 		this.data=null;
