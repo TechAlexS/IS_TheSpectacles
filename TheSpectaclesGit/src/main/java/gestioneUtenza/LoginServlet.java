@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		   
+		    
 			String email = request.getParameter("email");
 			String pw = request.getParameter("password");
 			
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				mdhash = MessageDigest.getInstance("SHA-256");
 			} catch (NoSuchAlgorithmException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 	        byte[] digest = mdhash.digest(data1);              
@@ -70,7 +70,9 @@ public class LoginServlet extends HttpServlet {
 				
 				if(cerca.getEmail() == null) {
 					out.print("Nulla");
+					request.setAttribute("loginResult", "utente inesistente");
 				}
+				
 					
 				if((cerca.getEmail() != null) && (cerca.getRole()==1)) {
 					request.getSession().setAttribute("auth", cerca);
