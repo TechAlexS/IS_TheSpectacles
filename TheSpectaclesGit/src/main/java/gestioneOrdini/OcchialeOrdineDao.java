@@ -37,12 +37,13 @@ public class OcchialeOrdineDao {
 			con = ConnectionPool.getConnection();
 			ps = con.prepareStatement(insertSQL);
 
-			ps.setString(1, occhialeOrdine.getProdotto().getIdGlasses());
+			//ps.setString(1, occhialeOrdine.getProdotto().getIdGlasses());
+			ps.setString(1, occhialeOrdine.getIdProdotto());
 			ps.setString(2, occhialeOrdine.getIdOrdine().toString());
 			ps.setFloat(3, occhialeOrdine.getPrezzoEffettivo());
 			ps.setFloat(4, occhialeOrdine.getIva());
 			ps.setInt(5, occhialeOrdine.getQuantita());
-
+			System.out.println("doSave: "+ps);
 			ps.executeUpdate();
 
 		} finally {
@@ -56,11 +57,28 @@ public class OcchialeOrdineDao {
 		}
 	}
 
-	public boolean doDelete(String idOcchialeOrdine) throws SQLException {
-		return false;
+	public void doDelete(OcchialeOrdineBean occhialeOrdine) throws SQLException {
+		Connection con = null;
+		PreparedStatement prep = null;
+		String deleteSQL = "DELETE FROM " + OcchialeOrdineDao.TABLE_NAME + " WHERE id = ?";
+		
+		try {
+			con = ConnectionPool.getConnection();
+			prep = con.prepareStatement(deleteSQL);
+
+			prep.setInt(1, occhialeOrdine.getIdOcchialeOrdine());
+			System.out.println("doDelete: "+prep);
+			prep.executeUpdate();
+			
+
+		} finally {
+			prep.close();
+			ConnectionPool.rilasciaConnessione(con);;
+		}
+		
 	}
 
-	public OcchialeOrdineBean doRetrieveByKey(String idOcchialeOrdine) throws SQLException {
+	public OcchialeOrdineBean doRetrieveByKey(int idOcchialeOrdine) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -71,16 +89,16 @@ public class OcchialeOrdineDao {
 
 			con = ConnectionPool.getConnection();
 			ps = con.prepareStatement(query);
-			ps.setString(1, idOcchialeOrdine);
+			ps.setInt(1, idOcchialeOrdine);
 			rs = ps.executeQuery();
-			ArrayList<String> key = new ArrayList<>();
+			
 
 			while (rs.next()) {
-				key.add(rs.getString(2));
+				
 
-				OcchialeBean prod = (OcchialeBean) new OcchialeDao().doRetrieveByKey(key);
+				
 				OcchialeOrdineBean prodotto = new OcchialeOrdineBean(rs.getInt(1), UUID.fromString(rs.getString(3)),
-						prod, rs.getInt(4), rs.getFloat(5), rs.getInt(6));
+						rs.getString(2)	, rs.getInt(4), rs.getFloat(5), rs.getInt(6));
 				listaProdotti.add(prodotto);
 			}
 
@@ -168,7 +186,7 @@ public class OcchialeOrdineDao {
 		return ordini;
 	}*/
 
-	public ArrayList<OcchialeOrdineBean> doRetrivebyOrder(String ordine,DataSource data) throws SQLException {
+	public ArrayList<OcchialeOrdineBean> doRetrivebyOrder(String ordine) throws SQLException {
 	Connection con = null;
 	PreparedStatement prep = null;
 	ResultSet rs = null;
@@ -184,13 +202,12 @@ public class OcchialeOrdineDao {
 
 		while (rs.next()) {
 			/*OcchialeDao oDao= new OcchialeDao();
-			oDao.setDB(data);
 			OcchialeBean prod= oDao.doRetrieveOcchiale(rs.getString(2));
 			System.out.println("Metodo OcchialeOrdineDao  OcchialeBean: "+prod);*/
 			//(int idOcchialeOrdine, UUID idOrdine, OcchialeBean occhiale, int prezzoEffettivo, float iva, int quantita)
 			OcchialeOrdineBean bean = new OcchialeOrdineBean(rs.getInt(1), UUID.fromString(rs.getString("id_ordine")), rs.getString("id_occhiale"),
 					rs.getInt("prezzo_reale"), rs.getFloat("iva"), rs.getInt("quantita"));
-			System.out.println("Metodo OcchialeOrdineDao  doRetrivebyOrder: "+bean);
+			//System.out.println("Metodo OcchialeOrdineDao  doRetrivebyOrder: "+bean);
 			ordini.add(bean);
 		}
 	} catch (Exception e) {
@@ -201,8 +218,40 @@ public class OcchialeOrdineDao {
 		prep.close();
 		ConnectionPool.rilasciaConnessione(con);
 	}
-	System.out.println("tutti gli ordini doRetrivebyOrder: "+ordini);
+	//System.out.println("tutti gli ordini doRetrivebyOrder: "+ordini);
 	return ordini;
 }
+	
+	public int getLastIndexAdded() throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement prep = null;
+		ResultSet rs = null;
+		int index=0;
+		
+		String query = "SELECT MAX(id) FROM  " + TABLE_NAME;
+	 
+		try {
+			con = ConnectionPool.getConnection();
+			prep = con.prepareStatement(query);
+			rs = prep.executeQuery();
+			
+			
+			while (rs.next()) {
+				
+				index=rs.getInt("Max(id)");
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			rs.close();
+			prep.close();
+			ConnectionPool.rilasciaConnessione(con);
+	     }
+		return index;
+	}
 
 }

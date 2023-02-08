@@ -100,7 +100,8 @@ public class Checkout extends HttpServlet {
 		for (int i= 0; i < car.size(); i++) {
 			
 			OcchialeOrdineBean bean = new OcchialeOrdineBean();
-			bean.setProdotto(car.get(i));
+			//bean.setProdotto(car.get(i));
+			bean.setIdProdotto(car.get(i).getIdGlasses());
 			bean.setPrezzoEffettivo(car.get(i).getPrice());
 			bean.setQuantita(car.get(i).getQuantity());
 			bean.setIdOrdine(idOrdine);
