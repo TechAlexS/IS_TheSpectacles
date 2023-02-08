@@ -186,6 +186,7 @@ public class OcchialeOrdineDao {
 			oDao.setDB(data);
 			OcchialeBean prod= oDao.doRetrieveOcchiale(rs.getString(2));
 			System.out.println("Metodo OcchialeOrdineDao  OcchialeBean: "+prod);*/
+			//(int idOcchialeOrdine, UUID idOrdine, OcchialeBean occhiale, int prezzoEffettivo, float iva, int quantita)
 			OcchialeOrdineBean bean = new OcchialeOrdineBean(rs.getInt(1), UUID.fromString(rs.getString("id_ordine")), rs.getString("id_occhiale"),
 					rs.getInt("prezzo_reale"), rs.getFloat("iva"), rs.getInt("quantita"));
 			System.out.println("Metodo OcchialeOrdineDao  doRetrivebyOrder: "+bean);

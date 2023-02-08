@@ -53,6 +53,23 @@ public class OcchialeOrdineBean implements Serializable {
 		this.iva=iva;
 		this.quantita=quantita;
 	}
+	/**
+	 * @param idOcchialeOrdine id dell'occhialeOrdine
+	 * @param idOrdine id dell'ordine
+	 * @param idOcchiale identificativo occhiale dell'occhialeOrdine
+	 * @param prezzoEffettivo prezzo dell'occhialeOrdine
+	 * @param iva iva dell'occhialeOrdine
+	 * @param quantita quantità dell'occhialeOrdine
+	 * @return 
+	 */
+	public OcchialeOrdineBean(int idOcchialeOrdine,UUID idOrdine,String idOcchiale,int prezzoEffettivo,float iva,int quantita) {
+		this.idOcchialeOrdine = idOcchialeOrdine;
+		this.idOrdine = idOrdine;
+		this.idOcchiale = idOcchiale;
+		this.prezzoEffettivo = prezzoEffettivo;
+		this.iva = iva;
+		this.quantita = quantita;
+	}
 	
 	/**
 	 * @return idOcchialeOrdine id dell'occhialeOrdine
