@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class UtenteBean implements Serializable, Cloneable {
 
-	private static final long serialVersionUID = -850475236728288737L;
+	private static final long serialVersionUID=-850475236728288737L;
 	private String pass;
 	private int role;
 	private String email;
@@ -30,9 +30,9 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @return 
 	 */
 	public UtenteBean(String email, String pass,String firstName,String lastName,Date birthday,int role) {
-		this.firstName = firstName;
-		this.email = email;
-		this.pass= pass;
+		this.firstName=firstName;
+		this.email=email;
+		this.pass=pass;
 		this.lastName=lastName;
 		this.birthday=birthday;
 		this.role=role;
@@ -85,27 +85,23 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @return 
 	 */
 	public void setPass(String pass) {
-		this.pass = pass;
+		this.pass=pass;
 	}
 
 	/**
 	 * @param role ruolo da assegnare all'utente(standard o admin)
-	 * @precondition role==0 OR role==1
-	 * @postcondition l'utente è standard o admin 
 	 * @return 
 	 */
 	public void setRole(int role) {
-		this.role = role;
+		this.role=role;
 	}
 
 	/**
 	 * @param email indirizzo email dell'utente
-	 * @precondition email==NULL
-	 * @postcondition email!=NULL
 	 * @return 
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.email=email;
 	}
 
 	/**
@@ -113,7 +109,7 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @return 
 	 */
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName=firstName;
 	}
 
 	/**
@@ -121,7 +117,7 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @return 
 	 */
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName=lastName;
 	}
 
 	/**
@@ -129,7 +125,7 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @return 
 	 */
 	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+		this.birthday=birthday;
 	}
 
 	@Override

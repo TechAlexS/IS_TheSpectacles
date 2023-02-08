@@ -54,8 +54,6 @@ public class OrdineBean implements Serializable {
 
 	/**
 	 * @param idOrder id da assegnare all'ordine
-	 * @precondition idOrder==NULL
-	 * @postcodition idOrder!=NULL
 	 * @return
 	 */
 	public void setIdOrder(UUID idOrder) {
@@ -77,8 +75,7 @@ public class OrdineBean implements Serializable {
 	}
 	
 	/**
-	 * @param stato stato da assegnare all'ordine
-	 * @precondition stato==”confermato” OR stato==”in elaborazione” OR stato==”spedito” 
+	 * @param stato stato da assegnare all'ordine 
 	 * @return
 	 */
 	public void setStato(String stato) {
@@ -117,8 +114,6 @@ public class OrdineBean implements Serializable {
 	
 	/**
 	 * @param email email da assegnare all'ordine
-	 * @precondition email deve avere una corrispondenza come chiave di un Utente
-	 * @postcondition email corrisponde ad un Utente
 	 * @return
 	 */
 	public void setEmail(String email) {
