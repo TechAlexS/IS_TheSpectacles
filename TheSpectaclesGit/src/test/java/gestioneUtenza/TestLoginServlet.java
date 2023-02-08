@@ -53,7 +53,7 @@ public class TestLoginServlet {
 			
 			servlet.doPost(request, response);
 			
-			assertEquals("utente inesistentet", (String)request.getAttribute("loginResult"));
+			assertEquals("utente inesistente", (String)request.getAttribute("loginResult"));
 			
 		
 		}
