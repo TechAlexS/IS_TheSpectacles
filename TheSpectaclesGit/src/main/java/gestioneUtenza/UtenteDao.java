@@ -26,7 +26,11 @@ import util.*;
 	 public class UtenteDao implements Model<UtenteBean, DataSource>{
 	 	private static final String TABLE_NAME="utente";
 	 	private DataSource ds;
-		
+	 	
+		/**
+		 * @param obj connessione al database
+		 * @return
+		 */
 	 	public void setDB(DataSource obj) {
 			this.ds=obj;
 		}
@@ -62,8 +66,7 @@ import util.*;
 	 		} 
 	 		catch(Exception e) {
 	 			e.printStackTrace();
-	 		}
-	 		finally {
+	 		} finally {
 	 			rs.close();
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -71,7 +74,6 @@ import util.*;
 	 		return bean;
 		}
 		
-
 	 	/**
 	 	 * @param email stringa email da controllare
 	 	 * @precondition email!=NULL
@@ -105,8 +107,7 @@ import util.*;
 	 		} 
 	 		catch(Exception e) {
 	 			e.printStackTrace();
-	 		}
-	 		finally {
+	 		}finally {
 	 			rs.close();
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -151,9 +152,7 @@ import util.*;
 	 		} 
 	 		catch(Exception e) {
 	 			e.printStackTrace();
-	 		}
-	 		finally {
-	 			
+	 		}finally {
 	 			rs.close();
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -191,8 +190,7 @@ import util.*;
 	 		} 
 	 		catch(Exception e) {
 	 			e.printStackTrace();
-	 		}
-	 		finally {
+	 		}finally {
 	 			rs.close();
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
