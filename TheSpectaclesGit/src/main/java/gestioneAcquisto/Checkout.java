@@ -26,17 +26,22 @@ import gestioneOrdini.OrdineDao;
 import gestioneUtenza.UtenteBean;
 import gestioneOcchiali.OcchialeBean;
 
-
+/**
+ * Questa classe è un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 
+ */
 @WebServlet("/Checkout")
 public class Checkout extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
-	static boolean isDataSource = true;
-	private OrdineDao ordineDao= new OrdineDao();
-	private OcchialeDao oDao= new OcchialeDao();
-	private IndirizziDao indDao= new IndirizziDao();
-	OcchialeOrdineDao occhialeDao = new OcchialeOrdineDao();
+	private static final long serialVersionUID=1L;
+	static boolean isDataSource=true;
+	private OrdineDao ordineDao=new OrdineDao();
+	private OcchialeDao oDao=new OcchialeDao();
+	private IndirizziDao indDao=new IndirizziDao();
+	OcchialeOrdineDao occhialeDao=new OcchialeOrdineDao();
 	
+	/**
+	 * @return
+	 * @throws ServletException
+	 */
 	public void init() throws ServletException {
 		super.init();
 		ordineDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));
@@ -45,48 +50,50 @@ public class Checkout extends HttpServlet {
 		indDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));
 	}
 
+	 /**
+	 * @precondition Request.getParameter(“sameadr”)!=null AND Request.getParameter(“cardnumber”)!=null AND Request.getSession().getAttribute(“auth”)!=null
+	 * @precondition carrello=request.getSession().getAttribute("Carrello")!=null 
+	 * @postcondition Request.getSession().getAttribute(“address”)!=null AND carrello.dimension=0 AND dispatcher!=null
+	 * @throws ServletException, IOException
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String ind= (String) request.getParameter("sameadr");
+		String ind=(String) request.getParameter("sameadr");
 		System.out.println("Checkout address: "+request.getParameter("sameadr"));
 		System.out.println("Checkout cardNumber: "+request.getParameter("cardnumber"));
 		
-		Carrello cart = (Carrello) request.getSession().getAttribute("carrello");
+		Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 		
-		if (request.getSession().getAttribute("auth") != null) {
-			UtenteBean bean= (UtenteBean) request.getSession().getAttribute("auth");
-			if (cart != null) {
-				OrdineBean ordine = createOrder(request);
-				ArrayList<OcchialeOrdineBean> occhialiOrdine = createProducts(
-					cart,
-					ordine.getIdOrder()
-				);
-				try {
-					
+		if (request.getSession().getAttribute("auth")!=null) {
+			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
+			if (cart!=null) {
+				OrdineBean ordine=createOrder(request);
+				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());
+				
+				try {	
 					ordineDao.doSave(ordine);
 					request.getSession().setAttribute("address",indDao.search(bean.getEmail(), ind));
-					
-					
-					for (OcchialeOrdineBean o : occhialiOrdine) {
+				
+					for (OcchialeOrdineBean o:occhialiOrdine) {
 						occhialeDao.doSave(o);
-						
-						oDao.decreaseAvailability(o.getProdotto()); // controllare perch� toglie tutte le quantit�
+						oDao.decreaseAvailability(o.getProdotto()); // controllare perch� toglie tutte le quantit�
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				cart.delete();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirmation.jsp");
+			
+			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
 
 	private OrdineBean createOrder(HttpServletRequest request) {
-		OrdineBean ordine = new OrdineBean();
+		OrdineBean ordine=new OrdineBean();
 		ordine.setDate(new Date());
 		ordine.setStato("preso in carico");
 		ordine.setIdOrder(UUID.randomUUID());
@@ -95,11 +102,10 @@ public class Checkout extends HttpServlet {
 	}
 
 	private ArrayList<OcchialeOrdineBean> createProducts(Carrello cart, UUID idOrdine) {
-		ArrayList<OcchialeOrdineBean> result = new ArrayList<>();
-		ArrayList<OcchialeBean> car = cart.getCarrello();
-		for (int i= 0; i < car.size(); i++) {
-			
-			OcchialeOrdineBean bean = new OcchialeOrdineBean();
+		ArrayList<OcchialeOrdineBean> result=new ArrayList<>();
+		ArrayList<OcchialeBean> car=cart.getCarrello();
+		for (int i=0; i<car.size(); i++) {
+			OcchialeOrdineBean bean=new OcchialeOrdineBean();
 			//bean.setProdotto(car.get(i));
 			bean.setIdProdotto(car.get(i).getIdGlasses());
 			bean.setPrezzoEffettivo(car.get(i).getPrice());
