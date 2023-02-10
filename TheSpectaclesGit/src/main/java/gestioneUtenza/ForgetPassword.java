@@ -19,64 +19,61 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-
+/**
+ * Questa classe è un control che si occupa di passare la mail ad UtenteDao per vedere se esiste già in fase di registrazione 
+ *
+ */
 @WebServlet("/ForgetPass")
 public class ForgetPassword extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static UtenteDao utenteModel = new UtenteDao();
+	private static final long serialVersionUID=1L;
+	private static UtenteDao utenteModel=new UtenteDao();
 	
-	
-	
-
+	/**
+	 * @return
+	 * @throws ServletException
+	 */
 	public void init() throws ServletException {
 		super.init();
-		utenteModel.setDB((DataSource) getServletContext().getAttribute("DataSource"));
-		
+		utenteModel.setDB((DataSource) getServletContext().getAttribute("DataSource"));	
 	}
 	
     public ForgetPassword() {
-        super();
-        
+        super();  
     }
+    
+    /**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect(response.encodeRedirectURL("error.jsp"));
 	}
+    
+    /**
+	 * @precondition request.getParameter(“password”)!=null AND request.getSession().getattribute(“email")!=null 
+	 * @postcondition password aggiornata
+	 * @throws ServletException, IOException
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String newPassword= request.getParameter("password");
-		
-        byte[] data1 = newPassword.getBytes("UTF-8");
-        MessageDigest mdhash = null;
+		String newPassword=request.getParameter("password");
+        byte[] data1=newPassword.getBytes("UTF-8");
+        MessageDigest mdhash=null;
+        
 		try {
-			mdhash = MessageDigest.getInstance("SHA-256");
+			mdhash=MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        byte[] digest = mdhash.digest(data1);              
-        String HashPassw = Base64.getEncoder().encodeToString(digest);
-		
-		
-		
-	
-		
-		
-		String email= (String) request.getSession().getAttribute("email");
-		
-		
-		
-		
+        byte[] digest=mdhash.digest(data1);              
+        String HashPassw=Base64.getEncoder().encodeToString(digest);
+		String email=(String) request.getSession().getAttribute("email");
 		PrintWriter out= response.getWriter();
+		
 		try {
-			
 			utenteModel.changePassword(email, HashPassw);
 			out.print("ok");
-		} catch (SQLException e) {
-			System.out.println ("Errore nella signin: " + e.getMessage());
+		} catch(SQLException e) {
+			System.out.println("Errore nella signin: " + e.getMessage());
 		}
-		
-		
 	}
-
 }

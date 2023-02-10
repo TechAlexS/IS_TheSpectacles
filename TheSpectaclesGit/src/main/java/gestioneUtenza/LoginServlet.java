@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	  /**
-		 * @precondition request.getParameter(“email”)!=null AND Request.getParameter(“password”)!=null 
+		 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
 		 * @postcondition request.getSession().getAttribute(“auth”)!=null
 		 * @throws ServletException, IOException
 		 */
