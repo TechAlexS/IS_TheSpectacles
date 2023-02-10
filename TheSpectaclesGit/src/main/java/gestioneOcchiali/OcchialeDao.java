@@ -286,6 +286,7 @@ import util.ConnectionPool;
 			PreparedStatement prep=null;
 			ResultSet rs=null;
 			String sql="SELECT * FROM " + OcchialeDao.TABLE_NAME;
+			
 			if(order!=null && !order.equals("")) {
 				sql +=" ORDER BY " + order;
 			}
