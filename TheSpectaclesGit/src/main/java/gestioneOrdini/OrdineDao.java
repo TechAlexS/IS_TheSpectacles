@@ -106,7 +106,9 @@ import util.ConnectionPool;
 		
 		/**
 	 	 * @param email email da usare per rimuovere un utente dal db
-	 	 * @return ordini nuova lita di ordini 
+	 	 * @precondition order!=NULL
+	 	 * @postcondition ordini=db.ordine->(select(o|o.email=user)
+	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
 	 	 */
 		public ArrayList<OrdineBean> doRetrieveByUser(String email) throws SQLException {
@@ -144,7 +146,9 @@ import util.ConnectionPool;
 		
 		/**
 	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel db
-	 	 * @return ordini nuova lita di ordini 
+	 	 * @precondition user!=NULL
+	 	 * @postcondition ordini=db.ordine->(select(o).orderBy order)
+	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
 	 	 */
 		public Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
@@ -229,7 +233,7 @@ import util.ConnectionPool;
 		/**
 		 * @param user utente da controllare
 	 	 * @param order stringa ordine da controllare
-	 	 * @return ordini nuova lita di ordini 
+	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
 	 	 */
 		public ArrayList<OrdineBean> doRetriveByUser(UtenteBean user, String order) throws SQLException {
@@ -270,7 +274,7 @@ import util.ConnectionPool;
 	 	 * @param end //
 	 	 * @param skip //
 	 	 * @param limit //
-	 	 * @return ordini nuova lita di ordini 
+	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
 	 	 */
 		public ArrayList<OrdineBean> doRetriveByDate(Date init, Date end, int skip, int limit) throws SQLException {

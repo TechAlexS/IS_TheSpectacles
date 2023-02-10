@@ -201,7 +201,7 @@ import util.ConnectionPool;
 				prep.setString(1,brand);
 				rs=prep.executeQuery();
 
-	 			while (rs.next()) {
+	 			while(rs.next()) {
 	 				OcchialeBean bean=new OcchialeBean();
 	            	bean.setIdGlasses(rs.getString("idOcchiale"));
 	            	bean.setNameGlasses(rs.getString("nomeOcchiale"));
