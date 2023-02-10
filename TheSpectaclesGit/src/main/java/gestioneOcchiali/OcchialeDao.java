@@ -10,12 +10,11 @@ import javax.sql.DataSource;
 
 import util.ConnectionPool;
 
-/**
- * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Occhiale.
- * @author Mario Ranieri 
- * @author Roberto Piscopo
- *
- */
+	/**
+	 * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Occhiale.
+ 	 * @author Mario Ranieri 
+ 	 * @author Roberto Piscopo
+ 	 */
 	 public class OcchialeDao {
 	 	private static final String TABLE_NAME = "occhiale";
 	 	private DataSource ds;
@@ -134,7 +133,7 @@ import util.ConnectionPool;
 		/**
 	 	 * @param id stringa id da controllare
 	 	 * @precondition id!=NULL
-	 	 * @postcondition db.occhiale->(select(o|o.idOcchiale=id))
+	 	 * @postcondition occhiale=db.occhiale->(select(o|o.idOcchiale=id))
 	 	 * @return bean nuovo occhiale(OcchialeBean)
 	 	 * @throws SQLException
 	 	 */
@@ -185,7 +184,7 @@ import util.ConnectionPool;
 		/**
 	 	 * @param brand stringa brand da controllare
 	 	 * @precondition brand!=NULL
-	 	 * @postcondition db.occhiale->(select(o|o.brand=brand))
+	 	 * @postcondition occhiali=db.occhiale->(select(o|o.brand=brand))
 	 	 * @return bean nuovo occhiale(OcchialeBean)
 	 	 * @throws SQLException
 	 	 */
@@ -378,7 +377,7 @@ import util.ConnectionPool;
 		}
 
 		/**
-	 	 * @param id stringa id da rimuove nel db
+	 	 * @param id stringa id da rimuovere nel db
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */

@@ -10,32 +10,45 @@ import javax.sql.DataSource;
 
 import util.ConnectionPool;
 
-
-	 public class IndirizziDao  {
-
-	 	private static final String TABLE_NAME = "indirizzi";
-
+	/**
+	 * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Indirizzi.
+	 * @author Mario Ranieri 
+	 * @author Roberto Piscopo
+	 */
+	 public class IndirizziDao {
+	 	private static final String TABLE_NAME="indirizzi";
 	 	private DataSource ds;
 
+	 	/**
+		 * @param obj connessione al database
+		 * @return
+		 */
 		public void setDB(DataSource obj) {
 			this.ds=obj;
 		}
 
+		/**
+	 	 * @param email email da usare per rimuovere delle istanze nel db
+	 	 * @precondition email!=NULL
+	 	 * @postcondition indirizzo=db.indirizzi->(select(i|i.email=email AND i.attivo=1)
+	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @throws SQLException
+	 	 */
 		public IndirizziBean doRetrieveActive(String email) throws SQLException {
-			IndirizziBean bean = new IndirizziBean();
-			Connection con = null;
-			PreparedStatement prep = null;
-			ResultSet rs = null;
+			IndirizziBean bean=new IndirizziBean();
+			Connection con=null;
+			PreparedStatement prep=null;
+			ResultSet rs=null;
 	
-	 		String selectSQL = "SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and attivo=1";
+	 		String selectSQL="SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and attivo=1";
 
 	 		try {
-	 			con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(selectSQL);
+	 			con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(selectSQL);
 				prep.setString(1, email);
-				rs = prep.executeQuery();
+				rs=prep.executeQuery();
 
-	 			while (rs.next()) {
+	 			while(rs.next()) {
 	            	bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 	            	bean.setAddress(rs.getString("indirizzo"));
 	            	bean.setStatus(rs.getInt("attivo"));
@@ -47,7 +60,6 @@ import util.ConnectionPool;
 	            	bean.setName(rs.getString("nome"));
 	            	bean.setName(rs.getString("surname"));
 	 			}
-
 	 		} finally {
 	 			rs.close();
 				prep.close();
@@ -56,24 +68,28 @@ import util.ConnectionPool;
 	 		return bean;
 		}
 		
-
+		/**
+	 	 * @param email stringa email da usare per cercare delle istanze nel db
+	 	 * @param via stringa via da usare per cercare delle istanze nel db
+	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @throws SQLException
+	 	 */
 		public IndirizziBean search(String email, String via) throws SQLException {
-			IndirizziBean bean = new IndirizziBean();
-			Connection con = null;
-			PreparedStatement prep = null;
-			ResultSet rs = null;
+			IndirizziBean bean=new IndirizziBean();
+			Connection con=null;
+			PreparedStatement prep=null;
+			ResultSet rs=null;
 	
-	 		String selectSQL = "SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and indirizzo= ?";
+	 		String selectSQL="SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and indirizzo= ?";
 
 	 		try {
-	 			con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(selectSQL);
+	 			con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(selectSQL);
 				prep.setString(1, email);
 				prep.setString(2, via);
-				rs = prep.executeQuery();
+				rs=prep.executeQuery();
 
-	 			while (rs.next()) {
-	 				
+	 			while(rs.next()) {
 	            	bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 	            	bean.setAddress(rs.getString("indirizzo"));
 	            	bean.setStatus(rs.getInt("attivo"));
@@ -85,7 +101,6 @@ import util.ConnectionPool;
 	            	bean.setName(rs.getString("nome"));
 	            	bean.setSurname(rs.getString("cognome"));
 	 			}
-
 	 		} finally {
 	 			rs.close();
 				prep.close();
@@ -93,21 +108,27 @@ import util.ConnectionPool;
 	 		}
 	 		return bean;
 		}
+		
+		/**
+	 	 * @param email stringa email da usare per rimuovere delle istanze nel db
+	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @throws SQLException
+	 	 */
 		public Collection<IndirizziBean> doRetrieveAllAddress(String email) throws SQLException {
-			Collection<IndirizziBean> indirizzi = new ArrayList<IndirizziBean>();
-			Connection con = null;
-			PreparedStatement prep = null;
-			ResultSet rs = null;
-			String sql = "SELECT * FROM " + IndirizziDao.TABLE_NAME+"  WHERE email = ?";
+			Collection<IndirizziBean> indirizzi=new ArrayList<IndirizziBean>();
+			Connection con=null;
+			PreparedStatement prep=null;
+			ResultSet rs=null;
+			String sql="SELECT * FROM " + IndirizziDao.TABLE_NAME+"  WHERE email = ?";
 			
 			try {
-				con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(sql);
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(sql);
 				prep.setString(1, email);
-				rs = prep.executeQuery();
+				rs=prep.executeQuery();
 			
-			while (rs.next()) {
-				IndirizziBean bean = new IndirizziBean();
+			while(rs.next()) {
+				IndirizziBean bean=new IndirizziBean();
 				bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
             	bean.setAddress(rs.getString("indirizzo"));
             	bean.setStatus(rs.getInt("attivo"));
@@ -129,27 +150,32 @@ import util.ConnectionPool;
 			return indirizzi;
 		}
 	
+		/**
+	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel db
+	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @throws SQLException
+	 	 */
 		public Collection<IndirizziBean> doRetrieveAll(String order) throws SQLException {
-			Collection<IndirizziBean> indirizzi = new ArrayList<IndirizziBean>();
-			Connection con = null;
-			PreparedStatement prep = null;
-			ResultSet rs = null;
-			String sql = "SELECT idIndirizzo FROM " + IndirizziDao.TABLE_NAME+" ORDER BY ?";
+			Collection<IndirizziBean> indirizzi=new ArrayList<IndirizziBean>();
+			Connection con=null;
+			PreparedStatement prep=null;
+			ResultSet rs=null;
+			String sql="SELECT idIndirizzo FROM " + IndirizziDao.TABLE_NAME+" ORDER BY ?";
 			/*if(order !=null && !order.equals("")) {
 				sql += " ORDER BY " + order;
 			}*/
 			try {
-				con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(sql);
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(sql);
 				prep.setString(1, order);
-				rs = prep.executeQuery();
+				rs=prep.executeQuery();
 			
-			while (rs.next()) {
-				IndirizziBean bean = new IndirizziBean();
+			while(rs.next()) {
+				IndirizziBean bean=new IndirizziBean();
 				bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
 				
 				indirizzi.add(bean);
-		}
+				}
 		 } finally {
 				rs.close();
 				prep.close();
@@ -158,14 +184,19 @@ import util.ConnectionPool;
 			return indirizzi;
 		}
 		
+		/**
+	 	 * @param indirizzo indirizzo da aggiornare nel db
+	 	 * @return
+	 	 * @throws SQLException
+	 	 */
 		public void doUpdate(IndirizziBean indirizzo) throws SQLException {
-			Connection con = null;
-			PreparedStatement prep = null;
-			String sql = "UPDATE indirizzo SET idIndirizzo=?, indirizzo=?, attivo=?, citta=?, provincia=?, cap=?, email=?, telefono=?, nome=?, cognome=?";
+			Connection con=null;
+			PreparedStatement prep=null;
+			String sql="UPDATE indirizzo SET idIndirizzo=?, indirizzo=?, attivo=?, citta=?, provincia=?, cap=?, email=?, telefono=?, nome=?, cognome=?";
 
 			try {
-				con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(sql);
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(sql);
 
 				prep.setInt(1, indirizzo.getIdIndirizzo());
 				prep.setString(2, indirizzo.getAddress());
@@ -186,17 +217,21 @@ import util.ConnectionPool;
 			}
 		}
 
+		/**
+	 	 * @param indirizzo indirizzo da rimuovere nel db
+	 	 * @return
+	 	 * @throws SQLException
+	 	 */
 		public void doDelete(IndirizziBean indirizzo) throws SQLException {
-			Connection con = null;
-			PreparedStatement prep = null;
-			String deleteSQL = "DELETE FROM " + IndirizziDao.TABLE_NAME + " WHERE CODE = ?";
+			Connection con=null;
+			PreparedStatement prep=null;
+			String deleteSQL="DELETE FROM " + IndirizziDao.TABLE_NAME + " WHERE CODE = ?";
 			
 			try {
-				con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(deleteSQL);
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(deleteSQL);
 
 				prep.setInt(1, indirizzo.getIdIndirizzo());
-
 				prep.executeUpdate();
 
 			} finally {
@@ -205,15 +240,20 @@ import util.ConnectionPool;
 			}
 		}
 
+		/**
+	 	 * @param indirizzo indirizzo da salvare nel db
+	 	 * @return
+	 	 * @throws SQLException
+	 	 */
 		public void doSave(IndirizziBean indirizzo) throws SQLException {
-			Connection con = null;
-			PreparedStatement prep = null;
+			Connection con=null;
+			PreparedStatement prep=null;
 		
-			String insertSQL = "INSERT INTO " + IndirizziDao.TABLE_NAME
-					+ " (indirizzo, attivo, citta, provincia, cap, email, telefono, nome, cognome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insertSQL="INSERT INTO " + IndirizziDao.TABLE_NAME + " (indirizzo, attivo, citta, provincia, cap, email, telefono, nome, cognome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
 			try {
-				con = ConnectionPool.getConnection();
-				prep = con.prepareStatement(insertSQL);
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(insertSQL);
 				
 				System.out.println("Do Save "+prep);
 				
