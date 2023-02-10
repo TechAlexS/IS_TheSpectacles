@@ -23,7 +23,6 @@ public class IndirizziBean implements Serializable {
 		
 	}
 	
-
 	/**
 	 * @param idIndirizzo id dell'indirizzo
 	 * @param address la stringa dell'indirizzo
@@ -37,9 +36,7 @@ public class IndirizziBean implements Serializable {
 	 * @param surname il cognome associato all'indirizzo
 	 * @return 
 	 */
-	public IndirizziBean(int idIndirizzo, String address, int status, String city, String province, int cap,
-			String email, String telefono, String name, String surname) {
-		
+	public IndirizziBean(int idIndirizzo, String address, int status, String city, String province, int cap, String email, String telefono, String name, String surname) {
 		this.idIndirizzo=idIndirizzo;
 		this.address=address;
 		this.status=status;
