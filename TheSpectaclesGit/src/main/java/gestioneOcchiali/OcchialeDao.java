@@ -39,7 +39,6 @@ import util.ConnectionPool;
 			Collection<OcchialeBean> occhiali=new ArrayList<OcchialeBean>();
 	 		String sql="SELECT * FROM " + OcchialeDao.TABLE_NAME + " WHERE categoria = ?";
 	 		
-
 	 		try {
 	 			con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(sql);
