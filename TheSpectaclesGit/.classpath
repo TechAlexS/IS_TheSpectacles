@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -9,23 +10,21 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.29.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/tomcat/apache-tomcat-9.0.64/lib/servlet-api.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0 (2)">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/apiguardian-api-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/byte-buddy-1.12.22.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/byte-buddy-agent-1.12.22.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/junit-jupiter-api-5.9.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/junit-platform-commons-1.9.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/mockito-core-5.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/mockito-junit-jupiter-5.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/objenesis-3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/opentest4j-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-core-6.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-jcl-6.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aless/Desktop/UNI/III Anno/Ingegneria Del Software/workspace_eclipse/librerie/spring-test-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Tomcat/apache-tomcat-9.0.63/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/mockito-junit-jupiter-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-core-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-jcl-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-test-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-beans-6.0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-context-6.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-dao-1.2.9.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/spring-jdbc-1.2.9.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/byte-buddy-1.12.22.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/byte-buddy-agent-1.12.22.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/mockito-core-5.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/mockito-subclass-5.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/objenesis-3.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

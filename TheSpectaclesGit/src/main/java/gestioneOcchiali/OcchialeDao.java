@@ -358,11 +358,11 @@ import util.ConnectionPool;
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
-		public void decreaseAvailability(OcchialeBean occhiale) throws SQLException {
+		public int decreaseAvailability(OcchialeBean occhiale) throws SQLException {
 			Connection con=null;
 			PreparedStatement prep=null;
 			String sql="UPDATE occhiale SET disponibilita=? WHERE idOcchiale=?";
-
+			
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(sql);
@@ -374,6 +374,8 @@ import util.ConnectionPool;
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
 			}
+			
+			return occhiale.getAvailability()-occhiale.getQuantity();
 		}
 
 		/**
@@ -426,8 +428,10 @@ import util.ConnectionPool;
 				prep.setString(9, occhiale.getImage());
 				prep.setString(10, occhiale.getImage2());
 				prep.setString(11, occhiale.getDescription());
-
+				
+				System.out.println("doSve occhiale: "+prep);
 				prep.executeUpdate();
+				
 				
 			} finally {
 				prep.close();
