@@ -28,6 +28,10 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID=1L;
 	private static Model<UtenteBean, DataSource> utenteModel=new UtenteDao();
 	
+	/**
+	 * @return
+	 * @throws ServletException
+	 */
 	public void init() throws ServletException {
 		super.init();
 		utenteModel.setDB((DataSource) getServletContext().getAttribute("DataSource"));
@@ -47,18 +51,16 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	  /**
-		 * @precondition Request.getParameter(“email”)!=null AND Request.getParameter(“user_password”)!=null 
+		 * @precondition Request.getParameter(“email”)!=null AND Request.getParameter(“password”)!=null 
 		 * @postcondition request.getSession().getAttribute(“auth”)!=null
 		 * @throws ServletException, IOException
 		 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		    
-			String email=request.getParameter("email");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		    String email=request.getParameter("email");
 			String pw=request.getParameter("password");
-			
 	        byte[] data1=pw.getBytes("UTF-8");
 	        MessageDigest mdhash=null;
+	        
 			try {
 				mdhash=MessageDigest.getInstance("SHA-256");
 			} catch(NoSuchAlgorithmException e1) {
