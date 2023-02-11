@@ -71,7 +71,7 @@ public class Checkout extends HttpServlet {
 		
 		if (request.getSession().getAttribute("auth")!=null) {
 			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
-			if (cart.getDimensione()>0) {
+			if (cart!=null || cart.getDimensione()>0) {
 				OrdineBean ordine=createOrder(request);
 				System.out.println("Checkout ordine: "+ordine);
 				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());

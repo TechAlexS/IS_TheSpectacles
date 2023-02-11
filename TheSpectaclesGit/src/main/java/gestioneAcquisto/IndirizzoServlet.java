@@ -76,11 +76,20 @@ public class IndirizzoServlet extends HttpServlet {
 
 					Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 					
-					if(cart.getDimensione()>0) {
+					if(cart!=null ) {
 						
-						RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/checkout.jsp");
-						dispatcher.forward(request, response);
-						return;
+						if (cart.getDimensione()>0) {
+							RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/checkout.jsp");
+							dispatcher.forward(request, response);
+							return;
+						}
+						else {
+							RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/error.jsp");
+							dispatcher.forward(request, response);
+							return;
+						}
+						
+						
 					}
 					else {
 						

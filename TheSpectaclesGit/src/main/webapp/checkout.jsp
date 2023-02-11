@@ -237,17 +237,17 @@ function validateForm() {
   var cvvPattern = /^\d{3,4}$/;
 
   if (!cardNumberPattern.test(cardNumber)) {
-    alert("Invalid card number format.");
+    alert("Formato numero carta non valido.");
     return false;
   }
 
   if (!expirationDatePattern.test(expirationDate)) {
-    alert("Invalid expiration date format.");
+    alert("Formato scadenza carta non valido.");
     return false;
   }
 
   if (!cvvPattern.test(cvv)) {
-    alert("Invalid CVV format.");
+    alert("Formato CVV non valido");
     return false;
   }
 
