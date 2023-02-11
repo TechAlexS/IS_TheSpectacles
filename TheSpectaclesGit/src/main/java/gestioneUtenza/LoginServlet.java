@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	  /**
-		 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
+		 * @precondition request.getSession().getAttribute( “auth”)!=null AND request.getParameter(“user_address”)!=null AND request.getParameter(“city”)!=null AND request.getParameter(“user_country”)!=null AND request.getParameter(“zip_code”)!=null AND request.getParameter(“user_phone”)!=null 
 		 * @postcondition request.getSession().getAttribute(“auth”)!=null
 		 * @throws ServletException, IOException
 		 */

@@ -14,30 +14,35 @@ import javax.sql.DataSource;
 
 import gestioneUtenza.UtenteBean;
 
-
-
-
+/**
+ * Questa classe è un control che si occupa di passare un nuovo indirizzo a IndirizzoDao.
+ */
 @WebServlet("/AddAddress")
 public class ServletAddAddress extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	private IndirizziDao indDao= new IndirizziDao();
+	private static final long serialVersionUID=1L;
+	private IndirizziDao indDao=new IndirizziDao();
 	
+	/**
+	 * @return
+	 * @throws ServletException
+	 */
 	public void init() throws ServletException {
 		super.init();
-		
 		indDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));
 	}
+	
 	public ServletAddAddress() {
 		super();
 	}
 
-	
+	/**
+	 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
+	 * @postcondition IndirizzoDao.doSave(idIndirizzo) eseguito AND dispatcher!=null
+	 * @throws ServletException, IOException
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session= request.getSession(false);
-		UtenteBean bean= (UtenteBean)session.getAttribute("auth");
-		
+		HttpSession session=request.getSession(false);
+		UtenteBean bean=(UtenteBean)session.getAttribute("auth");
 		
 		System.out.println("Sono nella Servlet aggiungi indirizzo: \n");
 		System.out.println("\n"+request.getParameter("user_name"));
@@ -50,18 +55,16 @@ public class ServletAddAddress extends HttpServlet {
 
 		String nome=request.getParameter("user_name");
 		String cognome=request.getParameter("user_surname");
-		String telefono= request.getParameter("user_phone");
-		String via=  request.getParameter("user_address");
-		String citta= request.getParameter("city");
+		String telefono=request.getParameter("user_phone");
+		String via=request.getParameter("user_address");
+		String citta=request.getParameter("city");
 		String provincia=request.getParameter("user_country");
-		int cap=  Integer.parseInt(request.getParameter("zipcode"));
-		String email= bean.getEmail();
-		
-		
+		int cap=Integer.parseInt(request.getParameter("zipcode"));
+		String email=bean.getEmail();
 		int status=0;
 		
 		try {
-			IndirizziBean indirizzo= new IndirizziBean();
+			IndirizziBean indirizzo=new IndirizziBean();
 			indirizzo.setName(nome);
 			indirizzo.setSurname(cognome);
 			indirizzo.setAddress(via);
@@ -71,24 +74,18 @@ public class ServletAddAddress extends HttpServlet {
 			indirizzo.setStatus(status);
 			indirizzo.setEmail(email);
 			indirizzo.setTelefono(telefono);
-			
 			indDao.doSave(indirizzo);
-			
-			
-			
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			System.out.println("Errore Servelt aggiungi indirizzo: " + e.getMessage());
 		}
-		
-		
-		RequestDispatcher dis= getServletContext().getRequestDispatcher("/Indirizzo");
+		RequestDispatcher dis=getServletContext().getRequestDispatcher("/Indirizzo");
 		dis.forward(request, response);
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		doGet(request, response);
 	}
-
 }
