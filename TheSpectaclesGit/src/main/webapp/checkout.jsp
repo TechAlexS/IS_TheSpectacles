@@ -8,7 +8,8 @@
 <%
 if(request.getSession().getAttribute("auth") == null) {
 	response.sendRedirect(getServletContext().getContextPath() +
-	"/login.jsp"); } 
+	"/login.jsp"); 
+	} 
 	UtenteBean auth = (UtenteBean) request.getSession().getAttribute("auth");
 	IndirizziBean attivo= (IndirizziBean) request.getAttribute("attivo");
 	Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
@@ -17,7 +18,7 @@ if(request.getSession().getAttribute("auth") == null) {
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
+<script src="./resources/Ajax.js"></script>
 <%@ include file="meta.html"%>
 
 </head>
@@ -65,7 +66,7 @@ if(request.getSession().getAttribute("auth") == null) {
 			       <tr>    
                   <td><%= auth.getFirstName() %> <%= auth.getLastName() %></td>
                   <td>
-                   <input type="radio"  name="sameadr" value="<%=attivo.getAddress() %>" checked>Default: <%=attivo.getAddress() %>
+                   <input id="indirizzo" type="radio"  name="indirizzo" value="<%=attivo.getAddress() %>" checked>Default: <%=attivo.getAddress() %>
                    </td>
                     </tr>
                     </tbody>
@@ -89,7 +90,7 @@ if(request.getSession().getAttribute("auth") == null) {
 							IndirizziBean bean = (IndirizziBean) it.next();%> 
                        <tr>
                         <td><%= auth.getFirstName() %> <%= auth.getLastName() %></td>
-                       <td><input type="radio" name="sameadr"  value="<%=bean.getAddress() %>"><%=bean.getAddress() %></td>
+                       <td><input id="indirizzo" type="radio" name="indirizzo"  value="<%=bean.getAddress() %>"><%=bean.getAddress() %></td>
                        </tr>
                        
                    <% }
@@ -97,7 +98,7 @@ if(request.getSession().getAttribute("auth") == null) {
 						<% }
 						%>
 						<tr>
-						<td> <input type="radio" name="sameadr" onclick="aggiungi()" value="nuovoIndirizzo">Nuovo indirizzo spedizione</td>
+						<td> <input id="indirizzo" type="radio" name="indirizzo" onclick="aggiungi()" value="nuovoIndirizzo">Nuovo indirizzo spedizione</td>
 						</tr>
 						
 						<script type="text/javascript">
@@ -121,16 +122,16 @@ if(request.getSession().getAttribute("auth") == null) {
                         <div class="card-details">
                           
                               <div class="form-group">
-                                 <label for="card-number">Numero Carta <span class="required">*</span></label>
-                                 <input  id="card-number" class="form-control" name="cardnumber"  type="tel" placeholder="">
+                                 <label for="cardnumber">Numero Carta <span class="required">*</span></label>
+                                 <input  id="cardnumber" class="form-control" name="cardnumber"  type="text" placeholder="">
                               </div>
                               <div class="form-group half-width padding-right">
-                                 <label for="card-expiry">Scadenza (MM/YY) <span class="required">*</span></label>
-                                 <input id="card-expiry" class="form-control" name="expiry" type="tel" placeholder="MM / YY">
+                                 <label for="expiry">Scadenza (MM/YY) <span class="required">*</span></label>
+                                 <input id="expiry" class="form-control" name="expiry" type="text" placeholder="MM / YY">
                               </div>
                               <div class="form-group half-width padding-left">
-                                 <label for="card-cvc">CVV <span class="required">*</span></label>
-                                 <input id="card-cvc" class="form-control" name="cvv"  type="tel" maxlength="3" placeholder="123" >
+                                 <label for="cvc">CVV <span class="required">*</span></label>
+                                 <input id="cvc" class="form-control" name="cvv"  type="text" maxlength="3" placeholder="123" >
                               </div>
                                <button  type="submit" class="btn btn-main mt-20" id="submit" value="Continua Checkout">Ordina</button>
                         
@@ -207,6 +208,7 @@ if(request.getSession().getAttribute("auth") == null) {
    
  <%@ include file="footer.html"%>
  <%@ include file="script.html"%>
+  <script src="./resources/ajaxCheckout.js"></script>
 
  </body>
  </html>

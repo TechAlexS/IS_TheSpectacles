@@ -27,7 +27,7 @@ import gestioneUtenza.UtenteBean;
 import gestioneOcchiali.OcchialeBean;
 
 /**
- * Questa classe è un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 
+ * Questa classe � un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 
  */
 @WebServlet("/Checkout")
 public class Checkout extends HttpServlet {
@@ -51,16 +51,20 @@ public class Checkout extends HttpServlet {
 	}
 
 	 /**
-	 * @precondition Request.getParameter(“sameadr”)!=null AND Request.getParameter(“cardnumber”)!=null AND Request.getSession().getAttribute(“auth”)!=null
+	 * @precondition Request.getParameter(indirizzo)!=null AND Request.getParameter(cardnumber)!=null AND Request.getSession().getAttribute(auth)!=null
 	 * @precondition carrello=request.getSession().getAttribute("Carrello")!=null 
-	 * @postcondition Request.getSession().getAttribute(“address”)!=null AND carrello.dimension=0 AND dispatcher!=null
+	 * @postcondition Request.getSession().getAttribute(address)!=null AND carrello.dimension=0 AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		String ind=(String) request.getParameter("sameadr");
-		System.out.println("Checkout address: "+request.getParameter("sameadr"));
+		String ind=(String) request.getParameter("indirizzo");
+		System.out.println("Checkout address: "+request.getParameter("indirizzo"));
 		System.out.println("Checkout cardNumber: "+request.getParameter("cardnumber"));
+		
+		String cardNumber=request.getParameter("cardnumber");
+		String cvv=request.getParameter("cvv");
+		String expiry=request.getParameter("expiry");
 		
 		Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 		
@@ -76,7 +80,7 @@ public class Checkout extends HttpServlet {
 				
 					for (OcchialeOrdineBean o:occhialiOrdine) {
 						occhialeDao.doSave(o);
-						oDao.decreaseAvailability(o.getProdotto()); // controllare perch� toglie tutte le quantit�
+						oDao.decreaseAvailability(o.getProdotto()); 
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
