@@ -18,7 +18,7 @@ if(request.getSession().getAttribute("auth") == null) {
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<script src="./resources/Ajax.js"></script>
+
 <%@ include file="meta.html"%>
 
 </head>
@@ -43,7 +43,7 @@ if(request.getSession().getAttribute("auth") == null) {
 	</div>
 </section>
 
- <form  class="checkout-form" action="Checkout" method="get">
+ <form  class="checkout-form" action="Checkout" method="get" onsubmit="return validateForm()">
 <div class="page-wrapper">
    <div class="checkout shopping">
       <div class="container">
@@ -51,8 +51,9 @@ if(request.getSession().getAttribute("auth") == null) {
             <div class="col-md-8">
                <div class="block billing-details">
                   <h4 class="widget-title">Indirizzo</h4>
-                   
+                  
                   <div class="table-responsive">
+                  <% if(attivo.getAddress()!=null){ %> 
                      <table class="table">
                       <thead>
 			                <tr>
@@ -61,7 +62,7 @@ if(request.getSession().getAttribute("auth") == null) {
 			                </tr>
 			              </thead>
 			               <tbody>
-                  <% if(attivo!=null){ %>
+                 
                    
 			       <tr>    
                   <td><%=  attivo.getName()  %> <%= attivo.getSurname() %></td>
@@ -98,7 +99,7 @@ if(request.getSession().getAttribute("auth") == null) {
 						<% }
 						%>
 						<tr>
-						<td> <input id="indirizzo" type="radio" name="indirizzo" onclick="aggiungi()" value="nuovoIndirizzo">Nuovo indirizzo spedizione</td>
+						<td> <input id="addAddress" type="radio" name="newAddress" onclick="aggiungi()" value="nuovoIndirizzo">Aggiungi nuovo indirizzo spedizione</td>
 						</tr>
 						
 						<script type="text/javascript">
@@ -123,23 +124,44 @@ if(request.getSession().getAttribute("auth") == null) {
                           
                               <div class="form-group">
                                  <label for="cardnumber">Numero Carta <span class="required">*</span></label>
-                                 <input  id="cardnumber" class="form-control" name="cardnumber"  type="text" placeholder="">
+                                 <input  id="cardnumber" class="form-control" name="cardnumber"  type="text" placeholder="" required>
                               </div>
                               <div class="form-group half-width padding-right">
                                  <label for="expiry">Scadenza (MM/YY) <span class="required">*</span></label>
-                                 <input id="expiry" class="form-control" name="expiry" type="text" placeholder="MM / YY">
+                                 <input id="expiry" class="form-control" name="expiry" type="text" placeholder="MM / YY" required>
                               </div>
                               <div class="form-group half-width padding-left">
-                                 <label for="cvc">CVV <span class="required">*</span></label>
-                                 <input id="cvc" class="form-control" name="cvv"  type="text" maxlength="3" placeholder="123" >
+                                 <label for="cvv">CVV <span class="required">*</span></label>
+                                 <input id="cvv" class="form-control" name="cvv"  type="text" maxlength="3" placeholder="123" required>
                               </div>
-                               <button  type="submit" class="btn btn-main mt-20" id="submit" value="Continua Checkout">Ordina</button>
+                               <button  type="submit" class="btn btn-main mt-20" id="submit" value="Continua Checkout" onclick="return checkRadio()">Ordina</button>
                         
                         </div>
                        </div>
                      </div>
                   </div>
                </div>
+                <script>
+					function checkRadio() {
+					  var radios = document.getElementsByName('indirizzo');
+					  var formValid = false;
+					
+					  for (var i = 0; i < radios.length; i++) {
+					    if (radios[i].checked && !(radios[i].value.equals("null"))) {
+					      formValid = true;
+					      break;
+					    }
+					  }
+					
+					  if (!formValid) {
+					    alert("Seleziona un indirizzo o creane uno nuovo");
+					    return false;
+					  }
+					
+					  return true;
+					}
+				</script>
+  
            
           
             <div class="col-md-4">
@@ -204,11 +226,38 @@ if(request.getSession().getAttribute("auth") == null) {
         	</div>
        	</div>
         </form>  <!-- fine form -->
+<script>
+function validateForm() {
+  var cardNumber = document.getElementById("cardnumber").value;
+  var expirationDate = document.getElementById("expiry").value;
+  var cvv = document.getElementById("cvv").value;
 
+  var cardNumberPattern = /^\d{16}$/;
+  var expirationDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+  var cvvPattern = /^\d{3,4}$/;
+
+  if (!cardNumberPattern.test(cardNumber)) {
+    alert("Invalid card number format.");
+    return false;
+  }
+
+  if (!expirationDatePattern.test(expirationDate)) {
+    alert("Invalid expiration date format.");
+    return false;
+  }
+
+  if (!cvvPattern.test(cvv)) {
+    alert("Invalid CVV format.");
+    return false;
+  }
+
+  return true;
+}
+</script>
    
  <%@ include file="footer.html"%>
  <%@ include file="script.html"%>
-  <script src="./resources/ajaxCheckout.js"></script>
+
 
  </body>
  </html>

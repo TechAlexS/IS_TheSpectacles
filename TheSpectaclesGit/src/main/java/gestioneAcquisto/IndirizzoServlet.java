@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
 import gestioneUtenza.UtenteBean;
+import gestioneCarrello.Carrello;
 
 /**
  * Questa classe è un control che si occupa di recuperare gli indirizzi usando IndirizziDao.
@@ -40,7 +40,7 @@ public class IndirizzoServlet extends HttpServlet {
 
 	/**
 	 * @precondition request.getSession().getAttribute("auth")!=null 
-	 * @postcondition request.getAttribute(“attivo”)!=null AND request.getAttribute(“indirizzi”)!=null AND dispatcher!=null
+	 * @postcondition request.getAttribute(attivo)!=null AND request.getAttribute(indirizzi)!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,9 +73,21 @@ public class IndirizzoServlet extends HttpServlet {
 					}
 				else {
 					System.out.println("else");
-					RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/checkout.jsp");
-					dispatcher.forward(request, response);
-					return;
+
+					Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
+					
+					if(cart.getDimensione()>0) {
+						
+						RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/checkout.jsp");
+						dispatcher.forward(request, response);
+						return;
+					}
+					else {
+						
+						RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/error.jsp");
+						dispatcher.forward(request, response);
+						return;
+					}
 				   }
 			   }
 			else {

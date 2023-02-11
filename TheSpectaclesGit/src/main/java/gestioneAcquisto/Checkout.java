@@ -68,9 +68,10 @@ public class Checkout extends HttpServlet {
 		
 		Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 		
+		
 		if (request.getSession().getAttribute("auth")!=null) {
 			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
-			if (cart!=null) {
+			if (cart.getDimensione()>0) {
 				OrdineBean ordine=createOrder(request);
 				System.out.println("Checkout ordine: "+ordine);
 				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());
@@ -91,10 +92,15 @@ public class Checkout extends HttpServlet {
 					e.printStackTrace();
 				}
 				cart.delete();
+				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/error.jsp");
+				dispatcher.forward(request, response);
 			}
 			
-			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
-			dispatcher.forward(request, response);
+			
 		} else {
 			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);

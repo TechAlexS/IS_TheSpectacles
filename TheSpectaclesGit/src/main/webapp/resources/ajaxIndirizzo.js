@@ -2,9 +2,13 @@ $(document).ready(function(){
 	var err= 0;
 	var err2= 0;
 	var err3= 0;
+	var err4= 0;
+	var err5= 0;
+	var err6= 0;
+	var err7= 0;
 	$('#submit').click(function(){
-	var email= $('#email1').val();
-	var password= $('#password1').val();	
+	var nome= $('#email1').val();
+	var cognome= $('#password1').val();	
 	var expEm= /^([a-z1-9.-])*@([a-z])+(.com)$/;
 	var expEm2= /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/;
 	

@@ -70,7 +70,7 @@ $(document).ready(function(){
 		$('#errorecvv').remove();
 	}
 		
-	if (!(indirizzo.equals(null))){
+	if (!(indirizzo.equals("null"))){
 		errindirizzo= errindirizzo + 1;
 		$('#indirizzo').remove();
 	}
@@ -79,11 +79,11 @@ $(document).ready(function(){
 		
 	//utilizzo di ajax
 		
-	if ((cardnumber.match(expCardNumber)) && (expiry.match(expCardExpiry)) && (cvv.match(expCardCvv)) && (indirizzo!=null) ){
+	if ((cardnumber.match(expCardNumber)) && (expiry.match(expCardExpiry)) && (cvv.match(expCardCvv)) && !(indirizzo.equals("null"))){
 			$.ajax({
 				type: 'GET',
 				data: {cardnumber: cardnumber,expiry: expiry, cvv: cvv, indirizzo: indirizzo},
-				url: 'Checkout',
+				url: 'Checkout'
 			
 				})
 			}
