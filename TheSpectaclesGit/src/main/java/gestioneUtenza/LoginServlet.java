@@ -48,11 +48,11 @@ public class LoginServlet extends HttpServlet {
 		response.sendRedirect(response.encodeRedirectURL("error.jsp"));
 	}
 	
-	  /**
-		 * @precondition request.getSession().getAttribute( “auth”)!=null AND request.getParameter(“user_address”)!=null AND request.getParameter(“city”)!=null AND request.getParameter(“user_country”)!=null AND request.getParameter(“zip_code”)!=null AND request.getParameter(“user_phone”)!=null 
-		 * @postcondition request.getSession().getAttribute(“auth”)!=null
-		 * @throws ServletException, IOException
-		 */
+	/**
+	 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
+	 * @postcondition request.getSession().getAttribute(“auth”)!=null
+	 * @throws ServletException, IOException
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		    String email=request.getParameter("email");
 			String pw=request.getParameter("password");
@@ -66,7 +66,6 @@ public class LoginServlet extends HttpServlet {
 			}
 	        byte[] digest=mdhash.digest(data1);              
 	        String HashPassw=Base64.getEncoder().encodeToString(digest);
-			
 			ArrayList<String> value=new ArrayList<String>();
 			PrintWriter out=response.getWriter();
 			value.add(email);
@@ -74,24 +73,21 @@ public class LoginServlet extends HttpServlet {
 			
 			try{
 				UtenteBean cerca=utenteModel.doRetrieveByKey(value);
-		
 				if(cerca.getEmail()==null) {
 					out.print("Nulla");
 					request.setAttribute("loginResult", "utente inesistente");
 				}
-				
 				if((cerca.getEmail()!=null) && (cerca.getRole()==1)) {
 					request.getSession().setAttribute("auth", cerca);
 					out.print("Admin");
 				}
-				
 				if((cerca.getEmail()!=null) && !(cerca.getRole()==1)) {
 					request.getSession().setAttribute("auth", cerca);
 					out.print("Utente");
 				}
 			}
-		catch(Exception e) {
-			System.out.println("Error Login Servlet: " + e.getMessage());	
+			catch(Exception e) {
+				System.out.println("Error Login Servlet: " + e.getMessage());	
 			}
 		}
-}
+	}
