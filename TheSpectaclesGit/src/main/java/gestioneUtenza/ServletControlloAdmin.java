@@ -15,44 +15,45 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.util.*;
 
-
+/**
+ * Questa classe è un control che si occupa di gestire l’apertura delle 3 pagine azione dell’Admin 
+ */
 @WebServlet("/ControlloAdmin")
 public class ServletControlloAdmin extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID=1L;
        
-    
+	/**
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter(“id”)!=null 
+	 * @postcondition request.getAttribute(“admin”)!=null ANd dispatcher!=null
+	 * @throws ServletException, IOException
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String azione= request.getParameter("azione");
-		UtenteBean utente= (UtenteBean) request.getSession().getAttribute("auth");
+		String azione=request.getParameter("azione");
+		UtenteBean utente=(UtenteBean) request.getSession().getAttribute("auth");
 		request.setAttribute("admin", utente);
 		
-		if (azione!=null && azione.equalsIgnoreCase("controllo")) {
-			RequestDispatcher dis= request.getRequestDispatcher("/PageAmministratore.jsp");
+		if(azione!=null && azione.equalsIgnoreCase("controllo")) {
+			RequestDispatcher dis=request.getRequestDispatcher("/PageAmministratore.jsp");
 			dis.forward(request, response);
 		}
-		
-		if (azione!=null && azione.equalsIgnoreCase("ordiniNominativo")) {
-			RequestDispatcher dis= request.getRequestDispatcher("/ControlloOrdiniAdmin.jsp");
+		if(azione!=null && azione.equalsIgnoreCase("ordiniNominativo")) {
+			RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniAdmin.jsp");
 			dis.forward(request, response);
 		}
-		
-		if (azione!=null && azione.equalsIgnoreCase("ordiniData")) {
-			RequestDispatcher dis= request.getRequestDispatcher("/ControlloOrdiniDataAdmin.jsp");
+		if(azione!=null && azione.equalsIgnoreCase("ordiniData")) {
+			RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniDataAdmin.jsp");
 			dis.forward(request, response);
 		}
-		
-		if (azione == null) {
-		RequestDispatcher dis= request.getRequestDispatcher("/ControlloAmministratore.jsp");
+		if(azione==null) {
+		RequestDispatcher dis=request.getRequestDispatcher("/ControlloAmministratore.jsp");
 		dis.forward(request, response);
-	
 		}
 	}
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doGet(request, response);
 	}
-
 }
