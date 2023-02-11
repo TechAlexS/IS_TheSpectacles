@@ -58,7 +58,7 @@ public class ServletProdotti extends HttpServlet {
 		
 		
 		System.out.println("Action value: "+ azione);
-			
+		
 		if (azione != null && azione.equalsIgnoreCase("dettagli")) {
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/prodotto.jsp");
@@ -69,6 +69,7 @@ public class ServletProdotti extends HttpServlet {
 			
 			System.out.println("Sono nell'if aggiungi ");
 			OcchialeBean occhiale= (OcchialeBean) request.getAttribute("descrizione");
+			System.out.println("occhaile bean carrello: "+occhiale);
 			if (!car.searchProdotto(occhiale.getIdGlasses())) {
 			car.addCarrello(occhiale);
 			car.getPrezzoTotale(1, valori.get(0));
@@ -78,10 +79,11 @@ public class ServletProdotti extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		
+		/*
 		if (Integer.parseInt(request.getParameter("scelta"))>= 1) {
 			RequestDispatcher dis= getServletContext().getRequestDispatcher("/carello.jsp");
 			dis.forward(request, response);
-		}
+		}*/
 		
 		}
 		catch (Exception e) {

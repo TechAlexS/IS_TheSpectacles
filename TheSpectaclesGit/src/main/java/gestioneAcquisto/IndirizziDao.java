@@ -58,7 +58,7 @@ import util.ConnectionPool;
 	            	bean.setEmail(rs.getString("email"));
 	            	bean.setTelefono(rs.getString("telefono"));
 	            	bean.setName(rs.getString("nome"));
-	            	bean.setName(rs.getString("surname"));
+	            	bean.setName(rs.getString("cognome"));
 	 			}
 	 		} finally {
 	 			rs.close();
@@ -225,7 +225,7 @@ import util.ConnectionPool;
 		public void doDelete(IndirizziBean indirizzo) throws SQLException {
 			Connection con=null;
 			PreparedStatement prep=null;
-			String deleteSQL="DELETE FROM " + IndirizziDao.TABLE_NAME + " WHERE CODE = ?";
+			String deleteSQL="DELETE FROM " + IndirizziDao.TABLE_NAME + " WHERE idIndirizzo = ?";
 			
 			try {
 				con=ConnectionPool.getConnection();
@@ -255,9 +255,9 @@ import util.ConnectionPool;
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(insertSQL);
 				
-				System.out.println("Do Save "+prep);
 				
-				//prep.setInt(1, indirizzo.getIdIndirizzo());
+				
+				
 				prep.setString(1, indirizzo.getAddress());
 				prep.setInt(2, indirizzo.getStatus());
 				prep.setString(3, indirizzo.getCity());
@@ -267,12 +267,38 @@ import util.ConnectionPool;
 				prep.setString(7, indirizzo.getTelefono());
 				prep.setString(8,indirizzo.getName());
 				prep.setString(9,indirizzo.getSurname());
-			
+				
+				System.out.println("Do Save "+prep);
 				prep.executeUpdate();
 
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
 			}
+		}
+		
+		public int getLastIndexAdded() throws SQLException {
+			Connection con=null;
+			PreparedStatement prep=null;
+			ResultSet rs=null;
+			int index=0;
+			String query="SELECT MAX(idIndirizzo) FROM  " + IndirizziDao.TABLE_NAME;
+		 
+			try {
+				con=ConnectionPool.getConnection();
+				prep=con.prepareStatement(query);
+				rs=prep.executeQuery();
+				
+				while(rs.next()) {
+					index=rs.getInt("Max(idIndirizzo)");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				rs.close();
+				prep.close();
+				ConnectionPool.rilasciaConnessione(con);
+		     }
+			return index;
 		}
 	 }

@@ -64,7 +64,7 @@ if(request.getSession().getAttribute("auth") == null) {
                   <% if(attivo!=null){ %>
                    
 			       <tr>    
-                  <td><%= auth.getFirstName() %> <%= auth.getLastName() %></td>
+                  <td><%=  attivo.getName()  %> <%= attivo.getSurname() %></td>
                   <td>
                    <input id="indirizzo" type="radio"  name="indirizzo" value="<%=attivo.getAddress() %>" checked>Default: <%=attivo.getAddress() %>
                    </td>
@@ -89,7 +89,7 @@ if(request.getSession().getAttribute("auth") == null) {
 						<%while (it.hasNext()) {
 							IndirizziBean bean = (IndirizziBean) it.next();%> 
                        <tr>
-                        <td><%= auth.getFirstName() %> <%= auth.getLastName() %></td>
+                        <td><%=  bean.getName()  %> <%= bean.getSurname() %></td>
                        <td><input id="indirizzo" type="radio" name="indirizzo"  value="<%=bean.getAddress() %>"><%=bean.getAddress() %></td>
                        </tr>
                        

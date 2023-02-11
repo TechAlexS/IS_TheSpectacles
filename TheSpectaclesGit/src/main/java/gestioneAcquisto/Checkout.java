@@ -72,15 +72,20 @@ public class Checkout extends HttpServlet {
 			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
 			if (cart!=null) {
 				OrdineBean ordine=createOrder(request);
+				System.out.println("Checkout ordine: "+ordine);
 				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());
 				
 				try {	
 					ordineDao.doSave(ordine);
+					
 					request.getSession().setAttribute("address",indDao.search(bean.getEmail(), ind));
 				
 					for (OcchialeOrdineBean o:occhialiOrdine) {
+						System.out.println("Checkout occhialeOrdineBean: "+o);
 						occhialeDao.doSave(o);
-						oDao.decreaseAvailability(o.getProdotto()); 
+						OcchialeBean occhiale=oDao.doRetrieveOcchiale(o.getIdProdotto());
+						occhiale.setQuantity(o.getQuantita());
+						oDao.decreaseAvailability(occhiale); 
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();

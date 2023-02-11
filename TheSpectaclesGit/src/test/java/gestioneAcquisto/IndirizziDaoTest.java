@@ -30,12 +30,13 @@ class IndirizziDaoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		 dao.doSave(bean);
+		 bean.setIdIndirizzo(dao.getLastIndexAdded());
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		dao.doDelete(bean);
-		bean.setIdIndirizzo(dao.getLastIndexAdded());
+		
 	}
 
 	

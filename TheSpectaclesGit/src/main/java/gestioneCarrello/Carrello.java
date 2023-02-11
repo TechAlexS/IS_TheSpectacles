@@ -152,17 +152,27 @@ public class Carrello implements Serializable {
 	 * @param q
 	 * @return
 	 */
-	public void insertQuantita(String code, int q) {
+	public int insertQuantita(String code, int q) {
+		int ris=0;
 		for (int i=0; i<car.size(); i++) {
 			if(car.get(i).getIdGlasses().equals(code)) {
 				System.out.println("Disponibilit�: "+car.get(i).getAvailability());
 				System.out.println("\n Stampa if di InsertQuantita: "+(q<=car.get(i).getAvailability()));
 				if(q<=car.get(i).getAvailability())
-					car.get(i).setQuantity(q);
+					{
+						car.get(i).setQuantity(q);
+						ris=1;
+					}
+					
 				else 
-					car.get(i).setQuantity(car.get(i).getAvailability());
+					{
+						car.get(i).setQuantity(car.get(i).getAvailability());
+					    ris=-1;
+					}
+					
 			}
 			System.out.println("Quantit� scelta corretta in Occhiale Bean: "+car.get(i).getQuantity());
 		}
+		return ris;
 	}
 }

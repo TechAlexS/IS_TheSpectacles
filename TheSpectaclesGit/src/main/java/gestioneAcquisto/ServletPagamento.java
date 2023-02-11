@@ -47,10 +47,10 @@ public class ServletPagamento extends HttpServlet {
 		request.getSession().setAttribute("carrello", car);
 		}
 		catch (SQLException e) {
-			System.out.println ("Errore servletpagamento: " + e.getMessage());
+			System.out.println ("Errore servlet pagamento: " + e.getMessage());
 		}
 		
-		RequestDispatcher dis= request.getRequestDispatcher("/Confirmation.jsp");
+		RequestDispatcher dis= request.getRequestDispatcher("/confirmation.jsp");
 		dis.forward(request, response);
 	}
 }
