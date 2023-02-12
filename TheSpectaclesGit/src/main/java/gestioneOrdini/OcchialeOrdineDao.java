@@ -15,7 +15,7 @@ import util.ConnectionPool;
 import java.util.UUID;
 
 	/**
-	* Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto OcchialeOrdine.
+	* Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto OcchialeOrdine.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -32,7 +32,7 @@ import java.util.UUID;
 	  }
 
 	  /**
-	   * @param occhialeOrdine occhialeOrdine da salvare nel db
+	   * @param occhialeOrdine occhialeOrdine da salvare nel DB
 	   * @return
 	   * @throws SQLException
 	   */
@@ -68,7 +68,7 @@ import java.util.UUID;
 	  }
 
 	  /**
-	 	 * @param occhialeOrdine occhialeOrdine da rimuovere nel db
+	 	 * @param occhialeOrdine occhialeOrdine da rimuovere nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -80,11 +80,9 @@ import java.util.UUID;
 		try {
 			con=ConnectionPool.getConnection();
 			prep=con.prepareStatement(deleteSQL);
-
 			prep.setInt(1, occhialeOrdine.getIdOcchialeOrdine());
 			System.out.println("doDelete: "+prep);
 			prep.executeUpdate();
-			
 		} finally {
 			prep.close();
 			ConnectionPool.rilasciaConnessione(con);;
@@ -115,8 +113,7 @@ import java.util.UUID;
 				OcchialeOrdineBean prodotto=new OcchialeOrdineBean(rs.getInt(1), UUID.fromString(rs.getString(3)), rs.getString(2)	, rs.getInt(4), rs.getFloat(5), rs.getInt(6));
 				listaProdotti.add(prodotto);
 			}
-		}
-		catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			rs.close();
@@ -151,10 +148,9 @@ import java.util.UUID;
 				key.add(rs.getString(2));
 				OcchialeBean prod=(OcchialeBean) new OcchialeDao().doRetrieveByKey(key);
 				OcchialeOrdineBean bean=new OcchialeOrdineBean(rs.getInt(1), UUID.fromString(rs.getString(3)), prod, rs.getInt(4), rs.getFloat(5), rs.getInt(6));
-
 				occhiali.add(bean);
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			rs.close();
@@ -170,7 +166,7 @@ import java.util.UUID;
 		ResultSet rs=null;
 		ArrayList<OcchialeOrdineBean> ordini=new ArrayList<OcchialeOrdineBean>();
 		ArrayList<String> key=new ArrayList<>();
-		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = '" + ordine.getIdOrder() + "'";
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = '" + ordine.getIdOrder() + "'";
      
 		try {
 			con=ConnectionPool.getConnection();
@@ -200,7 +196,7 @@ import java.util.UUID;
 
 	  /**
 	   * @param ordine ordine da controllare
-	   * @precondition ordine!=NULL AND data!=NULL //DATA NON C'E' NEL METODO
+	   * @precondition ordine!=null AND data!=null //DATA NON C'E' NEL METODO
 	   * @postcondition ordini=db.occhialeOrdine->(select(o|o.idOrdine=ordine))
 	   * @return ordini
 	   * @throws SQLException
@@ -257,7 +253,7 @@ import java.util.UUID;
 			while(rs.next()) {
 				index=rs.getInt("Max(id)");
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			rs.close();
