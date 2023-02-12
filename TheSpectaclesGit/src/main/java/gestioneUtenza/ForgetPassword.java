@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa di passare la mail ad UtenteDao per vedere se esiste già in fase di registrazione 
+ * Questa classe e' un control che si occupa di passare la mail ad UtenteDao per vedere se esiste giàa' in fase di registrazione 
  *
  */
 @WebServlet("/ForgetPass")
@@ -44,13 +44,12 @@ public class ForgetPassword extends HttpServlet {
     /**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect(response.encodeRedirectURL("error.jsp"));
 	}
     
     /**
-	 * @precondition request.getParameter(“password”)!=null AND request.getSession().getattribute(“email")!=null 
+	 * @precondition request.getParameter("password")!=null AND request.getSession().getAttribute("email")!=null 
 	 * @postcondition password aggiornata
 	 * @throws ServletException, IOException
 	 */
@@ -67,7 +66,7 @@ public class ForgetPassword extends HttpServlet {
         byte[] digest=mdhash.digest(data1);              
         String HashPassw=Base64.getEncoder().encodeToString(digest);
 		String email=(String) request.getSession().getAttribute("email");
-		PrintWriter out= response.getWriter();
+		PrintWriter out=response.getWriter();
 		
 		try {
 			utenteModel.changePassword(email, HashPassw);

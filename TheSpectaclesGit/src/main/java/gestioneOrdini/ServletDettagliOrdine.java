@@ -19,7 +19,7 @@ import gestioneUtenza.UtenteBean;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di recuperare i dettagli da OrdineDao tramite OcchialeOrdineDao.
+ * Questa classe e' un control che si occupa di recuperare i dettagli da OrdineDao tramite OcchialeOrdineDao.
  */
 @WebServlet("/DettagliOrdini")
 public class ServletDettagliOrdine extends HttpServlet {
@@ -43,8 +43,8 @@ public class ServletDettagliOrdine extends HttpServlet {
 	}	
 	
 	/**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null AND request.getParameter(“ordineId”)!=null 
-	 * @postcondition request.getAttribute(“ordine”)!=null AND request.getParameter("prodotti")!=null AND dispatcher!=null
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("ordineId")!=null 
+	 * @postcondition request.getAttribute("ordine")!=null AND request.getParameter("prodotti")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

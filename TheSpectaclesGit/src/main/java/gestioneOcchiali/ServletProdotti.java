@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import gestioneCarrello.Carrello;
 
 /**
- * Questa classe è un control che si occupa di ottenere i dettagli di un occhiale passando l’id a OcchialeDao.
+ * Questa classe e' un control che si occupa di ottenere i dettagli di un occhiale passando l'id a OcchialeDao.
  */
 @WebServlet("/Prodotto")
 public class ServletProdotti extends HttpServlet {

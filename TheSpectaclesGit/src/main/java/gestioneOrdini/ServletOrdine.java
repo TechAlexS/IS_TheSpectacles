@@ -37,7 +37,6 @@ public class ServletOrdine extends HttpServlet {
 		ordineDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));
 	}
 	
-	@Override
 	public ServletOrdine() {
 		super();
 	}	

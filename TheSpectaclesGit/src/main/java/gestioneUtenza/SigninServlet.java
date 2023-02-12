@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa di passare a UtenteDao i dati dell’utente per inserire il nuovo utente
+ * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell’utente per inserire il nuovo utente.
  */
 @WebServlet("/Signin")
 public class SigninServlet extends HttpServlet {
@@ -51,7 +51,7 @@ public class SigninServlet extends HttpServlet {
 	}
     
     /**
-	 * @precondition Request.getParameter(“email”)!=null AND Request.getParameter(“password”)!=null AND Request.getParameter(“nome”)!=null AND Request.getParameter(“cognome”)!=null AND Request.getParameter(“data”)!=null 
+	 * @precondition request.getParameter("email")!=null AND request.getParameter("password")!=null AND request.getParameter("nome")!=null AND request.getParameter("cognome")!=null AND request.getParameter("data")!=null 
 	 * @postcondition request.getSession().getAttribute(“auth”)!=null
 	 * @throws ServletException, IOException
 	 */
@@ -67,7 +67,6 @@ public class SigninServlet extends HttpServlet {
 		}
         byte[] digest=mdhash.digest(data1);              
         String HashPassw=Base64.getEncoder().encodeToString(digest);
-		
 		String nome=request.getParameter("nome");
 		String cognome=request.getParameter("cognome");
 		Date birth=new Date();
@@ -80,7 +79,6 @@ public class SigninServlet extends HttpServlet {
 		
 		System.out.println(request.getParameter("data"));
 		String email=request.getParameter("email");
-		
 		int ruolo=0;
 		PrintWriter out=response.getWriter();
 		ArrayList<String> value=new ArrayList<String>();

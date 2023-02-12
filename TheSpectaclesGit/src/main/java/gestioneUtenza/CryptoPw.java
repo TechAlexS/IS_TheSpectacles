@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Questa classe è una classe Java che si occupa di crittografare le password.
+ * Questa classe e' una classe Java che si occupa di crittografare le password.
  */
 public  class CryptoPw {
 	private static String ALGO="SHA-256" ;

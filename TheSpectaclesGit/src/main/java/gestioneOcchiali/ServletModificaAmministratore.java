@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di passare i dati nuovi di un Occhiale esistente a OcchialeDao che farà l'update dell’occhiale in questione.
+ * Questa classe e' un control che si occupa di passare i dati nuovi di un Occhiale esistente a OcchialeDao che fara' l'update dell'occhiale in questione.
  */
 @WebServlet("/Modifica")
 public class ServletModificaAmministratore extends HttpServlet {
@@ -36,7 +36,7 @@ public class ServletModificaAmministratore extends HttpServlet {
     }
     
     /**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null AND request.getParameter(“nome”)!=null AND request.getParameter(“descrizione”)!=null 
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("nome")!=null AND request.getParameter("descrizione")!=null 
 	 * @postcondition OcchialeDao.doUpdate(occhiale) eseguito AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */

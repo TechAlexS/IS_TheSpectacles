@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di ottenere le informazioni dell’utente loggato, usando UtenteDao.
+ * Questa classe e' un control che si occupa di ottenere le informazioni dell'utente loggato, usando UtenteDao.
  */
 @WebServlet("/Profile")
 public class ServletProfile extends HttpServlet {
@@ -32,13 +32,12 @@ public class ServletProfile extends HttpServlet {
 		utenteDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));	
 	}
 	
-	@Override
 	public ServletProfile() {
 		super();
 	}
 
 	/**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null 
+	 * @precondition request.getSession().getAttribute("auth")!=null 
 	 * @postcondition dispatcher!=null
 	 * @throws ServletException, IOException
 	 */

@@ -19,13 +19,13 @@ public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID=1L;
        
 	/**
-	 * @precondition Request.getSession().getAttribute(“auth”)!=null
-	 * @postcondition request.getSession().getAttribute(“auth”)==null
+	 * @precondition request.getSession().getAttribute("auth")!=null
+	 * @postcondition request.getSession().getAttribute("auth")==null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out=response.getWriter()) {
+		try(PrintWriter out=response.getWriter()) {
 			if(request.getSession().getAttribute("auth")!=null) {
 				request.getSession().removeAttribute("auth");
 				request.getSession().invalidate();

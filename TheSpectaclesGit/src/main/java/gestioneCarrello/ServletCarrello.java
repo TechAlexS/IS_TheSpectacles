@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa di restituire un catalogo di occhiali.
+ * Questa classe e' un control che si occupa di restituire un catalogo di occhiali.
  */
 @WebServlet("/Prodotto2")
 public class ServletCarrello extends HttpServlet {
@@ -24,8 +24,8 @@ public class ServletCarrello extends HttpServlet {
     }
 
     /**
-	 * @precondition request.getSession().getAttribute("carrello”)!=null AND request.getParameter("id")!=null AND request.getParameter("scelta")!=null
-	 * @postcondition Carrello.insertQuantità(id,scelta) eseguito AND dispatcher!=null
+	 * @precondition request.getSession().getAttribute("carrello")!=null AND request.getParameter("id")!=null AND request.getParameter("scelta")!=null
+	 * @postcondition Carrello.insertQuantità(id, scelta) eseguito AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

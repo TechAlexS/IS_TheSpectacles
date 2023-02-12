@@ -27,7 +27,7 @@ import gestioneUtenza.UtenteBean;
 import gestioneOcchiali.OcchialeBean;
 
 /**
- * Questa classe è un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 
+ * Questa classe e' un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 
  */
 @WebServlet("/Checkout")
 public class Checkout extends HttpServlet {
@@ -51,39 +51,35 @@ public class Checkout extends HttpServlet {
 	}
 
 	 /**
-	 * @precondition Request.getParameter(“sameadr”)!=null AND Request.getParameter(“cardnumber”)!=null AND Request.getSession().getAttribute(“auth”)!=null
+	 * @precondition request.getParameter("sameadr")!=null AND request.getParameter("cardnumber")!=null AND request.getSession().getAttribute("auth")!=null
 	 * @precondition carrello=request.getSession().getAttribute("Carrello")!=null 
-	 * @postcondition Request.getSession().getAttribute(“address”)!=null AND carrello.dimension=0 AND dispatcher!=null
+	 * @postcondition request.getSession().getAttribute("address")!=null AND carrello.dimension=0 AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ind=(String) request.getParameter("sameadr");
 		System.out.println("Checkout address: "+request.getParameter("sameadr"));
 		System.out.println("Checkout cardNumber: "+request.getParameter("cardnumber"));
-		
 		Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 		
-		if (request.getSession().getAttribute("auth")!=null) {
+		if(request.getSession().getAttribute("auth")!=null) {
 			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
-			if (cart!=null) {
+			if(cart!=null) {
 				OrdineBean ordine=createOrder(request);
 				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());
 				
 				try {	
 					ordineDao.doSave(ordine);
 					request.getSession().setAttribute("address",indDao.search(bean.getEmail(), ind));
-				
 					for (OcchialeOrdineBean o:occhialiOrdine) {
 						occhialeDao.doSave(o);
-						oDao.decreaseAvailability(o.getProdotto()); // controllare perch� toglie tutte le quantit�
+						oDao.decreaseAvailability(o.getProdotto()); // controllare perche' toglie tutte le quantita'
 					}
-				} catch (SQLException e) {
+				} catch(SQLException e) {
 					e.printStackTrace();
 				}
 				cart.delete();
 			}
-			
 			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
 			dispatcher.forward(request, response);
 		} else {
@@ -104,7 +100,7 @@ public class Checkout extends HttpServlet {
 	private ArrayList<OcchialeOrdineBean> createProducts(Carrello cart, UUID idOrdine) {
 		ArrayList<OcchialeOrdineBean> result=new ArrayList<>();
 		ArrayList<OcchialeBean> car=cart.getCarrello();
-		for (int i=0; i<car.size(); i++) {
+		for(int i=0; i<car.size(); i++) {
 			OcchialeOrdineBean bean=new OcchialeOrdineBean();
 			//bean.setProdotto(car.get(i));
 			bean.setIdProdotto(car.get(i).getIdGlasses());

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa di passare la mail ad UtenteDao per vedere se esiste già in fase di registrazione 
+ * Questa classe eè un control che si occupa di passare la mail ad UtenteDao per vedere se esiste gia' in fase di registrazione 
  */
 @WebServlet("/cercaMail")
 public class EsisteEmail extends HttpServlet {
@@ -43,14 +43,13 @@ public class EsisteEmail extends HttpServlet {
     /**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect(response.encodeRedirectURL("error.jsp"));
 	}
     
     /**
-	 * @precondition request.getParameter(“email”)!=null 
-	 * @postcondition request.getSession().getAttribute(“email”)!=null
+	 * @precondition request.getParameter("email")!=null 
+	 * @postcondition request.getSession().getAttribute("email")!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

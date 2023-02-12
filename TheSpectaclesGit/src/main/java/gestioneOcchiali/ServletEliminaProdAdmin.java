@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di rimuovere passare l’id di un Occhiale a OcchialeDao, che eliminerà il prodotto dal DB.
+ * Questa classe e' un control che si occupa di rimuovere passare l'id di un Occhiale a OcchialeDao, che eliminera' il prodotto dal DB.
  */
 @WebServlet("/EliminaProdAdmin")
 public class ServletEliminaProdAdmin extends HttpServlet {
@@ -37,8 +37,8 @@ public class ServletEliminaProdAdmin extends HttpServlet {
     }   
     
     /**
-	 * @precondition request.getSession().getAttribute(“carrello”)!=null AND request.getParameter(“id”)!=null 
-	 * @postcondition request.getSession().getAttribute(“auth”)!=null
+	 * @precondition request.getSession().getAttribute("carrello")!=null AND request.getParameter("id")!=null 
+	 * @postcondition request.getSession().getAttribute("auth")!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

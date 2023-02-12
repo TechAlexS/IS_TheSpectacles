@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa della visualizzazione degli occhiali in base alla scelta dell’utente 
+ * Questa classe e' un control che si occupa della visualizzazione degli occhiali in base alla scelta dell’utente 
  */
 
 @WebServlet("/Categoria")
@@ -38,8 +38,8 @@ public class CategoriaServlet extends HttpServlet {
 	}
 
 	 /**
-	 * @precondition Request.getParameter(“tipo”)!=null OR Request.getParameter(“sex”)!=null 
-	 * @postcondition request.getAttribute().getAttribute(“occhiali”)!=null AND dispatcher!=null
+	 * @precondition request.getParameter("tipo")!=null OR Request.getParameter("sex")!=null 
+	 * @postcondition request.getAttribute().getAttribute("occhiali")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,8 +61,7 @@ public class CategoriaServlet extends HttpServlet {
 		    }
 			request.removeAttribute("occhiali");
 			request.setAttribute("occhiali", beans);
-			}
-		catch (SQLException e) {
+			} catch (SQLException e) {
 			System.out.println("Errore Categoria Servlet: " + e.getMessage());
 			}
 		}
@@ -75,12 +74,10 @@ public class CategoriaServlet extends HttpServlet {
 			    }
 				request.removeAttribute("occhiali");
 				request.setAttribute("occhiali", beans);
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Errore Categoria Servlet: " + e.getMessage());
 			}
 		}
-
 		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/shopCategoria.jsp");
 		dispatcher.forward(request, response);
 	}

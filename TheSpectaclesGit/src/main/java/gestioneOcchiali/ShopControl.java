@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che si occupa di passare l’email a OrdineDao per ottenere la lista dei suoi ordini.
+ * Questa classe e' un control che si occupa di passare l'email a OrdineDao per ottenere la lista dei suoi ordini.
  */
  @WebServlet("/ShopControl")
 public class ShopControl extends HttpServlet {
@@ -30,13 +30,12 @@ public class ShopControl extends HttpServlet {
 		modelOcchiale.setDB((DataSource) getServletContext().getAttribute("DataSource"));	
 	}
 	
-	@Override
 	public ShopControl() {
 		super();
 	}
 
 	/**
-	 * @precondition request.getAttribute(“sort”)!=null 
+	 * @precondition request.getAttribute("sort")!=null 
 	 * @postcondition request.getAttribute("occhiali")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
@@ -47,9 +46,9 @@ public class ShopControl extends HttpServlet {
 			request.removeAttribute("occhiali");
 			request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(sort));
 			
-			} catch(SQLException e) {
-				System.out.println("Error:" + e.getMessage());
-			}
+		} catch(SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
 		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/shop.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
  /**
-  * Questa classe è un control che si occupa di occupa di prelevare l’intero catalogo di Occhiali per visualizzarli nell’homepage.
+  * Questa classe e' un control che si occupa di occupa di prelevare l’intero catalogo di Occhiali per visualizzarli nell’homepage.
   */
  @WebServlet("/OcchialeControl")
 public class OcchialeControl extends HttpServlet {
@@ -35,8 +35,8 @@ public class OcchialeControl extends HttpServlet {
 	}
 
 	/**
-	 * @precondition request.getParameter(“sort”)!=null 
-	 * @postcondition request.getAttribute(“occhiali”)!=null AND dispatcher!=null
+	 * @precondition request.getParameter("sort")!=null 
+	 * @postcondition request.getAttribute("occhiali")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,8 +47,7 @@ public class OcchialeControl extends HttpServlet {
 			request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(sort));
 			} catch(SQLException e) {
 			System.out.println("Error:" + e.getMessage());
-				}
-
+			  }
 		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request, response);
 	}

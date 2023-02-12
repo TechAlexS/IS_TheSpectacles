@@ -18,7 +18,7 @@ import gestioneUtenza.UtenteBean;
 import gestioneUtenza.UtenteDao;
 
 /**
- * Questa classe è un control che si occupa di ottenere le informazioni dell’utente loggato, usando UtenteDao.
+ * Questa classe e' un control che si occupa di ottenere le informazioni dell'utente loggato, usando UtenteDao.
  */
 @WebServlet("/CercaCliente")
 public class SevletCercaCliente extends HttpServlet {
@@ -36,14 +36,13 @@ public class SevletCercaCliente extends HttpServlet {
 		id_utente.setDB((DataSource) getServletContext().getAttribute("DataSource"));
 	}
 	
-	@Override
 	public SevletCercaCliente() {
 		super();
 	}
 
 	/**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null 
-	 * @postcondition dispatcher!=null
+	 * @precondition request.getSession().getAttribute("admin")!=null AND request.getParameter("email")!=null
+	 * @postcondition dispatcher!=null AND request.getAttribute("dati")!=null AND request.getParameter("ordini")!=null  
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,9 +56,8 @@ public class SevletCercaCliente extends HttpServlet {
 			request.setAttribute("dati", dati);
 			request.setAttribute("email", ordini);	
 		} catch(SQLException e) {
-		System.out.println("Error Servlet Cerca Cliente: " + e.getMessage());
+			System.out.println("Error Servlet Cerca Cliente: " + e.getMessage());
 		}
-		
 		RequestDispatcher dis=request.getRequestDispatcher("/AdminCercaEmail.jsp");
 		dis.forward(request, response);
 	}

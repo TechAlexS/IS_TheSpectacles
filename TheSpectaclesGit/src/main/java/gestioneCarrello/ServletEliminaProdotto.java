@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import gestioneOcchiali.OcchialeBean;
 
 /**
- * Questa classe è un control che si occupa di eliminare un occhiale dal Carrello, scelto dall’utente 
+ * Questa classe e' un control che si occupa di eliminare un occhiale dal Carrello, scelto dall'utente 
  */
 @WebServlet("/EliminaProdotto")
 public class ServletEliminaProdotto extends HttpServlet {
@@ -26,8 +26,8 @@ public class ServletEliminaProdotto extends HttpServlet {
     }
 
     /**
-	 * @precondition request.getSession().getAttribute(“carrello”)!=null AND request.getParameter(“id”)!=null 
-	 * @postcondition request.getSession().getAttribute(“auth”)!=null
+	 * @precondition request.getSession().getAttribute("carrello")!=null AND request.getParameter("id")!=null 
+	 * @postcondition request.getSession().getAttribute("auth")!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
