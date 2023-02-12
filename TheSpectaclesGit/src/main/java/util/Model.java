@@ -15,6 +15,5 @@ public interface Model<T, J> {
 	
 	public void doUpdate(T bean) throws SQLException;
 	
-	public void doDelete(T bean) throws SQLException;
-	
+	public void doDelete(T bean) throws SQLException;	
 }

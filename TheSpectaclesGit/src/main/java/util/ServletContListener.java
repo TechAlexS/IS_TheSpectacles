@@ -16,31 +16,26 @@ import javax.sql.DataSource;
 public class ServletContListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext context = sce.getServletContext();
-
-		DataSource ds = null;
+		ServletContext context=sce.getServletContext();
+		DataSource ds=null;
+		
 		try {
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
-			ds = (DataSource) envCtx.lookup("jdbc/ecommerce");
-
-		} catch (NamingException e) {
+			Context initCtx=new InitialContext();
+			Context envCtx=(Context) initCtx.lookup("java:comp/env");
+			ds=(DataSource) envCtx.lookup("jdbc/ecommerce");
+		} catch(NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 
 		context.setAttribute("DataSource", ds);
 		System.out.println("DataSource creation...." + ds.toString());
-
 		context.setAttribute("dataStartingServer", Timestamp.valueOf(LocalDateTime.now()));
 		context.setAttribute("numberRequests", Long.valueOf(0));
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
-		ServletContext context = sce.getServletContext();
-
-		DataSource ds = (DataSource) context.getAttribute("DataSource");
+		ServletContext context=sce.getServletContext();
+		DataSource ds=(DataSource) context.getAttribute("DataSource");
 		System.out.println("DataSource deletion...." + ds.toString());
-
 	}
 }
