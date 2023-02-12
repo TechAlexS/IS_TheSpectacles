@@ -3,11 +3,10 @@ package gestioneAcquisto;
 import java.io.Serializable;
 
 /**
- * Questa classe rappresenta l'entità Indirizzi.
+ * Questa classe rappresenta l'entita' Indirizzi.
  * @author Mario Ranieri
  */
 public class IndirizziBean implements Serializable {
-	
 	int idIndirizzo;
 	String address;
 	int status;
@@ -57,11 +56,13 @@ public class IndirizziBean implements Serializable {
 	}
 	
 	/**
+	 * @precondition idIndirizzo non e' presente nel DB
+	 * @postcondition idIndirizzo e' presente nel DB
 	 * @param idIndirizzo id da assegnare all'indirizzo
 	 * @return
 	 */
 	public void setIdIndirizzo(int idIndirizzo) {
-		this.idIndirizzo = idIndirizzo;
+		this.idIndirizzo=idIndirizzo;
 	}
 	
 	/**
@@ -90,8 +91,8 @@ public class IndirizziBean implements Serializable {
 	 * @param status stato da assegnare all'indirizzo
 	 * @return
 	 */
-	public void setStatus(int i) {
-		this.status=i;
+	public void setStatus(int status) {
+		this.status=status;
 	}
 	
 	/**
@@ -147,6 +148,8 @@ public class IndirizziBean implements Serializable {
 	}
 	
 	/**
+	 * @precondition email deve avere una corrispondeza nel DB come chiave di un UtenteBean
+	 * @postcondition email ha una corrispondeza nel DB come chiave di un UtenteBean
 	 * @param email email da assegnare all'indirizzo
 	 * @return
 	 */

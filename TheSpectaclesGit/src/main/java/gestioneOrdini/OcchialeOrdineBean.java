@@ -10,8 +10,7 @@ import gestioneOcchiali.OcchialeBean;
  * @author Mario Ranieri
  */
 public class OcchialeOrdineBean implements Serializable {
-
-	private static final long serialVersionUID = -1258634432830603623L;
+	private static final long serialVersionUID=-1258634432830603623L;
 	private int idOcchialeOrdine;
 	private UUID idOrdine;
 	private OcchialeBean occhiale;
@@ -20,14 +19,6 @@ public class OcchialeOrdineBean implements Serializable {
 	private float iva;
 	private int quantita;
 
-	/**
-	 * @param idOcchialeOrdine id dell'occhialeOrdine
-	 * @param occhiale occhiale dell'occhialeOrdine
-	 * @param prezzoEffettivo prezzo dell'occhialeOrdine
-	 * @param iva iva dell'occhialeOrdine
-	 * @param quantita quantità dell'occhialeOrdine
-	 * @return 
-	 */
 	public OcchialeOrdineBean() {
 		this.idOcchialeOrdine=0;
 		this.occhiale=null;
@@ -42,7 +33,7 @@ public class OcchialeOrdineBean implements Serializable {
 	 * @param occhiale occhiale dell'occhialeOrdine
 	 * @param prezzoEffettivo prezzo dell'occhialeOrdine
 	 * @param iva iva dell'occhialeOrdine
-	 * @param quantita quantità dell'occhialeOrdine
+	 * @param quantita quantita' dell'occhialeOrdine
 	 * @return 
 	 */
 	public OcchialeOrdineBean(int idOcchialeOrdine, UUID idOrdine, OcchialeBean occhiale, int prezzoEffettivo, float iva, int quantita) {
@@ -53,8 +44,8 @@ public class OcchialeOrdineBean implements Serializable {
 		this.iva=iva;
 		this.quantita=quantita;
 	}
+	
 	/**
-	 * @param idOcchialeOrdine id dell'occhialeOrdine
 	 * @param idOrdine id dell'ordine
 	 * @param idOcchiale identificativo occhiale dell'occhialeOrdine
 	 * @param prezzoEffettivo prezzo dell'occhialeOrdine
@@ -62,21 +53,12 @@ public class OcchialeOrdineBean implements Serializable {
 	 * @param quantita quantità dell'occhialeOrdine
 	 * @return 
 	 */
-	public OcchialeOrdineBean(int idOcchialeOrdine,UUID idOrdine,String idOcchiale,int prezzoEffettivo,float iva,int quantita) {
-		this.idOcchialeOrdine = idOcchialeOrdine;
-		this.idOrdine = idOrdine;
-		this.idOcchiale = idOcchiale;
-		this.prezzoEffettivo = prezzoEffettivo;
-		this.iva = iva;
-		this.quantita = quantita;
-	}
-	
 	public OcchialeOrdineBean(UUID idOrdine,String idOcchiale,int prezzoEffettivo,float iva,int quantita) {
-		this.idOrdine = idOrdine;
-		this.idOcchiale = idOcchiale;
-		this.prezzoEffettivo = prezzoEffettivo;
-		this.iva = iva;
-		this.quantita = quantita;
+		this.idOrdine=idOrdine;
+		this.idOcchiale=idOcchiale;
+		this.prezzoEffettivo=prezzoEffettivo;
+		this.iva=iva;
+		this.quantita=quantita;
 	}
 	
 	/**
@@ -101,7 +83,7 @@ public class OcchialeOrdineBean implements Serializable {
 	}
 	
 	/**
-	 * @return idOcchiale id dell'occhialeOrdine
+	 * @return idOcchiale id dell'occhiale
 	 */
 	public String getIdProdotto() {
 		return idOcchiale;
@@ -122,22 +104,26 @@ public class OcchialeOrdineBean implements Serializable {
 	}
 
 	/**
-	 * @return quantita quantità dell'occhialerdine
+	 * @return quantita quantita' dell'occhialeOrdine
 	 */
 	public int getQuantita() {
 		return quantita;
 	}
 
 	/**
+	 * @precondition idOcchiale deve avere una corrispondeza nel DB come chiave di un OcchialeBean 
+	 * @postcondition idOcchiale ha una corrispondeza nel DB come chiave di un OcchialeBean 
 	 * @param id id da assegnare all'occhialeOrdine
 	 * @return
 	 */
-	public void setIdProdotto(String id) {
-		this.idOcchiale=id;
+	public void setIdProdotto(String idOcchiale) {
+		this.idOcchiale=idOcchiale;
 	}
 	
 	/**
-	 * @param idOcchialeOrdine idOcchiale da assegnare all'ordine
+	 * @precondition idOcchialeOrdine non deve essere gia' presente nel DB
+	 * @postcondition idOcchialeOrdine presente nel DB
+	 * @param idOcchialeOrdine idOcchiale da assegnare all'occhialeOrdine
 	 * @return
 	 */
 	public void setIdOcchialeOrdine(int idOcchialeOrdine) {
@@ -145,7 +131,9 @@ public class OcchialeOrdineBean implements Serializable {
 	}
 
 	/**
-	 * @param idOrdine id da assegnare all'ordine
+	 * @precondition idOrdine deve avere una corrispondeza nel DB come chiave di un OrdineBean
+	 * @postcondition idOcchiale ha una corrispondeza nel DB come chiave di un OcchialeBean
+	 * @param idOrdine id da assegnare all'occhialeOrdine
 	 * @return
 	 */
 	public void setIdOrdine(UUID idOrdine) {
@@ -153,7 +141,7 @@ public class OcchialeOrdineBean implements Serializable {
 	}
 
 	/**
-	 * @param occhiale occhiale da assegnare all'occhialeOrdine
+	 * @param occhiale occhiale da assegnare all'ordine
 	 * @return
 	 */
 	public void setProdotto(OcchialeBean occhiale) {
@@ -169,7 +157,7 @@ public class OcchialeOrdineBean implements Serializable {
 	}
 
 	/**
-	 * @param quantita quantità da assegnare all'occhialeOrdine
+	 * @param quantita quantita' da assegnare all'occhialeOrdine
 	 * @return
 	 */
 	public void setQuantita(int quantita) {

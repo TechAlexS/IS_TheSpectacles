@@ -3,12 +3,11 @@ package gestioneOcchiali;
 import java.io.Serializable;
 
 /**
- * Questa classe rappresenta l'entità Occhiale.
+ * Questa classe rappresenta l'entita' Occhiale.
  * @author Mario Ranieri
  */
-public class OcchialeBean implements Serializable  {
-	
-	private static final long serialVersionUID = -4959563723922476262L;
+public class OcchialeBean implements Serializable {
+	private static final long serialVersionUID=-4959563723922476262L;
 	String idGlasses;
 	String nameGlasses;
 	String brand;
@@ -23,11 +22,7 @@ public class OcchialeBean implements Serializable  {
 	int quantity=1;
 	float totalPrice;
 	
-	/**
-	 * @param quantità quantità dell'occhiale
-	 * @param totalPrice prezzo totale dell'occhiale in base alla quantità
-	 * @return 
-	 */
+	@Override
 	public OcchialeBean() {
 		quantity=1;
 		totalPrice=0;
@@ -47,20 +42,19 @@ public class OcchialeBean implements Serializable  {
 	 * @param description descrizione dell'occhiale
 	 * @return 
 	 */
-	public OcchialeBean(String idGlasses, String nameGlasses, String brand, int price, int availability, String type,
-			String color, String category, String image,String image2, String description) {
+	public OcchialeBean(String idGlasses, String nameGlasses, String brand, int price, int availability, String type, String color, String category, String image,String image2, String description) {
 		super();
-		this.idGlasses = idGlasses;
-		this.nameGlasses = nameGlasses;
-		this.brand = brand;
-		this.price = price;
-		this.availability = availability;
-		this.type = type;
-		this.color = color;
-		this.category = category;
-		this.image = image;
-		this.image2 = image2;
-		this.description = description;
+		this.idGlasses=idGlasses;
+		this.nameGlasses=nameGlasses;
+		this.brand=brand;
+		this.price=price;
+		this.availability=availability;
+		this.type=type;
+		this.color=color;
+		this.category=category;
+		this.image=image;
+		this.image2=image2;
+		this.description=description;
 	}
 
 	/**
@@ -72,12 +66,12 @@ public class OcchialeBean implements Serializable  {
 
 	/**
 	 * @param idGlasses id da assegnare all'occhiale
-	 * @precondition idGlasses==NULL
-	 * @postcondition idGlasses!=NULL
+	 * @precondition idGlasses non deve essere gia' presente nel DB 
+	 * @postcondition idGlasses e' presente nel DB
 	 * @return
 	 */
 	public void setIdGlasses(String idGlasses) {
-		this.idGlasses = idGlasses;
+		this.idGlasses=idGlasses;
 	}
 
 	/**
@@ -92,7 +86,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setNameGlasses(String nameGlasses) {
-		this.nameGlasses = nameGlasses;
+		this.nameGlasses=nameGlasses;
 	}
 
 	/**
@@ -107,7 +101,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setBrand(String brand) {
-		this.brand = brand;
+		this.brand=brand;
 	}
 
 	/**
@@ -122,22 +116,22 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setPrice(int price) {
-		this.price = price;
+		this.price=price;
 	}
 
 	/**
-	 * @return availability disponibilità dell'occhiale
+	 * @return availability disponibilita' dell'occhiale
 	 */
 	public int getAvailability() {
 		return availability;
 	}
 
 	/**
-	 * @param setAvaiability disponibilità da assegnare all'occhiale
+	 * @param setAvaiability disponibilita' da assegnare all'occhiale
 	 * @return
 	 */
 	public void setAvailability(int availability) {
-		this.availability = availability;
+		this.availability=availability;
 	}
 
 	/**
@@ -152,11 +146,11 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setType(String type) {
-		this.type = type;
+		this.type=type;
 	}
 
 	/**
-	 * @return color colofe dell'occhiale
+	 * @return color colore dell'occhiale
 	 */
 	public String getColor() {
 		return color;
@@ -167,7 +161,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setColor(String color) {
-		this.color = color;
+		this.color=color;
 	}
 
 	/**
@@ -182,7 +176,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setCategory(String category) {
-		this.category = category;
+		this.category=category;
 	}
 
 	/**
@@ -197,7 +191,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setImage(String image) {
-		this.image = image;
+		this.image=image;
 	}
 	
 	/**
@@ -212,7 +206,7 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setImage2(String image2) {
-		this.image2 = image2;
+		this.image2=image2;
 	}
 
 	/**
@@ -227,23 +221,23 @@ public class OcchialeBean implements Serializable  {
 	 * @return
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description=description;
 	}
 	
 	/**
-	 * @return quantity quantità dell'occhiale
+	 * @return quantity quantita' dell'occhiale
 	 */
 	public int getQuantity() {
 		return quantity;
 	}
 	
 	/**
-	 * @param setQuantity quantità da assegnare all'occhiale
+	 * @param setQuantity quantita' da assegnare all'occhiale
 	 * @precondition quantity>=0
 	 * @return
 	 */
-	public void setQuantity (int q) {
-	this.quantity= q ;
+	public void setQuantity(int q) {
+		this.quantity=q ;
 	}
 	
 	/**
@@ -254,11 +248,11 @@ public class OcchialeBean implements Serializable  {
 	}
 	
 	/**
-	 * @param setTotPrezzo prezzo totale da assegnare all'occhiale in base alla quantità
+	 * @param setTotPrezzo prezzo totale da assegnare all'occhiale
 	 * @return
 	 */
 	public void setTotPrezzo(float prezzotot) {
-		this.totalPrice = prezzotot;
+		this.totalPrice=prezzotot;
 	}
 
 	@Override

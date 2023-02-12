@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.Date; 
 
 /**
- * Questa classe rappresenta l'entità Utente.
+ * Questa classe rappresenta l'entita' Utente.
  * @author Mario Ranieri
  */
 public class UtenteBean implements Serializable, Cloneable {
-
 	private static final long serialVersionUID=-850475236728288737L;
 	private String pass;
 	private int role;
@@ -17,9 +16,10 @@ public class UtenteBean implements Serializable, Cloneable {
 	private String lastName;
 	private Date birthday;
 
-	
+	@Override 
 	public UtenteBean() {
 	}
+	
 	/**
 	 * @param firstName nome dell'utente
 	 * @param lastName cognome dell'utente
@@ -29,7 +29,7 @@ public class UtenteBean implements Serializable, Cloneable {
 	 * @param role ruolo dell'utente
 	 * @return 
 	 */
-	public UtenteBean(String email, String pass,String firstName,String lastName,Date birthday,int role) {
+	public UtenteBean(String email, String pass, String firstName, String lastName, Date birthday, int role) {
 		this.firstName=firstName;
 		this.email=email;
 		this.pass=pass;
@@ -89,7 +89,9 @@ public class UtenteBean implements Serializable, Cloneable {
 	}
 
 	/**
+	 * @precondition role==0 OR role==1
 	 * @param role ruolo da assegnare all'utente(standard o admin)
+	 * @postcondition l'utente e' standard o admin
 	 * @return 
 	 */
 	public void setRole(int role) {
@@ -97,6 +99,8 @@ public class UtenteBean implements Serializable, Cloneable {
 	}
 
 	/**
+	 * @precondition email non deve essere gia' presente nel DB
+	 * @postcondition email e' nel DB
 	 * @param email indirizzo email dell'utente
 	 * @return 
 	 */

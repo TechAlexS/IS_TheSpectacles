@@ -7,22 +7,15 @@ import java.util.ArrayList;
 import gestioneOcchiali.OcchialeBean;
 
 /**
- * Questa classe rappresenta l'entità Carrello.
+ * Questa classe rappresenta l'entita' Carrello.
  * @author Mario Ranieri
  */
 public class Carrello implements Serializable {
-	
 	private static final long serialVersionUID=3497262402613555555L;
 	private ArrayList<OcchialeBean> car;
 	private int dimensione;
 	private float tot;
 	
-	/**
-	 * @param car carrello
-	 * @param dimensione dimensione del carrello
-	 * @param tot totale del carrello
-	 * @return
-	 */
 	public Carrello() {
 		car=new ArrayList<OcchialeBean>();
 		dimensione=0;
@@ -45,9 +38,8 @@ public class Carrello implements Serializable {
 	 * @return
 	 */
 	public void deleteProduct(OcchialeBean prod) {
-		
-		for (OcchialeBean p: car) {
-			if (p.getIdGlasses().equals(prod.getIdGlasses())) {
+		for(OcchialeBean p:car) {
+			if(p.getIdGlasses().equals(prod.getIdGlasses())) {
 				car.remove(p);
 				dimensione=dimensione-1;
 			break;
@@ -57,12 +49,15 @@ public class Carrello implements Serializable {
 	
 	/**
 	 * Prende il prodotto tramite l'id che gli viene passato come parametro
+	 * @precondition idOcchiale deve essere presente nel DB 
+	 * @postcondition un OcchialeBean viene utilizzato
 	 * @param id id del prodotto nel carrello
 	 * @return bean il nuovo prodotto (occhiale)
 	 */
 	public OcchialeBean prendiProdotto(String id) {
 		OcchialeBean bean=new OcchialeBean();
-		for(int i=0;i<car.size();i++) {
+		
+		for(int i=0; i<car.size(); i++) {
 			if(car.get(i).getIdGlasses().equals(id)) {
 				bean.setIdGlasses(car.get(i).getIdGlasses());
 				bean.setDescription(car.get(i).getDescription());
@@ -98,10 +93,10 @@ public class Carrello implements Serializable {
 	 * @param code
 	 * @return trovato parametro che assume true o false
 	 */
-	public boolean searchProdotto (String code) {
+	public boolean searchProdotto(String code) {
 		boolean trovato=false;
 		
-		for (int i= 0; i < car.size(); i++) {
+		for(int i=0; i<car.size(); i++) {
 			if(car.get(i).getIdGlasses().equals(code))
 				trovato=true;
 		}
@@ -123,10 +118,8 @@ public class Carrello implements Serializable {
 	 * @return tot prezzo totale del carrello
 	 */
 	public float getPrezzoTotale(int quant, String id) {
-		
-		for (int i=0; i<car.size(); i++) {
+		for(int i=0; i<car.size(); i++) {
 			if(car.get(i).getIdGlasses().equals(id)) {
-				
 				tot=car.get(i).getPrice()*quant;
 				car.get(i).setTotPrezzo(tot);
 				System.out.println("\ntot: "+tot);
@@ -153,7 +146,7 @@ public class Carrello implements Serializable {
 	 * @return
 	 */
 	public void insertQuantita(String code, int q) {
-		for (int i=0; i<car.size(); i++) {
+		for(int i=0; i<car.size(); i++) {
 			if(car.get(i).getIdGlasses().equals(code)) {
 				System.out.println("Disponibilit�: "+car.get(i).getAvailability());
 				System.out.println("\n Stampa if di InsertQuantita: "+(q<=car.get(i).getAvailability()));
@@ -162,7 +155,7 @@ public class Carrello implements Serializable {
 				else 
 					car.get(i).setQuantity(car.get(i).getAvailability());
 			}
-			System.out.println("Quantit� scelta corretta in Occhiale Bean: "+car.get(i).getQuantity());
+			System.out.println("Quantita' scelta corretta in Occhiale Bean: "+car.get(i).getQuantity());
 		}
 	}
 }

@@ -19,7 +19,7 @@ import gestioneUtenza.UtenteBean;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di restituire e visualizzare la lista di ordini tramite OrdineDao.
+ * Questa classe e' un control che si occupa di restituire e visualizzare la lista di ordini tramite OrdineDao.
  */
 @WebServlet("/CronologiaOrdini")
 public class ServletOrdine extends HttpServlet {
@@ -37,12 +37,13 @@ public class ServletOrdine extends HttpServlet {
 		ordineDao.setDB((DataSource) getServletContext().getAttribute("DataSource"));
 	}
 	
+	@Override
 	public ServletOrdine() {
 		super();
 	}	
 	
 	/**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null 
+	 * @precondition request.getSession().getAttribute("auth")!=null 
 	 * @postcondition request.getAttribute("ordini")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
