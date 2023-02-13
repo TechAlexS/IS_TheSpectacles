@@ -20,41 +20,32 @@ import org.mockito.Mockito;
 import gestioneUtenza.*;
 import util.ConnectionPool;
 
-public class TestLoginServlet {
+public class TestLoginServlet {	
+	private static final String rightEmail="a@gmail.com";
+	private static final String badEmail="test@libero.it";
+	private static final String rightPass="Password123";
+	private static final String badPass="badPassword";
+	private static final LoginServlet servlet=new LoginServlet();
+	private static final HttpServletRequest request=Mockito.mock(HttpServletRequest.class);
+	private static final HttpServletResponse response=Mockito.mock(HttpServletResponse.class);
+	private static final HttpSession session=Mockito.mock(HttpSession.class);
 	
-		private static final String rightEmail = "a@gmail.com";
-		private static final String badEmail = "test@libero.it";
-		private static final String rightPass = "Password123";
-		private static final String badPass = "badPassword";
-		
-		
-		private static final LoginServlet servlet = new LoginServlet();
-		private static final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-		private static final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-		private static final HttpSession session = Mockito.mock(HttpSession.class);
-	
-		@BeforeEach
-		public void setUp() throws Exception {
-			 Mockito.doReturn(session).when(request).getSession();
-		}
-	   
-	   
-		@AfterEach
-		public void tearDown() throws Exception{
-			
-		}
+	@BeforeEach
+	public void setUp() throws Exception {
+		 Mockito.doReturn(session).when(request).getSession();
+	}
+	   	   
+	@AfterEach
+	public void tearDown() throws Exception{			
+	}
 	
 	//TC_2.1_1 - Email non trovata nel database
-		@Test
-		public void testCase_1() throws ServletException, IOException{
-			Mockito.doReturn(badEmail).when(request).getParameter("email");
-			Mockito.doReturn(rightPass).when(request).getParameter("password");
-			
-			//servlet.doPost(request, response);
-			
-			//assertEquals("utente inesistente", (String)request.getAttribute("loginResult"));
-			assertThrows(IllegalArgumentException.class, () -> servlet.doPost(request, response));
-			
-		
+	@Test
+	public void testCase_1() throws ServletException, IOException{
+		Mockito.doReturn(badEmail).when(request).getParameter("email");
+		Mockito.doReturn(rightPass).when(request).getParameter("password");			
+		//servlet.doPost(request, response);			
+		//assertEquals("utente inesistente", (String)request.getAttribute("loginResult"));
+		assertThrows(IllegalArgumentException.class, ()->servlet.doPost(request, response));
 		}
 }
