@@ -4,6 +4,7 @@ package gestioneAcquisto;
 import java.util.Date;
 import java.util.UUID;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -74,7 +75,7 @@ public class Checkout extends HttpServlet {
 		Carrello cart=(Carrello) request.getSession().getAttribute("carrello");
 		
 		
-
+		PrintWriter out=response.getWriter();
 
 		if(request.getSession().getAttribute("auth")!=null) {
 
@@ -105,28 +106,31 @@ public class Checkout extends HttpServlet {
 					e.printStackTrace();
 				}
 				cart.delete();
+				out.print("confirmation.jsp");
 				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
 				dispatcher.forward(request, response);
 			}
 			else {
+				out.print("error.jsp");
 				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/error.jsp");
 				dispatcher.forward(request, response);
 			}
 			}
-			
-			
-
-			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/confirmation.jsp");
-			dispatcher.forward(request, response);
+			else {
+				out.print("error.jsp");
+				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/error.jsp");
+				dispatcher.forward(request, response);
+			}
 
 		} else {
+			out.print("login.jsp");
 			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		 }
 		
 	}
 
-	private OrdineBean createOrder(HttpServletRequest request) {
+	public OrdineBean createOrder(HttpServletRequest request) {
 		OrdineBean ordine=new OrdineBean();
 		ordine.setDate(new Date());
 		ordine.setStato("preso in carico");
@@ -135,7 +139,7 @@ public class Checkout extends HttpServlet {
 		return ordine;
 	}
 
-	private ArrayList<OcchialeOrdineBean> createProducts(Carrello cart, UUID idOrdine) {
+	public ArrayList<OcchialeOrdineBean> createProducts(Carrello cart, UUID idOrdine) {
 		ArrayList<OcchialeOrdineBean> result=new ArrayList<>();
 		ArrayList<OcchialeBean> car=cart.getCarrello();
 		for(int i=0; i<car.size(); i++) {
