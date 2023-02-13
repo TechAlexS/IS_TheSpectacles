@@ -37,34 +37,34 @@ UtenteBean auth = (UtenteBean) request.getSession().getAttribute("auth");
                   
                      <div class="form-group">
                         <label for="user_name">Nome </label>
-                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Mario">
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Mario" required>
                      </div>
                      <div class="form-group">
                         <label for="user_surname">Cognome </label>
-                        <input type="text" class="form-control" id="user_surname" name="user_surname" placeholder="Rossi">
+                        <input type="text" class="form-control" id="user_surname" name="user_surname" placeholder="Rossi" required>
                      </div>           
                      <div class="form-group">
                         <label for="user_address">Via </label>
-                        <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Via Le mani dal Naso">
+                        <input type="text" class="form-control" id="user_address" name="user_address" placeholder="Via Le mani dal Naso" required>
                      </div>
                      <div class="checkout-country-code clearfix">
                         <div class="form-group">
                            <label for="user_post_code">Codice Postale</label>
-                           <input type="text" class="form-control" id="user_post_code" name="zipcode" value="81100">
+                           <input type="text" class="form-control" id="user_post_code" name="zipcode" value="81100" required>
                         </div>
                         <div class="form-group" >
                            <label for="user_city">Città</label>
-                           <input type="text" class="form-control" id="user_city" name="city" placeholder="Caserta">
+                           <input type="text" class="form-control" id="user_city" name="city" placeholder="Caserta" required>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="user_country">Provincia</label>
-                        <input type="text" class="form-control" name="user_country" id="user_country" placeholder="CE">
+                        <input type="text" class="form-control" name="user_country" id="user_country" placeholder="CE" required>
                      </div>
                      <div class="form-group">
 
                         <label for="user_phone">Telefono</label>
-                        <input type="text" class="form-control" name="user_phone" id="user_phone" placeholder="1234567890">
+                        <input type="text" class="form-control" name="user_phone" id="user_phone" placeholder="1234567890" required>
                      </div>
                      <button  type="submit" class="btn btn-main mt-20" id="submit" value="Continua Checkout">Aggiungi</button>
                </div>
