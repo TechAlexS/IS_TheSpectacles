@@ -13,7 +13,7 @@ $(document).ready(function(){
 	var password = $('#password').val();
 	var ripPassword = $('#ripPassword').val();
 	    
-	var expNomeCognome= /^[A-Za-z]+$/;
+	var expNomeCognome= /^[a-zA-ZÀ-ÿ\s]+$/;
 	var expEmail= /^([a-z1-9.-])*@([a-z])+(.com)$/;
 	var expPassword= /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/;
 	//var expData=/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{4})$/;
