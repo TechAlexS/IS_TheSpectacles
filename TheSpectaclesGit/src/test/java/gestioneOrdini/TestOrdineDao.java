@@ -25,71 +25,54 @@ import gestioneUtenza.UtenteBean;
 import gestioneUtenza.UtenteDao;
 import util.ConnectionPool;
 
-
 public class TestOrdineDao {
-
-	
-	
-	private OrdineDao dao= new OrdineDao();
+	private OrdineDao dao=new OrdineDao();
 	String email="pas@gmail.com";
-	private OrdineBean bean = new OrdineBean(UUID.randomUUID(), new Date(),email,"confermato");
+	private OrdineBean bean=new OrdineBean(UUID.randomUUID(), new Date(),email,"confermato");
 	
-
+	@BeforeEach
+	public void setUp() throws Exception{
+		 dao.doSave(bean);
+	}
 	
-		@BeforeEach
-		public void setUp() throws Exception{
-			 dao.doSave(bean);
-	    }
+	@AfterEach
+    public void tearDown() throws Exception{
+		dao.doDelete(bean);		
+    }
+				
+	@Test 
+	void testDoRetrieveByKey() throws SQLException {		
+		String id=bean.getIdOrder().toString();			
+	    assertTrue(dao.doRetrieveByKey(id)!=null);
+	  }
+		 		  
+	@Test
+	void testDoRetrieveAll() throws SQLException {	   
+		assertTrue(dao.doRetrieveAll(null)!=null);
+	  }
+		 		  
+	@Test
+	void testDoSave() throws SQLException {
+		OrdineBean bean2=new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
+		    
+		try {
+			dao.doSave(bean2);
+			String id=bean2.getIdOrder().toString();
+			assertTrue(dao.doRetrieveByKey(id)!=null);
+		} finally {
+			dao.doDelete(bean2);
+		}
+	}
+		 
+	@Test
+	void testDoRetrieveByUser() throws SQLException {	   
+		assertTrue(dao.doRetrieveByUser(bean.getEmail())!=null);
+	}
 	
-		@AfterEach
-	    public void tearDown() throws Exception{
-			dao.doDelete(bean);
-			
-	    }
-		
-		
-		 @Test 
-		  void testDoRetrieveByKey() throws SQLException {
-			
-			String id=bean.getIdOrder().toString();
-			
-		    assertTrue(dao.doRetrieveByKey(id) !=null);
-		  }
-		 
-		  
-		  @Test
-		  void testDoRetrieveAll() throws SQLException {
-		   
-			 assertTrue(dao.doRetrieveAll(null) != null);
-		  }
-		 
-
-		  
-		  @Test
-		  void testDoSave() throws SQLException {
-			  OrdineBean bean2 = new OrdineBean(UUID.randomUUID(), new Date(),"a@gmail.com","confermato");
-		    try {
-		      dao.doSave(bean2);
-		      String id=bean2.getIdOrder().toString();
-		      assertTrue(dao.doRetrieveByKey(id) != null);
-		    } finally {
-		      dao.doDelete(bean2);
-		    }
-		  }
-		 
-		  @Test
-		  void testDoRetrieveByUser() throws SQLException {
-		   
-			 assertTrue(dao.doRetrieveByUser(bean.getEmail())!=null);
-		  }
-		 /*
-		  @Test
-		  void testDoRetrieveByDate() throws SQLException {
-		   
-			 assertTrue(dao.doRetrieveByDate() !=null);
-		  }
-		 */
-		  
-		  
-		  
+	/*
+  	@Test
+	void testDoRetrieveByDate() throws SQLException {	   
+ 		assertTrue(dao.doRetrieveByDate() !=null);
+  	}
+		 */	  
 }

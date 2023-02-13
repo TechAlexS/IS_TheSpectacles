@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di passare i dati di un nuovo occhiale a OcchialeDao.
+ * Questa classe e' un control che si occupa di passare i dati di un nuovo occhiale a OcchialeDao.
  */
 @WebServlet("/AggiungiProdAdmin")
 @MultipartConfig(fileSizeThreshold=1024*1024*2, maxFileSize=1024*1024*10, maxRequestSize=1024*1024*50)
@@ -28,16 +28,21 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	private OcchialeDao oDao=new OcchialeDao();
 	static String UPLOAD_DIRECTORY="images\\shop\\products";
 	
+	/**
+	 * @param pa
+	 * @return "" filename
+	 */
 	private String extractFileName(Part pa) {
 		String context=pa.getHeader("content-disposition");
 		String[] item=context.split(";");
-		for (String s:item) {
+		for(String s:item) {
 			if(s.trim().startsWith("filename")) {
 				return s.substring(s.indexOf("=")+2, s.length()- 1);
 			}
 		}
 		return "";
 	}
+	
 	/**
 	 * @return
 	 * @throws ServletException
@@ -52,13 +57,12 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	}
 	
 	 /**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null AND uploadPath!=null AND request.getPart(“img1”)!=null AND request.getPart(“img2”)!=null AND request.getParameter(“id”)!=null AND request.getParameter(“nome”)!=null AND request.getParameter(“brand”)!=null AND request.getParameter(“prezzo”)!=null AND request.getParameter(“disp”)!=null AND request.getParameter(“colore”)!=null AND request.getParameter(“sesso”)!=null AND request.getParameter(“desc”)!=null AND request.getParameter(“categoria”)!=null  
+	 * @precondition request.getSession().getAttribute("auth")!=null AND uploadPath!=null AND request.getPart("img1")!=null AND request.getPart("img2")!=null AND request.getParameter("id")!=null AND request.getParameter("nome")!=null AND request.getParameter("brand")!=null AND request.getParameter("prezzo")!=null AND request.getParameter("disp")!=null AND request.getParameter("colore")!=null AND request.getParameter("sesso")!=null AND request.getParameter("desc")!=null AND request.getParameter("categoria")!=null  
 	 * @postcondition OcchialeDao.doSave(prodotto) eseguito AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Sono nella Servlet di aggiunta Occhiale");
-			
 		String uploadPath=getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
 		System.out.println("\nUploadpath :"+uploadPath);
 		File uploadDir=new File(uploadPath);
@@ -91,9 +95,9 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 		prod.setType(sex);
 		prod.setDescription(desc);
 		prod.setImage(fileName);
+		
 		if(!fileName.equals(null))
 			prod.setImage2(fileName2);
-		
 		try {
 			oDao.doSave(prod);
 		}

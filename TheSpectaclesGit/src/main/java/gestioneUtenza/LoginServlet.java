@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 import util.Model;
 
 /**
- * Questa classe è un control che si occupa di passare a UtenteDao i dati dell’utente usando la query di Retrieve.
+ * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell'utente usando la query di Retrieve.
  */
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
@@ -49,44 +49,43 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	/**
-	 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
-	 * @postcondition request.getSession().getAttribute(“auth”)!=null
+	 * @precondition request.getParameter("email")!=null AND request.getParameter("password")!=null 
+	 * @postcondition request.getSession().getAttribute("auth")!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		    String email=request.getParameter("email");
-			String pw=request.getParameter("password");
-	        byte[] data1=pw.getBytes("UTF-8");
-	        MessageDigest mdhash=null;
+		String email=request.getParameter("email");
+		String pw=request.getParameter("password");
+	    byte[] data1=pw.getBytes("UTF-8");
+	    MessageDigest mdhash=null;
 	        
-			try {
-				mdhash=MessageDigest.getInstance("SHA-256");
-			} catch(NoSuchAlgorithmException e1) {
-				e1.printStackTrace();
-			}
-	        byte[] digest=mdhash.digest(data1);              
-	        String HashPassw=Base64.getEncoder().encodeToString(digest);
-			ArrayList<String> value=new ArrayList<String>();
-			PrintWriter out=response.getWriter();
-			value.add(email);
-			value.add(HashPassw);
+		try {
+			mdhash=MessageDigest.getInstance("SHA-256");
+		} catch(NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+		}
+	      byte[] digest=mdhash.digest(data1);              
+	      String HashPassw=Base64.getEncoder().encodeToString(digest);
+		  ArrayList<String> value=new ArrayList<String>();
+		  PrintWriter out=response.getWriter();
+		  value.add(email);
+		  value.add(HashPassw);
 			
-			try{
-				UtenteBean cerca=utenteModel.doRetrieveByKey(value);
-				if(cerca.getEmail()==null) {
-					out.print("Nulla");
-					request.setAttribute("loginResult", "utente inesistente");
-				}
-				if((cerca.getEmail()!=null) && (cerca.getRole()==1)) {
-					request.getSession().setAttribute("auth", cerca);
-					out.print("Admin");
-				}
-				if((cerca.getEmail()!=null) && !(cerca.getRole()==1)) {
-					request.getSession().setAttribute("auth", cerca);
-					out.print("Utente");
-				}
+		  try{
+			  UtenteBean cerca=utenteModel.doRetrieveByKey(value);
+			  if(cerca.getEmail()==null) {
+				  out.print("Nulla");
+				  request.setAttribute("loginResult", "utente inesistente");
 			}
-			catch(Exception e) {
+			  if((cerca.getEmail()!=null) && (cerca.getRole()==1)) {
+				  request.getSession().setAttribute("auth", cerca);
+				  out.print("Admin");
+			}
+			 if((cerca.getEmail()!=null) && !(cerca.getRole()==1)) {
+				request.getSession().setAttribute("auth", cerca);
+				out.print("Utente");
+			 }
+			} catch(Exception e) {
 				System.out.println("Error Login Servlet: " + e.getMessage());	
 			}
 		}

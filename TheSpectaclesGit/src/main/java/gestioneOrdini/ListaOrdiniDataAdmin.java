@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di passare i dati inseriti dall’admin ad OrdineDao per visualizzare gli ordini di una certa data.
+ * Questa classe e' un control che si occupa di passare i dati inseriti dall'admin ad OrdineDao per visualizzare gli ordini di una certa data.
  */
 @WebServlet("/ordiniData")
 public class ListaOrdiniDataAdmin extends HttpServlet {
@@ -39,8 +39,8 @@ public class ListaOrdiniDataAdmin extends HttpServlet {
 	}
 
 	 /**
-	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter(“skip”)!=null AND request.getParameter(“limit”)!=null 
-	 * @postcondition request.getAttribute(“ordini”)!=null AND request.getAttribute(“skip”)!=null AND request.getAttribute(“limit”)!=null AND dispatcher!=null 
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("skip")!=null AND request.getParameter("limit")!=null 
+	 * @postcondition request.getAttribute("ordini")!=null AND request.getAttribute("skip")!=null AND request.getAttribute("limit")!=null AND dispatcher!=null 
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

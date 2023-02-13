@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe è un control che permette di ottenere determinati occhiali passando a OcchialiDao il brand scelto dall’utente.
+ * Questa classe e' un control che permette di ottenere determinati occhiali passando a OcchialiDao il brand scelto dall'utente.
  */
 @WebServlet("/search")
 public class Search extends HttpServlet {
@@ -36,8 +36,8 @@ public class Search extends HttpServlet {
 	}
 
 	/**
-	 * @precondition request.getParameter(“brand”)!=null 
-	 * @postcondition request.getAttribute(“occhiali”)!=null AND dispatcher!=null
+	 * @precondition request.getParameter("brand")!=null 
+	 * @postcondition request.getAttribute("occhiali")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -46,8 +46,8 @@ div.log {
 	            <div class="buttonPart" align="center">
 				<form action="ordiniData" method="get">
 				<div align="center">
-				Inserisci la data di inizio:<br><input type="date" name="dateStart"><br><br>
-				Inserisci la data di fine:<br><input type="date" name="dateEnd"><br><br>
+				Inserisci la data di inizio:<br><input type="date" min="1920-01-01" max="2050-12-31" name="dateStart"><br><br>
+				Inserisci la data di fine:<br><input type="date" min="1920-01-01" max="2050-12-31" name="dateEnd"><br><br>
 				<input type="hidden" name="skip" value="0">
 				<input type="hidden" name="limit" value="10">
 				

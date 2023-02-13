@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import util.ConnectionPool;
 
 	/**
-	 * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Indirizzi.
+	 * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Indirizzi.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -28,10 +28,10 @@ import util.ConnectionPool;
 		}
 
 		/**
-	 	 * @param email email da usare per rimuovere delle istanze nel db
-	 	 * @precondition email!=NULL
+	 	 * @param email email da usare per rimuovere delle istanze nel DB
+	 	 * @precondition email!=null
 	 	 * @postcondition indirizzo=db.indirizzi->(select(i|i.email=email AND i.attivo=1)
-	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @return bean nuovo indirizzo (IndirizziBean)
 	 	 * @throws SQLException
 	 	 */
 		public IndirizziBean doRetrieveActive(String email) throws SQLException {
@@ -39,7 +39,6 @@ import util.ConnectionPool;
 			Connection con=null;
 			PreparedStatement prep=null;
 			ResultSet rs=null;
-	
 	 		String selectSQL="SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and attivo=1";
 
 	 		try {
@@ -69,9 +68,9 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param email stringa email da usare per cercare delle istanze nel db
-	 	 * @param via stringa via da usare per cercare delle istanze nel db
-	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @param email stringa email da usare per cercare delle istanze nel DB
+	 	 * @param via stringa via da usare per cercare delle istanze nel DB
+	 	 * @return bean nuovo indirizzo (IndirizziBean)
 	 	 * @throws SQLException
 	 	 */
 		public IndirizziBean search(String email, String via) throws SQLException {
@@ -79,7 +78,6 @@ import util.ConnectionPool;
 			Connection con=null;
 			PreparedStatement prep=null;
 			ResultSet rs=null;
-	
 	 		String selectSQL="SELECT * FROM " + IndirizziDao.TABLE_NAME + " WHERE email = ? and indirizzo= ?";
 
 	 		try {
@@ -110,8 +108,8 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param email stringa email da usare per rimuovere delle istanze nel db
-	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @param email stringa email da usare per rimuovere delle istanze nel DB
+	 	 * @return bean nuovo indirizzo (IndirizziBean)
 	 	 * @throws SQLException
 	 	 */
 		public Collection<IndirizziBean> doRetrieveAllAddress(String email) throws SQLException {
@@ -139,7 +137,6 @@ import util.ConnectionPool;
             	bean.setTelefono(rs.getString("telefono"));
             	bean.setName(rs.getString("nome"));
             	bean.setSurname(rs.getString("cognome"));
-				
 				indirizzi.add(bean);
 		}
 		 } finally {
@@ -151,8 +148,8 @@ import util.ConnectionPool;
 		}
 	
 		/**
-	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel db
-	 	 * @return bean nuovo indirizzo(IndirizziBean)
+	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel DB
+	 	 * @return bean nuovo indirizzo (IndirizziBean)
 	 	 * @throws SQLException
 	 	 */
 		public Collection<IndirizziBean> doRetrieveAll(String order) throws SQLException {
@@ -173,9 +170,8 @@ import util.ConnectionPool;
 			while(rs.next()) {
 				IndirizziBean bean=new IndirizziBean();
 				bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-				
 				indirizzi.add(bean);
-				}
+			}
 		 } finally {
 				rs.close();
 				prep.close();
@@ -185,7 +181,7 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param indirizzo indirizzo da aggiornare nel db
+	 	 * @param indirizzo indirizzo da aggiornare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -197,7 +193,6 @@ import util.ConnectionPool;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(sql);
-
 				prep.setInt(1, indirizzo.getIdIndirizzo());
 				prep.setString(2, indirizzo.getAddress());
 				prep.setInt(3, indirizzo.getStatus());
@@ -208,9 +203,7 @@ import util.ConnectionPool;
 				prep.setString(8, indirizzo.getTelefono());
 				prep.setString(9, indirizzo.getName());
 				prep.setString(10, indirizzo.getSurname());
-			
 				prep.executeUpdate();
-
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -218,7 +211,7 @@ import util.ConnectionPool;
 		}
 
 		/**
-	 	 * @param indirizzo indirizzo da rimuovere nel db
+	 	 * @param indirizzo indirizzo da rimuovere nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -230,10 +223,8 @@ import util.ConnectionPool;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(deleteSQL);
-
 				prep.setInt(1, indirizzo.getIdIndirizzo());
 				prep.executeUpdate();
-
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -241,23 +232,22 @@ import util.ConnectionPool;
 		}
 
 		/**
-	 	 * @param indirizzo indirizzo da salvare nel db
+	 	 * @param indirizzo indirizzo da salvare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
 		public void doSave(IndirizziBean indirizzo) throws SQLException {
 			Connection con=null;
 			PreparedStatement prep=null;
-		
 			String insertSQL="INSERT INTO " + IndirizziDao.TABLE_NAME + " (indirizzo, attivo, citta, provincia, cap, email, telefono, nome, cognome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(insertSQL);
+
 				
-				
-				
-				
+				//prep.setInt(1, indirizzo.getIdIndirizzo());
+
 				prep.setString(1, indirizzo.getAddress());
 				prep.setInt(2, indirizzo.getStatus());
 				prep.setString(3, indirizzo.getCity());
@@ -267,10 +257,11 @@ import util.ConnectionPool;
 				prep.setString(7, indirizzo.getTelefono());
 				prep.setString(8,indirizzo.getName());
 				prep.setString(9,indirizzo.getSurname());
+
 				
 				System.out.println("Do Save "+prep);
-				prep.executeUpdate();
 
+				prep.executeUpdate();
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);

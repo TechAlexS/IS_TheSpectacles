@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import util.ConnectionPool;
 
 	/**
-	 * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Ordine.
+	 * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Ordine.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -36,7 +36,7 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param ordine ordine da salvare nel db
+	 	 * @param ordine ordine da salvare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -44,7 +44,6 @@ import util.ConnectionPool;
 			OrdineBean bean=new OrdineBean();
 			Connection con=null;
 			PreparedStatement prep=null;
-			
 			String query="INSERT INTO " + TABLE_NAME + " (idOrdine, email, data, stato)" + " VALUES (?,?,CURRENT_TIMESTAMP(),?)";
 
 			try {
@@ -53,9 +52,7 @@ import util.ConnectionPool;
 				prep.setString(1, ordine.getIdOrder().toString());
 				prep.setString(2, ordine.getEmail());
 				prep.setString(3, ordine.getStato());
-				
-				prep.executeUpdate();
-				
+				prep.executeUpdate();		
 	 		} finally {
 				try {
 					if(prep!=null)
@@ -68,8 +65,8 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param idOrdine stringaId da usare per rimuovere delle istanze nel db
-	 	 * @return bean nuovo ordine(OrdineBean)
+	 	 * @param idOrdine stringaId da usare per rimuovere delle istanze nel DB
+	 	 * @return bean nuovo ordine (OrdineBean)
 	 	 * @throws SQLException
 	 	 */
 		public OrdineBean doRetrieveByKey(String idOrdine) throws SQLException {
@@ -77,7 +74,6 @@ import util.ConnectionPool;
 			Connection con=null;
 			PreparedStatement prep=null;
 			ResultSet rs=null;
-	
 	 		String selectSQL="SELECT * FROM " + OrdineDao.TABLE_NAME + " WHERE idOrdine = ?";
 	 		
 	 		try {
@@ -93,8 +89,7 @@ import util.ConnectionPool;
 	 				bean.setStato(rs.getString(4));
 	 				//System.out.println("DoRetrieveByKey OrdineDao: "+bean);
 	 			}
-	 		} 
-	 		catch(Exception e){
+	 		} catch(Exception e){
 	 			e.printStackTrace();
 	 		}finally {
 	 			rs.close();
@@ -105,8 +100,8 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param email email da usare per rimuovere un utente dal db
-	 	 * @precondition order!=NULL
+	 	 * @param email email da usare per rimuovere un utente dal DB
+	 	 * @precondition order!=null
 	 	 * @postcondition ordini=db.ordine->(select(o|o.email=user)
 	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
@@ -133,8 +128,7 @@ import util.ConnectionPool;
 	 				//System.out.println("DoRetrieveByKey OrdineDao: "+bean);
 	 				ordini.add(bean);
 	 			}
-	 		} 
-	 		catch(Exception e){
+	 		} catch(Exception e){
 	 			e.printStackTrace();
 	 		}finally {
 	 			rs.close();
@@ -145,8 +139,8 @@ import util.ConnectionPool;
 		}
 		
 		/**
-	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel db
-	 	 * @precondition user!=NULL
+	 	 * @param order stringa ordine da usare per rimuovere delle istanze nel DB
+	 	 * @precondition user!=null
 	 	 * @postcondition ordini=db.ordine->(select(o).orderBy order)
 	 	 * @return ordini nuova lista di ordini 
 	 	 * @throws SQLException
@@ -171,19 +165,18 @@ import util.ConnectionPool;
  				bean.setDate(new Date(rs.getTimestamp(2).getTime()));
  				bean.setEmail(rs.getString(3));
  				bean.setStato(rs.getString(4));
-			
 				ordine.add(bean);
 				}
 		 } finally {
-				rs.close();
-				prep.close();
-				ConnectionPool.rilasciaConnessione(con);;
-			}
-			return ordine;
+			rs.close();
+			prep.close();
+			ConnectionPool.rilasciaConnessione(con);;
 		}
+		return ordine;
+	}
 		
 		/**
-	 	 * @param ordine ordine da aggiornare nel db
+	 	 * @param ordine ordine da aggiornare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -195,12 +188,10 @@ import util.ConnectionPool;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(sql);
-
 				prep.setString(1, ordine.getIdOrder().toString());
 				prep.setString(2, ordine.getEmail());
 				prep.executeUpdate();
 				con.commit();
-
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);;
@@ -208,7 +199,7 @@ import util.ConnectionPool;
 		}
 
 		/**
-	 	 * @param ordine ordine da rimuovere nel db
+	 	 * @param ordine ordine da rimuovere nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -220,10 +211,8 @@ import util.ConnectionPool;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(deleteSQL);
-
 				prep.setString(1, ordine.getIdOrder().toString());
-				prep.executeUpdate();
-				
+				prep.executeUpdate();		
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);;
@@ -243,7 +232,7 @@ import util.ConnectionPool;
 				ResultSet rs=null;
 				String query="SELECT * FROM " + TABLE_NAME + " WHERE email = ?";
 				
-				if(order != null) {
+				if(order!=null) {
 					query+=" ORDER BY " + order;
 				}
 				try {
@@ -254,12 +243,10 @@ import util.ConnectionPool;
 					
 					while(rs.next()) {
 						OrdineBean bean=new OrdineBean();
-						
 						bean.setIdOrder(UUID.fromString(rs.getString(1)));
 						bean.setEmail(rs.getString(3));
 						bean.setDate(new Date(rs.getTimestamp(2).getTime()));
 						bean.setStato(rs.getString(4));
-					
 						ordine.add(bean);
 					}
 				} finally {
@@ -287,7 +274,6 @@ import util.ConnectionPool;
 				try {
 					con=ConnectionPool.getConnection();
 					prep=con.prepareStatement(query);
-					
 					prep.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(init));
 					prep.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(end) + " 23:59:59");
 					prep.setInt(3, skip);
@@ -302,7 +288,6 @@ import util.ConnectionPool;
 						bean.setDate(new Date(rs.getTimestamp("data").getTime()));
 						bean.setStato(rs.getString("stato"));
 						bean.setTot(rs.getInt("totale"));
-					
 						ordine.add(bean);
 					}
 				} finally {

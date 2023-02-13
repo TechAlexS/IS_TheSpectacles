@@ -3,21 +3,20 @@ package gestioneAcquisto;
 import java.io.Serializable;
 
 /**
- * Questa classe rappresenta l'entità Indirizzi.
+ * Questa classe rappresenta l'entita' Indirizzi.
  * @author Mario Ranieri
  */
 public class IndirizziBean implements Serializable {
-	
-	int idIndirizzo;
-	String address;
-	int status;
-	String city;
-	String province;
-	int cap;
-	String email;
-	String telefono;
-	String name;
-	String surname;
+	private int idIndirizzo;
+	private String address;
+	private int status;
+	private String city;
+	private String province;
+	private int cap;
+	private String email;
+	private String telefono;
+	private String name;
+	private String surname;
 	
 	public IndirizziBean() {
 		
@@ -57,11 +56,13 @@ public class IndirizziBean implements Serializable {
 	}
 	
 	/**
+	 * @precondition idIndirizzo non e' presente nel DB
+	 * @postcondition idIndirizzo e' presente nel DB
 	 * @param idIndirizzo id da assegnare all'indirizzo
 	 * @return
 	 */
 	public void setIdIndirizzo(int idIndirizzo) {
-		this.idIndirizzo = idIndirizzo;
+		this.idIndirizzo=idIndirizzo;
 	}
 	
 	/**
@@ -90,12 +91,12 @@ public class IndirizziBean implements Serializable {
 	 * @param status stato da assegnare all'indirizzo
 	 * @return
 	 */
-	public void setStatus(int i) {
-		this.status=i;
+	public void setStatus(int status) {
+		this.status=status;
 	}
 	
 	/**
-	 * @return city città dell'indirizzo
+	 * @return city citta' dell'indirizzo
 	 */
 	public String getCity() {
 		return city;
@@ -147,6 +148,8 @@ public class IndirizziBean implements Serializable {
 	}
 	
 	/**
+	 * @precondition email deve avere una corrispondeza nel DB come chiave di un UtenteBean
+	 * @postcondition email ha una corrispondeza nel DB come chiave di un UtenteBean
 	 * @param email email da assegnare all'indirizzo
 	 * @return
 	 */
@@ -200,7 +203,6 @@ public class IndirizziBean implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Indirizzi [idIndirizzo=" + idIndirizzo + "name=" + name + "surname=" + surname + ", address=" + address + ", status=" + status + ", city="
-				+ city + ", province=" + province + ", cap=" + cap + ", email=" + email + ", telefono=" + telefono + "]";
+		return "Indirizzi [idIndirizzo=" + idIndirizzo + "name=" + name + "surname=" + surname + ", address=" + address + ", status=" + status + ", city=" + city + ", province=" + province + ", cap=" + cap + ", email=" + email + ", telefono=" + telefono + "]";
 	}
 }

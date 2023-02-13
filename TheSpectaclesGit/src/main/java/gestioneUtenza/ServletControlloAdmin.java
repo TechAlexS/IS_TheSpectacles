@@ -16,15 +16,15 @@ import javax.sql.DataSource;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di gestire l’apertura delle 3 pagine azione dell’Admin 
+ * Questa classe e' un control che si occupa di gestire l'apertura delle 3 pagine azione dell'Admin 
  */
 @WebServlet("/ControlloAdmin")
 public class ServletControlloAdmin extends HttpServlet {
 	private static final long serialVersionUID=1L;
        
 	/**
-	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter(“id”)!=null 
-	 * @postcondition request.getAttribute(“admin”)!=null ANd dispatcher!=null
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("id")!=null 
+	 * @postcondition request.getAttribute("admin")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

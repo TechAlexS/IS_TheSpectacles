@@ -13,7 +13,7 @@ import util.ConnectionPool;
 import util.Model;
 
 	/**
-	 * Questa classe è un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Spedizione.
+	 * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Spedizione.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -30,10 +30,10 @@ import util.Model;
 		}
 
 		/**
-	 	 * @param keys chiavi da usare per rimuovere delle istanze nel db
-	 	 * @precondition code!=NULL
+	 	 * @param keys chiavi da usare per rimuovere delle istanze nel DB
+	 	 * @precondition code!=null
 	 	 * @postcondition spedizione=db.spedizione->(select(s|s.code=code)
-	 	 * @return bean nuova spedizione(SpedizioneBean)
+	 	 * @return bean nuova spedizione (SpedizioneBean)
 	 	 * @throws SQLException
 	 	 */
 		public SpedizioneBean doRetrieveByKey(ArrayList<String> keys) throws SQLException {
@@ -65,7 +65,7 @@ import util.Model;
 		
 		/**
 	 	 * @param order stringa ordine da controllare
-	 	 * @return bean nuova spedizione(SpedizioneBean)
+	 	 * @return bean nuova spedizione (SpedizioneBean)
 	 	 * @throws SQLException
 	 	 */
 		public Collection<SpedizioneBean> doRetrieveAll(String order) throws SQLException {
@@ -89,7 +89,6 @@ import util.Model;
 				bean.setDateShipment(rs.getDate("DateShipment"));
 				bean.setIdOrder(rs.getInt("idOrder"));
 				bean.setShipmentType(rs.getInt("shipmentType"));
-
 				spedizione.add(bean);
 			}
 		 } finally {
@@ -101,7 +100,7 @@ import util.Model;
 		}
 		
 		/**
-	 	 * @param spedizione spedizione da aggiornare nel db
+	 	 * @param spedizione spedizione da aggiornare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -113,14 +112,11 @@ import util.Model;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(sql);
-
 				prep.setInt(1, spedizione.getIdShipment());
 				prep.setDate(2, spedizione.getDateShipment(), Calendar.getInstance());
 				prep.setInt(3, spedizione.getIdOrder());
 				prep.setInt(4, spedizione.getShipmentType());
-			
 				prep.executeUpdate();
-
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -128,7 +124,7 @@ import util.Model;
 		}
 
 		/**
-	 	 * @param bean spedizione da rimuovere dal db
+	 	 * @param bean spedizione da rimuovere dal DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -140,10 +136,8 @@ import util.Model;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(deleteSQL);
-
 				prep.setInt(1, bean.getIdShipment());
 				prep.executeUpdate();
-				
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
@@ -151,7 +145,7 @@ import util.Model;
 		}
 
 		/**
-	 	 * @param spedizione spedizione da salvare nel db
+	 	 * @param spedizione spedizione da salvare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */
@@ -163,14 +157,11 @@ import util.Model;
 			try {
 				con=ConnectionPool.getConnection();
 				prep=con.prepareStatement(insertSQL);
-
 				prep.setInt(1, spedizione.getIdShipment());
 				prep.setDate(2, spedizione.getDateShipment(), Calendar.getInstance());
 				prep.setInt(3, spedizione.getIdOrder());
 				prep.setInt(4, spedizione.getShipmentType());
-				
 				prep.executeUpdate();
-
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);

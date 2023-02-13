@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import gestioneUtenza.UtenteBean;
 
 /**
- * Questa classe è un control che si occupa di passare un nuovo indirizzo a IndirizzoDao.
+ * Questa classe e' un control che si occupa di passare un nuovo indirizzo a IndirizzoDao.
  */
 @WebServlet("/AddAddress")
 public class ServletAddAddress extends HttpServlet {
@@ -36,7 +36,7 @@ public class ServletAddAddress extends HttpServlet {
 	}
 
 	/**
-	 * @precondition request.getParameter(“email”)!=null AND request.getParameter(“password”)!=null 
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("user_address")!=null AND request.getParameter("city")!=null AND request.getParameter("user_country")!=null AND request.getParameter("zip_code")!=null AND request.getParameter("user_phone")!=null 
 	 * @postcondition IndirizzoDao.doSave(idIndirizzo) eseguito AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */

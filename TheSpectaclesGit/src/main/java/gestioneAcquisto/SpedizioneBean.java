@@ -4,18 +4,17 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Questa classe rappresenta l'entità Spedizione.
+ * Questa classe rappresenta l'entita' Spedizione.
  * @author Mario Ranieri
  */
 public class SpedizioneBean implements Serializable {
+	private static final long serialVersionUID=-1258634432830603623L;
+	private int idShipment;
+	private Date dateShipment;
+	private int idOrder;
+	private int shipmentType;
 	
-	int idShipment;
-	Date dateShipment;
-	int idOrder;
-	int shipmentType;
-	
-	public SpedizioneBean() {
-		
+	public SpedizioneBean() {	
 	}
 	
 	/**
@@ -33,6 +32,8 @@ public class SpedizioneBean implements Serializable {
 	}
 
 	/**
+	 * @precondition idShipment deve essere presente nel DB 
+	 * @postcondition idShipment e' presente nel DB
 	 * @return idShipment id della spedizione
 	 */
 	public int getIdShipment() {
@@ -70,6 +71,8 @@ public class SpedizioneBean implements Serializable {
 	}
 
 	/**
+	 * @precondition idOrder deve avere una corrispondeza nel DB come chiave di un Ordine 
+	 * @postcondition idOrder ha una corrispondeza nel DB come chiave di un Ordine
 	 * @param shipmentType tipo di spedizione
 	 * @return
 	 */
@@ -94,7 +97,6 @@ public class SpedizioneBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Spedizione [idShipment=" + idShipment + ", dateShipment=" + dateShipment + ", idOrder=" + idOrder
-				+ ", shipmentType=" + shipmentType + "]";
+		return "Spedizione [idShipment=" + idShipment + ", dateShipment=" + dateShipment + ", idOrder=" + idOrder + ", shipmentType=" + shipmentType + "]";
 	}
 }

@@ -5,26 +5,17 @@ import java.util.UUID;
 import java.util.Date;
 
 /**
- * Questa classe rappresenta l'entità Ordine.
+ * Questa classe rappresenta l'entita' Ordine.
  * @author Mario Ranieri
  */
 public class OrdineBean implements Serializable {
+	private UUID idOrder;
+	private Date data;
+	private String email;
+	private String stato;
+	private int tot=0;
 	
-	UUID idOrder;
-	Date data;
-	String email;
-	String stato;
-	int tot=0;
-	
-	/**
-	 * @param idOrder id dell'ordine
-	 * @param data data dell'ordine
-	 * @param email email dell'ordine
-	 * @param stato stato dell'ordine
-	 * @return 
-	 */
 	public OrdineBean() {
-		
 		this.idOrder=null;
 		this.email=null;
 		this.data=null;
@@ -38,7 +29,7 @@ public class OrdineBean implements Serializable {
 	 * @param stato stato dell'ordine
 	 * @return 
 	 */
-	public OrdineBean(UUID idOrder, Date data, String email,String stato) {
+	public OrdineBean(UUID idOrder, Date data, String email, String stato) {
 		super();
 		this.idOrder=idOrder;
 		this.data=data;
@@ -54,6 +45,8 @@ public class OrdineBean implements Serializable {
 	}
 
 	/**
+	 * @precondition idOrder non deve essere gia' presente nel DB
+	 * @postcondition idOrder e' presente nel DB
 	 * @param idOrder id da assegnare all'ordine
 	 * @return
 	 */
@@ -76,6 +69,7 @@ public class OrdineBean implements Serializable {
 	}
 	
 	/**
+	 * @precondition stato=="confermato" OR stato=="in elaborazione" OR stato=="spedito"
 	 * @param stato stato da assegnare all'ordine 
 	 * @return
 	 */
@@ -89,6 +83,16 @@ public class OrdineBean implements Serializable {
 	 */
 	public void setDate(Date data) {
 		this.data=data;
+	}
+	
+	/**
+	 * @precondition idOrder non deve essere gia' presente nel DB
+	 * @postcondition email corrisponde ad un utente presente nel DB
+	 * @param email email da assegnare all'ordine
+	 * @return
+	 */
+	public void setEmail(String email) {
+		this.email=email;
 	}
 
 	/**
@@ -111,14 +115,6 @@ public class OrdineBean implements Serializable {
 	 */
 	public void setTot(int tot) {
 		this.tot=tot;
-	}
-	
-	/**
-	 * @param email email da assegnare all'ordine
-	 * @return
-	 */
-	public void setEmail(String email) {
-		this.email=email;
 	}
 
 	@Override

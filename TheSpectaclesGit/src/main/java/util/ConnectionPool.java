@@ -8,58 +8,51 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 public class ConnectionPool {
 	private static List<Connection> freeDbConnections;
-	private static boolean isTest = false;
+	private static boolean isTest=false;
 
 	static {
-		freeDbConnections = new LinkedList<Connection>();
+		freeDbConnections=new LinkedList<Connection>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+		} catch(ClassNotFoundException e) {
 			Logger.getLogger(ConnectionPool.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+			}
 		}
-	}
 
 	private static synchronized Connection createDBConnection() throws SQLException {
-		Connection newConnection = null;
+		Connection newConnection=null;
 		String db="ecommerce";
-		String username= "root";
+		String username="root";
 		String password="admin";
 		
-
-		newConnection = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Europe/Rome",username, password);
-		
+		newConnection=DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Europe/Rome",username, password);
 		newConnection.setAutoCommit(true);
 		return newConnection;
 	}
 
 	public static synchronized Connection getConnection() throws SQLException {
 		Connection connection;
-
-		if (!freeDbConnections.isEmpty()) {
-			connection = (Connection) freeDbConnections.get(0);
+		if(!freeDbConnections.isEmpty()) {
+			connection=(Connection) freeDbConnections.get(0);
 			freeDbConnections.remove(0);
 
 			try {
-				if (connection.isClosed())
-					connection = getConnection();
-			} catch (SQLException e) {
+				if(connection.isClosed())
+					connection=getConnection();
+			} catch(SQLException e) {
 				connection.close();
-				connection = getConnection();
+				connection=getConnection();
 			}
 		} else {
-			connection = createDBConnection();
+			connection=createDBConnection();
 		}
-
 		return connection;
 	}
 
 	public static synchronized void rilasciaConnessione(Connection connection) throws SQLException {
-		if (connection != null)
+		if(connection!=null)
 			freeDbConnections.add(connection);
 	}
 	
@@ -67,8 +60,7 @@ public class ConnectionPool {
 		return isTest;
 	}
 
-
 	public static void setTest(boolean isTest) {
-		ConnectionPool.isTest = isTest;
+		ConnectionPool.isTest=isTest;
 	}
 }

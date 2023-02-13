@@ -19,7 +19,7 @@ import gestioneUtenza.UtenteBean;
 import gestioneUtenza.UtenteDao;
 
 /**
- * Questa classe è un control che si occupa di passare i dati di un utente da cercare a UtenteDao e ottenere i suoi ordini, interfacciandosi con OrdineDao.
+ * Questa classe e' un control che si occupa di passare i dati di un utente da cercare a UtenteDao e ottenere i suoi ordini, interfacciandosi con OrdineDao.
  */
 @WebServlet("/searchCliente")
 public class SearchCliente extends HttpServlet {
@@ -43,8 +43,8 @@ public class SearchCliente extends HttpServlet {
 	}
 
 	/**
-	 * @precondition request.getSession().getAttribute( “auth”)!=null AND request.getParameter(“email”)!=null 
-	 * @postcondition request.getAttribute(“dati”)!=null AND request.getParameter("ordini")!=null AND dispatcher!=null
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("email")!=null 
+	 * @postcondition request.getAttribute("dati")!=null AND request.getParameter("ordini")!=null AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

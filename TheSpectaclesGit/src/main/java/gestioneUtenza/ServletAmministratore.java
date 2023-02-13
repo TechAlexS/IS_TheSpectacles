@@ -19,7 +19,7 @@ import gestioneOcchiali.OcchialeDao;
 import java.util.*;
 
 /**
- * Questa classe è un control che si occupa di restituire un catalogo di occhiali.
+ * Questa classe e' un control che si occupa di restituire un catalogo di occhiali.
  */
 @WebServlet("/Amministratore")
 public class ServletAmministratore extends HttpServlet {
@@ -40,8 +40,8 @@ public class ServletAmministratore extends HttpServlet {
 	}
 
 	 /**
-	 * @precondition request.getSession().getAttribute(“auth”)!=null AND request.getParameter("id")!=null
-	 * @postcondition request.getAttribute(“admin”)!=null AND (request.getAttribute("dettagli")!=null OR request.getAttribute("modifica")!=null) AND dispatcher!=null
+	 * @precondition request.getSession().getAttribute("auth")!=null AND request.getParameter("id")!=null
+	 * @postcondition request.getAttribute("admin")!=null AND (request.getAttribute("dettagli")!=null OR request.getAttribute("modifica")!=null) AND dispatcher!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,12 +51,11 @@ public class ServletAmministratore extends HttpServlet {
 			UtenteBean cerca=(UtenteBean) request.getSession().getAttribute("auth");
 			request.setAttribute("admin", cerca);
 			String azione=request.getParameter("action");
-			
 			System.out.println("Servlet Amministratore: "+azione);
+			
 			if(azione!=null && azione.equalsIgnoreCase("dettagli")) {
 				ArrayList<String> valori=new ArrayList<String>();
 				valori.add(request.getParameter("id"));
-				
 				System.out.println("sono in dettagli: "+valori.get(0));
 			  //errore qui
 				request.removeAttribute("des");
@@ -70,7 +69,6 @@ public class ServletAmministratore extends HttpServlet {
 				valori.add(request.getParameter("id"));
 				System.out.println("sono in modifica: "+valori.get(0));
 				request.setAttribute("modifica", modelOcchiale.singleProduct(valori));	
-				
 				RequestDispatcher dis=getServletContext().getRequestDispatcher("/ModificaAmministratore.jsp");
 				dis.forward(request, response);	
 				return;
