@@ -59,10 +59,9 @@ public class ServletProdotti extends HttpServlet {
 			request.setAttribute("descrizione", modelOcchiale.singleProduct(valori));
 			request.setAttribute("id", request.getParameter("id"));
 			session.setAttribute("carrello", car);
-<<<<<<< HEAD
+
 		
 		String azione= request.getParameter("action");
-		
 		
 		System.out.println("Action value: "+ azione);
 		
@@ -83,43 +82,19 @@ public class ServletProdotti extends HttpServlet {
 			
 			}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
-=======
-			String azione= request.getParameter("action");
-			System.out.println("Action value: "+ azione);
-			
-			if(azione!=null && azione.equalsIgnoreCase("dettagli")) {
-				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/prodotto.jsp");
->>>>>>> branch 'main' of https://github.com/TechAlexS/IS_TheSpectacles.git
 				dispatcher.forward(request, response);
-			}
-<<<<<<< HEAD
-		
+		}
 		/*
 		if (Integer.parseInt(request.getParameter("scelta"))>= 1) {
 			RequestDispatcher dis= getServletContext().getRequestDispatcher("/carello.jsp");
 			dis.forward(request, response);
 		}*/
-		
-=======
-			if(azione!=null && azione.equalsIgnoreCase("aggiungi")) {			
-				System.out.println("Sono nell'if aggiungi ");
-				OcchialeBean occhiale=(OcchialeBean) request.getAttribute("descrizione");
-				if(!car.searchProdotto(occhiale.getIdGlasses())) {
-					car.addCarrello(occhiale);
-					car.getPrezzoTotale(1, valori.get(0));
-					}
-				RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/carrello.jsp");
-				dispatcher.forward(request, response);
-			}
-			if(Integer.parseInt(request.getParameter("scelta"))>=1) {
-				RequestDispatcher dis=getServletContext().getRequestDispatcher("/carello.jsp");
-				dis.forward(request, response);
-			}
+			
 		}
 		catch(Exception e) {
 			System.out.println("Errore Servlet Prodotti: " + e.getMessage());
 			}
->>>>>>> branch 'main' of https://github.com/TechAlexS/IS_TheSpectacles.git
+
 		}
 		/*RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/shop.jsp");
 		dispatcher.forward(request, response);*/
