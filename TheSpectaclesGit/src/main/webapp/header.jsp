@@ -100,7 +100,7 @@
 							</div>
 							<ul class="text-center cart-buttons">
 								<li><a href="carrello.jsp" class="btn btn-small">Carrello</a></li>
-								<li><a href="checkout.jsp" class="btn btn-small btn-solid-border">Pagamento</a></li>
+								<li><a href="Indirizzo?page=''" class="btn btn-small btn-solid-border">Pagamento</a></li>
 							</ul>
 						</div>
 						<%
