@@ -160,7 +160,6 @@ if(request.getSession().getAttribute("auth") == null) {
                         <div class="media-body">
                            <h4 class="media-heading"><a href="product-single.html">Ambassador Heritage 1921</a></h4>
                            <p class="price"><%=car.getCarrello().get(i).getQuantity()%> x <%=car.getCarrello().get(i).getPrice()%>&#8364;</p>
-                           <span class="remove" >Remove</span>
                         </div>
                      </div>
                       <%                      
