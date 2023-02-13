@@ -36,10 +36,10 @@ public class OcchialeOrdineBean implements Serializable {
 	 * @param quantita quantita' dell'occhialeOrdine
 	 * @return 
 	 */
-	public OcchialeOrdineBean(int idOcchialeOrdine, UUID idOrdine, OcchialeBean occhiale, int prezzoEffettivo, float iva, int quantita) {
+	public OcchialeOrdineBean(int idOcchialeOrdine, UUID idOrdine, String idOcchiale, int prezzoEffettivo, float iva, int quantita) {
 		this.idOcchialeOrdine=idOcchialeOrdine;
 		this.idOrdine=idOrdine;
-		this.occhiale=occhiale;
+		this.idOcchiale=idOcchiale;
 		this.prezzoEffettivo=prezzoEffettivo;
 		this.iva=iva;
 		this.quantita=quantita;

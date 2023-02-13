@@ -220,7 +220,7 @@ public class OcchialeDao {
  		return occhiali;
 	}
 		
-<<<<<<< HEAD
+
 		/**
 	 	 * @param occhiale occhiale da diminuire quantità disponibile nel db
 	 	 * @return
@@ -245,7 +245,7 @@ public class OcchialeDao {
 			
 			return occhiale.getAvailability()-occhiale.getQuantity();
 		}
-=======
+
 	/**
  	 * @param keys stringhe di chiavi da controllare
  	 * @return bean nuovo occhiale (OcchialeBean)
@@ -289,7 +289,7 @@ public class OcchialeDao {
 	 	System.out.println("OCchiale: \n "+ bean+ "\n");
 		return bean;
 	}
->>>>>>> branch 'main' of https://github.com/TechAlexS/IS_TheSpectacles.git
+
 
 	/**
 	 * @param order stringa ordine da controllare
@@ -346,28 +346,7 @@ public class OcchialeDao {
 		PreparedStatement prep=null;
 		String sql="UPDATE occhiale SET  nomeOcchiale=?, prezzo=?, disponibilita=?, descrizione=? WHERE idOcchiale = ?";
 			
-<<<<<<< HEAD
-			try {
-				con=ConnectionPool.getConnection();
-				prep=con.prepareStatement(insertSQL);
 
-				prep.setString(1, occhiale.getIdGlasses());
-				prep.setString(2, occhiale.getNameGlasses());
-				prep.setString(3, occhiale.getBrand());
-				prep.setInt(4, occhiale.getPrice());
-				prep.setInt(5, occhiale.getAvailability() );
-				prep.setString(6, occhiale.getType());
-				prep.setString(7, occhiale.getColor());
-				prep.setString(8, occhiale.getCategory());
-				prep.setString(9, occhiale.getImage());
-				prep.setString(10, occhiale.getImage2());
-				prep.setString(11, occhiale.getDescription());
-				
-				System.out.println("doSve occhiale: "+prep);
-				prep.executeUpdate();
-				
-				
-=======
 		try {
 			con=ConnectionPool.getConnection();
 			prep=con.prepareStatement(sql);			
@@ -379,34 +358,14 @@ public class OcchialeDao {
 			
 			System.out.println("\nquery : "+prep);	
 			prep.executeUpdate();
->>>>>>> branch 'main' of https://github.com/TechAlexS/IS_TheSpectacles.git
+
 			} finally {
 				prep.close();
 				ConnectionPool.rilasciaConnessione(con);
 		}
 	}
 		
-	/**
- 	 * @param occhiale occhiale da diminuire la quantita' disponibile nel DB
- 	 * @return
- 	 * @throws SQLException
- 	 */
-	public void decreaseAvailability(OcchialeBean occhiale) throws SQLException {
-		Connection con=null;
-		PreparedStatement prep=null;
-		String sql="UPDATE occhiale SET disponibilita=? WHERE idOcchiale=?";
-
-		try {
-			con=ConnectionPool.getConnection();
-			prep=con.prepareStatement(sql);
-			prep.setInt(1, occhiale.getAvailability()-occhiale.getQuantity());
-			prep.setString(2,occhiale.getIdGlasses());
-			prep.executeUpdate();
-		} finally {
-			prep.close();
-			ConnectionPool.rilasciaConnessione(con);
-		}
-	}
+	
 
 	/**
  	 * @param id stringa id da rimuovere nel DB

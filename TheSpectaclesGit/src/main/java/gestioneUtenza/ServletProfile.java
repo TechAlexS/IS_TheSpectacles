@@ -44,7 +44,7 @@ public class ServletProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("auth")!=null) {
 			System.out.println("Sono nella Servlet profile ");
-			RequestDispatcher dispatcher= etServletContext().getRequestDispatcher("/profile_details.jsp");
+			RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/profile_details.jsp");
 			dispatcher.forward(request, response);
 			return;			
 			} else {

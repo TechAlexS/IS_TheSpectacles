@@ -145,14 +145,11 @@ public class Carrello implements Serializable {
 	 * @param q
 	 * @return
 	 */
-<<<<<<< HEAD
+
 	public int insertQuantita(String code, int q) {
 		int ris=0;
 		for (int i=0; i<car.size(); i++) {
-=======
-	public void insertQuantita(String code, int q) {
-		for(int i=0; i<car.size(); i++) {
->>>>>>> branch 'main' of https://github.com/TechAlexS/IS_TheSpectacles.git
+
 			if(car.get(i).getIdGlasses().equals(code)) {
 				System.out.println("Disponibilit�: "+car.get(i).getAvailability());
 				System.out.println("\n Stampa if di InsertQuantita: "+(q<=car.get(i).getAvailability()));
