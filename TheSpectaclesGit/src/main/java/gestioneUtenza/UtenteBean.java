@@ -16,7 +16,6 @@ public class UtenteBean implements Serializable, Cloneable {
 	private String lastName;
 	private Date birthday;
 
-	@Override 
 	public UtenteBean() {
 	}
 	
@@ -46,7 +45,7 @@ public class UtenteBean implements Serializable, Cloneable {
 	}
 
 	/**
-	 * @return role ruolo dell'utente(standard o admin)
+	 * @return role ruolo dell'utente (standard o admin)
 	 */
 	public int getRole() {
 		return role;
@@ -90,7 +89,7 @@ public class UtenteBean implements Serializable, Cloneable {
 
 	/**
 	 * @precondition role==0 OR role==1
-	 * @param role ruolo da assegnare all'utente(standard o admin)
+	 * @param role ruolo da assegnare all'utente (standard o admin)
 	 * @postcondition l'utente e' standard o admin
 	 * @return 
 	 */
@@ -134,7 +133,6 @@ public class UtenteBean implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return "UtenteBean [pass=" + pass + ", role=" + role + ", email=" + email + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", birthday=" + birthday+ "]";
+		return "UtenteBean [pass=" + pass + ", role=" + role + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday+ "]";
 	}
 }

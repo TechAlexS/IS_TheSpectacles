@@ -53,7 +53,7 @@ public class OcchialeOrdineBean implements Serializable {
 	 * @param quantita quantità dell'occhialeOrdine
 	 * @return 
 	 */
-	public OcchialeOrdineBean(UUID idOrdine,String idOcchiale,int prezzoEffettivo,float iva,int quantita) {
+	public OcchialeOrdineBean(UUID idOrdine, String idOcchiale, int prezzoEffettivo, float iva, int quantita) {
 		this.idOrdine=idOrdine;
 		this.idOcchiale=idOcchiale;
 		this.prezzoEffettivo=prezzoEffettivo;
@@ -166,7 +166,6 @@ public class OcchialeOrdineBean implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "OcchialeOrdineBean [idOcchialeOrdine=" + idOcchialeOrdine + ", idOrdine=" + idOrdine + ", occhiale=" + idOcchiale + ",prezzoEffettivo="
-				+ prezzoEffettivo+ ", iva=" + iva + ", quantita=" +quantita  + "]";
+		return "OcchialeOrdineBean [idOcchialeOrdine=" + idOcchialeOrdine + ", idOrdine=" + idOrdine + ", occhiale=" + idOcchiale + ",prezzoEffettivo=" + prezzoEffettivo+ ", iva=" + iva + ", quantita=" +quantita  + "]";
 	}
 }

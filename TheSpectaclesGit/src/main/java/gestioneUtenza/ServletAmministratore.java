@@ -51,12 +51,11 @@ public class ServletAmministratore extends HttpServlet {
 			UtenteBean cerca=(UtenteBean) request.getSession().getAttribute("auth");
 			request.setAttribute("admin", cerca);
 			String azione=request.getParameter("action");
-			
 			System.out.println("Servlet Amministratore: "+azione);
+			
 			if(azione!=null && azione.equalsIgnoreCase("dettagli")) {
 				ArrayList<String> valori=new ArrayList<String>();
 				valori.add(request.getParameter("id"));
-				
 				System.out.println("sono in dettagli: "+valori.get(0));
 			  //errore qui
 				request.removeAttribute("des");

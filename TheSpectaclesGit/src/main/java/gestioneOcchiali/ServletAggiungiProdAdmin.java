@@ -28,6 +28,10 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	private OcchialeDao oDao=new OcchialeDao();
 	static String UPLOAD_DIRECTORY="images\\shop\\products";
 	
+	/**
+	 * @param pa
+	 * @return "" filename
+	 */
 	private String extractFileName(Part pa) {
 		String context=pa.getHeader("content-disposition");
 		String[] item=context.split(";");
@@ -38,6 +42,7 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 		}
 		return "";
 	}
+	
 	/**
 	 * @return
 	 * @throws ServletException
@@ -58,7 +63,6 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Sono nella Servlet di aggiunta Occhiale");
-			
 		String uploadPath=getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
 		System.out.println("\nUploadpath :"+uploadPath);
 		File uploadDir=new File(uploadPath);

@@ -9,13 +9,12 @@ import java.util.Date;
  * @author Mario Ranieri
  */
 public class OrdineBean implements Serializable {
-	UUID idOrder;
-	Date data;
-	String email;
-	String stato;
-	int tot=0;
+	private UUID idOrder;
+	private Date data;
+	private String email;
+	private String stato;
+	private int tot=0;
 	
-	@Override
 	public OrdineBean() {
 		this.idOrder=null;
 		this.email=null;

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 import util.Model;
 
 /**
- * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell’utente usando la query di Retrieve.
+ * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell'utente usando la query di Retrieve.
  */
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {

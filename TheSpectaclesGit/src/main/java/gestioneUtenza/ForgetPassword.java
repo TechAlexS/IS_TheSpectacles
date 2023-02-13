@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe e' un control che si occupa di passare la mail ad UtenteDao per vedere se esiste giàa' in fase di registrazione 
+ * Questa classe e' un control che si occupa di passare la mail ad UtenteDao per vedere se esiste gia' in fase di registrazione 
  *
  */
 @WebServlet("/ForgetPass")

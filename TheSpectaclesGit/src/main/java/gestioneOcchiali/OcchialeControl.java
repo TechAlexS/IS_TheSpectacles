@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
  /**
-  * Questa classe e' un control che si occupa di occupa di prelevare l’intero catalogo di Occhiali per visualizzarli nell’homepage.
+  * Questa classe e' un control che si occupa di occupa di prelevare l'intero catalogo di Occhiali per visualizzarli nell'homepage.
   */
  @WebServlet("/OcchialeControl")
 public class OcchialeControl extends HttpServlet {

@@ -13,7 +13,7 @@ import util.ConnectionPool;
 import util.Model;
 
 	/**
-	 * Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Spedizione.
+	 * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Spedizione.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -100,7 +100,7 @@ import util.Model;
 		}
 		
 		/**
-	 	 * @param spedizione spedizione da aggiornare nel db
+	 	 * @param spedizione spedizione da aggiornare nel DB
 	 	 * @return
 	 	 * @throws SQLException
 	 	 */

@@ -45,7 +45,6 @@ public class ShopControl extends HttpServlet {
 		try {
 			request.removeAttribute("occhiali");
 			request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(sort));
-			
 		} catch(SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}

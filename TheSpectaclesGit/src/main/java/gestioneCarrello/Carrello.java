@@ -89,7 +89,7 @@ public class Carrello implements Serializable {
 	}
 	
 	/**
-	 * Controlla se un prodotto è gia presente nel carrello, se è presente restituisce true e se non lo è restituisce false
+	 * Controlla se un prodotto e' gia presente nel carrello, se e' presente restituisce true e se non lo e' restituisce false
 	 * @param code
 	 * @return trovato parametro che assume true o false
 	 */
@@ -113,7 +113,7 @@ public class Carrello implements Serializable {
 	
 	/**
 	 * Calcola il prezzo del prodotto in base alla quantità scelta dal cliente e restituisce il prezzo totale
-	 * @param quant quantità degli oggetti nel carrello
+	 * @param quant quantita' degli oggetti nel carrello
 	 * @param id
 	 * @return tot prezzo totale del carrello
 	 */

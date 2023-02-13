@@ -7,16 +7,16 @@ import java.io.Serializable;
  * @author Mario Ranieri
  */
 public class IndirizziBean implements Serializable {
-	int idIndirizzo;
-	String address;
-	int status;
-	String city;
-	String province;
-	int cap;
-	String email;
-	String telefono;
-	String name;
-	String surname;
+	private int idIndirizzo;
+	private String address;
+	private int status;
+	private String city;
+	private String province;
+	private int cap;
+	private String email;
+	private String telefono;
+	private String name;
+	private String surname;
 	
 	public IndirizziBean() {
 		
@@ -96,7 +96,7 @@ public class IndirizziBean implements Serializable {
 	}
 	
 	/**
-	 * @return city città dell'indirizzo
+	 * @return city citta' dell'indirizzo
 	 */
 	public String getCity() {
 		return city;
@@ -203,7 +203,6 @@ public class IndirizziBean implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Indirizzi [idIndirizzo=" + idIndirizzo + "name=" + name + "surname=" + surname + ", address=" + address + ", status=" + status + ", city="
-				+ city + ", province=" + province + ", cap=" + cap + ", email=" + email + ", telefono=" + telefono + "]";
+		return "Indirizzi [idIndirizzo=" + idIndirizzo + "name=" + name + "surname=" + surname + ", address=" + address + ", status=" + status + ", city=" + city + ", province=" + province + ", cap=" + cap + ", email=" + email + ", telefono=" + telefono + "]";
 	}
 }

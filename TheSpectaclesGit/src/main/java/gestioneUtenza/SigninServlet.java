@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell’utente per inserire il nuovo utente.
+ * Questa classe e' un control che si occupa di passare a UtenteDao i dati dell'utente per inserire il nuovo utente.
  */
 @WebServlet("/Signin")
 public class SigninServlet extends HttpServlet {
@@ -45,14 +45,13 @@ public class SigninServlet extends HttpServlet {
     /**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) hrows ServletException, IOException {
 		response.sendRedirect(response.encodeRedirectURL("error.jsp"));
 	}
     
     /**
 	 * @precondition request.getParameter("email")!=null AND request.getParameter("password")!=null AND request.getParameter("nome")!=null AND request.getParameter("cognome")!=null AND request.getParameter("data")!=null 
-	 * @postcondition request.getSession().getAttribute(“auth”)!=null
+	 * @postcondition request.getSession().getAttribute("auth")!=null
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

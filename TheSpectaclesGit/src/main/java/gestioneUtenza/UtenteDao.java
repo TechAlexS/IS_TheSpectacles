@@ -18,7 +18,7 @@ import java.util.Date;
 import util.*;
 
 /**
- * Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Utente.
+ * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Utente.
  * @author Mario Ranieri 
  * @author Roberto Piscopo
  *
@@ -36,7 +36,7 @@ import util.*;
 		}
 
  	/**
- 	 * @param keys chiavi da usare per rimuovere delle istanze nel db
+ 	 * @param keys chiavi da usare per rimuovere delle istanze nel DB
  	 * @return bean nuovo utente (UtenteBean)
  	 * @throws SQLException
  	 */
@@ -45,7 +45,6 @@ import util.*;
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-		
 		String selectSQL="SELECT * FROM " + UtenteDao.TABLE_NAME + " WHERE email = ? AND pass= ? ";
 
  		try {
@@ -85,7 +84,6 @@ import util.*;
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-			
 		String selectSQL="SELECT * FROM " + UtenteDao.TABLE_NAME + " WHERE email = ? ";
 
  		try {
@@ -119,7 +117,7 @@ import util.*;
 	 * @param email stringa email da controllare
  	 * @precondition email!=null
  	 * @postcondition user=db.utente->includes(select(u|utente.email=email))
- 	 * @return bean nuovo utente(UtenteBean)
+ 	 * @return bean nuovo utente (UtenteBean)
  	 * @throws SQLException
  	 */
 	public UtenteBean doRetrieveByMail(String email) throws SQLException {
@@ -127,7 +125,6 @@ import util.*;
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-			
 		String selectSQL="SELECT * FROM " + UtenteDao.TABLE_NAME + " WHERE email = ? ";
 
  		try {
@@ -165,7 +162,6 @@ import util.*;
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-			
 		String selectSQL="SELECT * FROM  indirizzi   WHERE email = ?";
 
  		try {
@@ -201,8 +197,8 @@ import util.*;
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-			
 		String sql="SELECT email FROM " + UtenteDao.TABLE_NAME;
+		
 	    if(order !=null && !order.equals("")) {
 			sql+=" ORDER BY " + order;
 		}
@@ -253,14 +249,13 @@ import util.*;
 	}
 
 	/**
- 	 * @param bean utente da rimuovere nel db
+ 	 * @param bean utente da rimuovere nel DB
  	 * @return
  	 * @throws SQLException
  	 */
 	public void doDelete(UtenteBean bean) throws SQLException {
 		Connection con=null;
 		PreparedStatement prep=null;
-		
 		String insertSQL="DELETE FROM " + UtenteDao.TABLE_NAME + " WHERE email=? ";
 			
 		try {
@@ -276,14 +271,13 @@ import util.*;
 	}
 
 	/**
- 	 * @param utente utente da salvare nel db
+ 	 * @param utente utente da salvare nel DB
  	 * @return
  	 * @throws SQLException
  	 */
 	public void doSave(UtenteBean utente) throws SQLException {
 		Connection con=null;
 		PreparedStatement prep=null;
-		
 		String insertSQL="INSERT INTO " + UtenteDao.TABLE_NAME + " (firstName, lastName, birthday, email,pass, role) VALUES (?, ?, ?, ?, ?, ?)";
 			
 		try {

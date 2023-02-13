@@ -8,21 +8,20 @@ import java.io.Serializable;
  */
 public class OcchialeBean implements Serializable {
 	private static final long serialVersionUID=-4959563723922476262L;
-	String idGlasses;
-	String nameGlasses;
-	String brand;
-	int price;
-	int availability;
-	String type;
-	String color;
-    String category;
-	String image;
-	String image2;
-	String description;
-	int quantity=1;
-	float totalPrice;
+	private String idGlasses;
+	private String nameGlasses;
+	private String brand;
+	private int price;
+	private int availability;
+	private String type;
+	private String color;
+	private  String category;
+	private String image;
+	private String image2;
+	private String description;
+	private int quantity=1;
+	private float totalPrice;
 	
-	@Override
 	public OcchialeBean() {
 		quantity=1;
 		totalPrice=0;
@@ -257,8 +256,6 @@ public class OcchialeBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OcchialeBean [idGlasses=" + idGlasses + ", nameGlasses=" + nameGlasses + ", brand=" + brand + ", price="
-				+ price + ", availability=" + availability + ", type=" + type + ", color=" + color + ", idCategory="
-				+ category + ", image=" + image + ", image2= " + image2 + ", description=" + description + "]";
+		return "OcchialeBean [idGlasses=" + idGlasses + ", nameGlasses=" + nameGlasses + ", brand=" + brand + ", price=" + price + ", availability=" + availability + ", type=" + type + ", color=" + color + ", idCategory=" + category + ", image=" + image + ", image2= " + image2 + ", description=" + description + "]";
 	}	
 }

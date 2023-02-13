@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
- * Questa classe e' un control che si occupa della visualizzazione degli occhiali in base alla scelta dell’utente 
+ * Questa classe e' un control che si occupa della visualizzazione degli occhiali in base alla scelta dell'utente 
  */
 
 @WebServlet("/Categoria")

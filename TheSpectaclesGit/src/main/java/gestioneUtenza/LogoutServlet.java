@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Questa classe è un control che si occupa di effettua il logout dell’utente dal sito 
+ * Questa classe e' un control che si occupa di effettua il logout dell'utente dal sito 
  */
 @WebServlet("/log-out")
 public class LogoutServlet extends HttpServlet {

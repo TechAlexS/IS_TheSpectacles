@@ -22,6 +22,7 @@ import java.util.*;
 public class ServletModificaAmministratore extends HttpServlet {
 	private static final long serialVersionUID=1L;
 	private OcchialeDao occhialeDao=new OcchialeDao();
+	
 	/**
 	 * @return
 	 * @throws ServletException

@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import util.ConnectionPool;
 
 /**
- * Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Occhiale.
+ * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Occhiale.
  * @author Mario Ranieri 
  * @author Roberto Piscopo
  */
@@ -78,7 +78,7 @@ public class OcchialeDao {
 		
 	/**
  	 * @param keys chiavi da usare per rimuovere delle istanze nel DB
- 	 * @return bean nuovo occhiale(OcchialiBean)
+ 	 * @return bean nuovo occhiale (OcchialiBean)
  	 * @throws SQLException
  	 */
 	public Collection<OcchialeBean> doRetrieveBySex(ArrayList<String> keys) throws SQLException {
@@ -222,7 +222,7 @@ public class OcchialeDao {
 		
 	/**
  	 * @param keys stringhe di chiavi da controllare
- 	 * @return bean nuovo occhiale(OcchialeBean)
+ 	 * @return bean nuovo occhiale (OcchialeBean)
  	 * @throws SQLException
 	 */
 	public OcchialeBean singleProduct(ArrayList<String> keys) throws SQLException {
@@ -230,7 +230,6 @@ public class OcchialeDao {
 		Connection con=null;
 		PreparedStatement prep=null;
 		ResultSet rs=null;
-		
 		String sql="SELECT * FROM " + OcchialeDao.TABLE_NAME + " WHERE idOcchiale = ?";	
  		System.out.println("Sono nel metodo del dao: "+ keys.get(0));
 	 		
@@ -267,7 +266,7 @@ public class OcchialeDao {
 
 	/**
 	 * @param order stringa ordine da controllare
-	 * @return bean nuovo occhiale(OcchialeBean)
+	 * @return bean nuovo occhiale (OcchialeBean)
 	 * @throws SQLException
 	 */
 	public Collection<OcchialeBean> doRetrieveAll(String order) throws SQLException {
@@ -338,7 +337,7 @@ public class OcchialeDao {
 	}
 		
 	/**
- 	 * @param occhiale occhiale da diminuire quantita' disponibile nel DB
+ 	 * @param occhiale occhiale da diminuire la quantita' disponibile nel DB
  	 * @return
  	 * @throws SQLException
  	 */

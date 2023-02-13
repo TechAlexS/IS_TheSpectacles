@@ -15,7 +15,7 @@ import util.ConnectionPool;
 import java.util.UUID;
 
 	/**
-	* Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto OcchialeOrdine.
+	* Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto OcchialeOrdine.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -39,13 +39,11 @@ import java.util.UUID;
 	  public void doSave(OcchialeOrdineBean occhialeOrdine) throws SQLException {
 		 Connection con=null;
 		 PreparedStatement ps=null;
-
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (id_occhiale, id_ordine, prezzo_reale, iva ,quantita) VALUES(?,?,?,?,?)";
 		
 		try {
 			con=ConnectionPool.getConnection();
 			ps=con.prepareStatement(insertSQL);
-
 			//ps.setString(1, occhialeOrdine.getProdotto().getIdGlasses());
 			ps.setString(1, occhialeOrdine.getIdProdotto());
 			ps.setString(2, occhialeOrdine.getIdOrdine().toString());
@@ -53,9 +51,7 @@ import java.util.UUID;
 			ps.setFloat(4, occhialeOrdine.getIva());
 			ps.setInt(5, occhialeOrdine.getQuantita());
 			System.out.println("doSave: "+ps);
-			
 			ps.executeUpdate();
-
 		} finally {
 			try {
 				if(ps!=null)
@@ -234,6 +230,7 @@ import java.util.UUID;
 		  //System.out.println("tutti gli ordini doRetrivebyOrder: "+ordini);
 		  return ordini;
 	  }
+	  
 	  /**
 	   * @return index ultimo indice aggiunto
 	   * @throws SQLException

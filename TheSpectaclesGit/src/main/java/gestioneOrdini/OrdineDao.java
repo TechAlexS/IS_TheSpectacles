@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import util.ConnectionPool;
 
 	/**
-	 * Questa classe e' un oggetto manager che si interfaccia con il database. Gestisce le query riguardanti l'oggetto Ordine.
+	 * Questa classe e' un oggetto manager che si interfaccia con il DB. Gestisce le query riguardanti l'oggetto Ordine.
 	 * @author Mario Ranieri 
 	 * @author Roberto Piscopo
 	 */
@@ -44,7 +44,6 @@ import util.ConnectionPool;
 			OrdineBean bean=new OrdineBean();
 			Connection con=null;
 			PreparedStatement prep=null;
-			
 			String query="INSERT INTO " + TABLE_NAME + " (idOrdine, email, data, stato)" + " VALUES (?,?,CURRENT_TIMESTAMP(),?)";
 
 			try {
@@ -75,7 +74,6 @@ import util.ConnectionPool;
 			Connection con=null;
 			PreparedStatement prep=null;
 			ResultSet rs=null;
-	
 	 		String selectSQL="SELECT * FROM " + OrdineDao.TABLE_NAME + " WHERE idOrdine = ?";
 	 		
 	 		try {

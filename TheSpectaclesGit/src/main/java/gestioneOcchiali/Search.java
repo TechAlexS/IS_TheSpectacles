@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
- * Questa classe e' un control che permette di ottenere determinati occhiali passando a OcchialiDao il brand scelto dall’utente.
+ * Questa classe e' un control che permette di ottenere determinati occhiali passando a OcchialiDao il brand scelto dall'utente.
  */
 @WebServlet("/search")
 public class Search extends HttpServlet {
