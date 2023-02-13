@@ -13,7 +13,7 @@ $(document).ready(function(){
 	var password = $('#password').val();
 	var ripPassword = $('#ripPassword').val();
 	    
-	var expNomeCognome= /^[A-Za-z]+$/;
+	var expNomeCognome= /^[a-zA-ZÀ-ÿ\s]+$/;
 	var expEmail= /^([a-z1-9.-])*@([a-z])+(.com)$/;
 	var expPassword= /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/;
 	//var expData=/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{4})$/;
@@ -65,12 +65,12 @@ $(document).ready(function(){
 	//eliminazione errori
 		
 	if (nome.match(expNomeCognome)){
-		errNome= errNome + 1;
+		errNome= errNome - 1;
 		$('#erroreNome').remove();
 	}
 		
 	if (cognome.match(expNomeCognome)){
-		errCognome= errCognome + 1;
+		errCognome= errCognome - 1;
 		$('#erroreCognome').remove();
 	}
 		
@@ -80,17 +80,17 @@ $(document).ready(function(){
 	}*/
 		
 	if (email.match(expEmail)){
-		errEmail= errEmail + 1;
+		errEmail= errEmail - 1;
 		$('#erroreEmail').remove();
 	}
 		
 	if (password.match(expEmail)){
-		errPassword= errPassword + 1;
+		errPassword= errPassword - 1;
 		$('#errorePassword').remove();
 	}
 		
 	if (ripPassword==password){
-		errRipPassword= errRipPassword + 1;
+		errRipPassword= errRipPassword - 1;
 		$('#erroreRipPassword').remove();
 	}
 		
