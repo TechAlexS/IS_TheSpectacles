@@ -72,9 +72,6 @@ if(occhiali == null) {
 												<a href="Prodotto?action=dettagli&id=<%= bean.getIdGlasses() %>"><i class="tf-ion-ios-search-strong"></i></a>
 										</li>
 										<li>
-					                        <a href="#!" ><i class="tf-ion-ios-heart"></i></a>
-										</li>
-										<li>
 											<a href="Prodotto?action=aggiungi&id=<%= bean.getIdGlasses() %>"><i class="tf-ion-android-cart"></i></a>
 										</li>
 									</ul>
