@@ -44,7 +44,7 @@ public class ServletAddAddress extends HttpServlet {
 		HttpSession session=request.getSession(false);
 		UtenteBean bean=(UtenteBean)session.getAttribute("auth");
 		
-		System.out.println("Sono nella Servlet aggiungi indirizzo: \n");
+		/*System.out.println("Sono nella Servlet aggiungi indirizzo: \n");
 		System.out.println("\n"+request.getParameter("user_name"));
 		System.out.println("\n"+request.getParameter("user_surname"));
 		System.out.println("\n"+request.getParameter("user_address"));
@@ -52,7 +52,8 @@ public class ServletAddAddress extends HttpServlet {
 		System.out.println("\n"+request.getParameter("user_country"));
 		System.out.println("\n"+request.getParameter("zipcode"));
 		System.out.println("\n"+request.getParameter("user_phone"));
-
+		 
+		 */
 		String nome=request.getParameter("user_name");
 		String cognome=request.getParameter("user_surname");
 		String telefono=request.getParameter("user_phone");
