@@ -104,6 +104,12 @@ $(document).ready(function(){
 				data: {nome: nome, cognome: cognome, data: data, email: email, password: password},
 				url: 'Signin',
 				success: function(result){
+					if(result=="Esistente" && errEmail < 1){
+						errEmail= errEmail + 1;
+					$('#email').after("<b><p id=erroreEmail style='color: red;'>Email già presente</p></b> <br>");		
+					}
+					
+					
 					if (result == "Utente"){
 					window.location.href="shop.jsp";
 				}

@@ -85,11 +85,18 @@ public class SigninServlet extends HttpServlet {
 		value.add(newPassword);
 		UtenteBean newUtente=new UtenteBean(email,HashPassw,nome,cognome,birth,ruolo);
 		
-		try {	
-			utenteModel.doSave(newUtente);
-			UtenteBean client=utenteModel.doRetrieveByKey(value);
-			request.getSession().setAttribute("auth", client);
-			out.print("Utente");
+		try {
+			//System.out.println((utenteModel.doRetrieveByMail(email).getEmail()==null));
+			if(utenteModel.doRetrieveByMail(email).getEmail()==null) {
+				utenteModel.doSave(newUtente);
+				UtenteBean client=utenteModel.doRetrieveByKey(value);
+				request.getSession().setAttribute("auth", client);
+				out.print("Utente");
+			}
+			else
+				out.print("Esistente");
+			
+			
 		} catch(SQLException e) {
 			System.out.println("Errore nella signin: " + e.getMessage());
 		}
