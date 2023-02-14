@@ -44,7 +44,6 @@ ArrayList<OrdineBean> ordini = (ArrayList<OrdineBean>) request.getAttribute("ord
 		<div class="col-md-12">
 			<ul class="list-inline dashboard-menu text-center">
 				<li><a class="active" href="CronologiaOrdini">Ordini</a></li>
-				<li><a href="Indirizzo?page=ok">Indirizzi</a></li>										
 				<li><a href="Profile">Dettagli Profilo</a></li>	
 			</ul> 
 				<div class="dashboard-wrapper user-dashboard">
