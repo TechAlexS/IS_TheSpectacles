@@ -62,9 +62,9 @@ public class Checkout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		String ind=(String) request.getParameter("indirizzo");
-		System.out.println("Checkout address: "+request.getParameter("indirizzo"));
+		//System.out.println("Checkout address: "+request.getParameter("indirizzo"));
 
-		System.out.println("Checkout cardNumber: "+request.getParameter("cardnumber"));
+		//System.out.println("Checkout cardNumber: "+request.getParameter("cardnumber"));
 
 		
 		String cardNumber=request.getParameter("cardnumber");
@@ -81,12 +81,12 @@ public class Checkout extends HttpServlet {
 
 			UtenteBean bean=(UtenteBean) request.getSession().getAttribute("auth");
 
-			if (cart!=null || cart.getDimensione()>0) {
+			if (cart!=null)  {
 
-			if(cart!=null) {
-
+			if(cart.getDimensione()>0) {
+                
 				OrdineBean ordine=createOrder(request);
-				System.out.println("Checkout ordine: "+ordine);
+				//System.out.println("Checkout ordine: "+ordine);
 				ArrayList<OcchialeOrdineBean> occhialiOrdine=createProducts(cart, ordine.getIdOrder());
 				
 				try {	
@@ -94,7 +94,7 @@ public class Checkout extends HttpServlet {
 					
 					request.getSession().setAttribute("address",indDao.search(bean.getEmail(), ind));
 					for (OcchialeOrdineBean o:occhialiOrdine) {
-						System.out.println("Checkout occhialeOrdineBean: "+o);
+						//System.out.println("Checkout occhialeOrdineBean: "+o);
 						occhialeDao.doSave(o);
 
 						OcchialeBean occhiale=oDao.doRetrieveOcchiale(o.getIdProdotto());
@@ -125,6 +125,7 @@ public class Checkout extends HttpServlet {
 		} else {
 			out.print("login.jsp");
 			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/login.jsp");
+			
 			dispatcher.forward(request, response);
 		 }
 		

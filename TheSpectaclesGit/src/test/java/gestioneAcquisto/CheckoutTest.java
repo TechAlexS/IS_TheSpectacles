@@ -39,7 +39,7 @@ import util.ConnectionPool;
 
 
 public class CheckoutTest {
- /*
+ 
   private  String indirizzo = "Via Napoli";
   private  String cardNumber = "1234567812345678";
   private  String cvv = "123";
@@ -65,14 +65,13 @@ public class CheckoutTest {
 	   
 	   Mockito.when(config.getServletContext()).thenReturn(context);
 	   servlet.init(config);
-	   Mockito.when(config.getServletContext()).thenReturn(context);
+	   //Mockito.when(config.getServletContext()).thenReturn(context);
 	   cart.addCarrello(occhiale);
 	   
-	   System.out.println(dispatcher);
+	   //System.out.println(dispatcher);
+	   
 
 	   Mockito.when(request.getSession()).thenReturn(session);
-	   Mockito.when(session.getAttribute("carrello")).thenReturn(cart);
-	   Mockito.when(session.getAttribute("auth")).thenReturn(bean);  
   }
     
     
@@ -82,9 +81,13 @@ public class CheckoutTest {
   }
  
    
-//TC_1.2_3 - dati Corretti
+//TC_7.9 - dati Corretti
   @Test
-  public void testCase_1_2_3() throws ServletException, IOException{
+  public void testCase_7_9() throws ServletException, IOException{
+   
+   
+   Mockito.when(session.getAttribute("carrello")).thenReturn(cart);
+   Mockito.when(session.getAttribute("auth")).thenReturn(bean);  
    
    PrintWriter out = Mockito.mock(PrintWriter.class);
    ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
@@ -94,25 +97,85 @@ public class CheckoutTest {
    Mockito.when(request.getParameter("expiry")).thenReturn(expiry);
    Mockito.when(request.getParameter("cvv")).thenReturn(cvv);
    Mockito.when(response.getWriter()).thenReturn(out);
+   Mockito.when(context.getRequestDispatcher("/confirmation.jsp")).thenReturn(dispatcher);
    
    servlet.doGet(request, response);
    
 
   
+  
+   Mockito.verify(dispatcher).forward(request, response);
+      
    Mockito.verify(out).print(argument.capture());
    assertEquals("confirmation.jsp", argument.getValue());
-   
-   
-   Mockito.when(context.getRequestDispatcher("/confirmation.jsp")).thenReturn(dispatcher);
-   Mockito.verify(dispatcher).forward(request, response);
   
- 
+  }
+///TC_7.1 - Sessione non attiva per l'utente
+  @Test
+  public void testCase_7_1() throws ServletException, IOException{
+   
+	  
+   
+   Mockito.when(session.getAttribute("carrello")).thenReturn(cart);
+   Mockito.when(session.getAttribute("auth")).thenReturn(null);  
+   
+   PrintWriter out = Mockito.mock(PrintWriter.class);
+   ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+
+   Mockito.when(request.getParameter("indirizzo")).thenReturn(indirizzo);
+   Mockito.when(request.getParameter("cardnumber")).thenReturn(cardNumber);
+   Mockito.when(request.getParameter("expiry")).thenReturn(expiry);
+   Mockito.when(request.getParameter("cvv")).thenReturn(cvv);
+   Mockito.when(response.getWriter()).thenReturn(out);
+   Mockito.when(context.getRequestDispatcher("/login.jsp")).thenReturn(dispatcher);
+   
+   servlet.doGet(request, response);
+   
+
+  
+  
+   Mockito.verify(dispatcher).forward(request, response);
+      
+   Mockito.verify(out).print(argument.capture());
+   assertEquals("login.jsp", argument.getValue());
+  
+  }
+  
+///TC_7.1.1 - Carrello inesistente
+  @Test
+  public void testCase_7_1_1() throws ServletException, IOException{
+   
+	  
+   
+   Mockito.when(session.getAttribute("carrello")).thenReturn(null);
+   Mockito.when(session.getAttribute("auth")).thenReturn(bean);  
+   
+   PrintWriter out = Mockito.mock(PrintWriter.class);
+   ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+
+   Mockito.when(request.getParameter("indirizzo")).thenReturn(indirizzo);
+   Mockito.when(request.getParameter("cardnumber")).thenReturn(cardNumber);
+   Mockito.when(request.getParameter("expiry")).thenReturn(expiry);
+   Mockito.when(request.getParameter("cvv")).thenReturn(cvv);
+   Mockito.when(response.getWriter()).thenReturn(out);
+   Mockito.when(context.getRequestDispatcher("/error.jsp")).thenReturn(dispatcher);
+   
+   servlet.doGet(request, response);
+   
+
+  
+  
+   Mockito.verify(dispatcher).forward(request, response);
+      
+   Mockito.verify(out).print(argument.capture());
+   assertEquals("error.jsp", argument.getValue());
+  
   }
   
   @Test
   public void testCreateOrder() throws ServletException, IOException{
    
- 
+	  Mockito.when(session.getAttribute("auth")).thenReturn(bean);  
 	  ordine=servlet.createOrder(request);
 	  assertTrue(ordine.getEmail().equals(bean.getEmail()));
   }
@@ -120,6 +183,7 @@ public class CheckoutTest {
   @Test
   public void testCreateOrder2() throws ServletException, IOException{
    
+	  Mockito.when(session.getAttribute("auth")).thenReturn(bean);  
 	  ordine=servlet.createOrder(request);
 	  assertFalse(ordine.getEmail().equals("email@non.esistente"));
 
@@ -132,24 +196,27 @@ public class CheckoutTest {
 
   }
   
-  
+  /*
   @Test
   public void testAddressAttribute() throws ServletException, IOException {
      IndirizziBean indirizzo = new IndirizziBean();
      indirizzo.setAddress("Via Napoli");
 
-  
-     servlet.doGet(request, response);
-
      ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
      ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
-     Mockito.verify(session).setAttribute(keyCaptor.capture(), valueCaptor.capture());
+     
+     
+     servlet.doGet(request, response);
 
      String key = keyCaptor.getValue();
      IndirizziBean value = (IndirizziBean) valueCaptor.getValue();
+     
+     Mockito.verify(session).setAttribute(keyCaptor.capture(), valueCaptor.capture());
+     
+
      assertEquals("Via Napoli", key);
      assertEquals(indirizzo.getAddress(), value.getAddress());
   }
-  */
+ */
 	
 }
