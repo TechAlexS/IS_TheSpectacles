@@ -47,7 +47,7 @@ UtenteBean auth = (UtenteBean) request.getSession().getAttribute("auth");
 
                     	 <div class="form-group">
                            <label for="id">ID Occhiale</label>
-                           <input type="text" class="form-control"  name="id" placeholder="Inserisci id Occhiale" required>
+                           <input id="id" type="text" class="form-control"  name="id" placeholder="Inserisci id Occhiale" required>
                         </div>
                         <div class="form-group">
                            <label for="nome">Nome Occhiale</label>
@@ -93,7 +93,7 @@ UtenteBean auth = (UtenteBean) request.getSession().getAttribute("auth");
                         </div>
                          <div class="form-group">
 	                        <label for="desc">Aggiungi immagine 2</label>
-	                         <input type="file"  name="img2" accept=".jpg, .jpeg, .png" > 
+	                         <input type="file"  name="img2" accept=".jpg, .jpeg, .png" required>
                         </div>
                    
              

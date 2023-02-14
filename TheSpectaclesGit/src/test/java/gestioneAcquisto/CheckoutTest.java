@@ -101,9 +101,6 @@ public class CheckoutTest {
    
    servlet.doGet(request, response);
    
-
-  
-  
    Mockito.verify(dispatcher).forward(request, response);
       
    Mockito.verify(out).print(argument.capture());

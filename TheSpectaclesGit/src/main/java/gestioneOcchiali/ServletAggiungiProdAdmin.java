@@ -2,6 +2,7 @@ package gestioneOcchiali;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -28,20 +29,7 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	private OcchialeDao oDao=new OcchialeDao();
 	static String UPLOAD_DIRECTORY="images\\shop\\products";
 	
-	/**
-	 * @param pa
-	 * @return "" filename
-	 */
-	private String extractFileName(Part pa) {
-		String context=pa.getHeader("content-disposition");
-		String[] item=context.split(";");
-		for(String s:item) {
-			if(s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=")+2, s.length()- 1);
-			}
-		}
-		return "";
-	}
+
 	
 	/**
 	 * @return
@@ -62,17 +50,22 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 	 * @throws ServletException, IOException
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Sono nella Servlet di aggiunta Occhiale");
+		
+		//System.out.println("Sono nella Servlet di aggiunta Occhiale");
+		
 		String uploadPath=getServletContext().getRealPath("") + UPLOAD_DIRECTORY;
 		System.out.println("\nUploadpath :"+uploadPath);
 		File uploadDir=new File(uploadPath);
 		if(!uploadDir.exists()) uploadDir.mkdir();
 					
 		Part part=request.getPart("img1");
-		String fileName=extractFileName (part);
+		//System.out.println("filename: "+part.getSubmittedFileName());
+		//String fileName=extractFileName (part);
+		String fileName=part.getSubmittedFileName();
 		part.write(uploadPath + File.separator + fileName);
 		Part part2=request.getPart("img2");
-		String fileName2=extractFileName (part2);	
+		//String fileName2=extractFileName (part2);	
+		String fileName2=part2.getSubmittedFileName();	
 		part2.write(uploadPath + File.separator + fileName2);
 		String idOcchiale=request.getParameter("id");
 		String nomeProd=request.getParameter("nome");
@@ -98,13 +91,29 @@ public class ServletAggiungiProdAdmin extends HttpServlet {
 		
 		if(!fileName.equals(null))
 			prod.setImage2(fileName2);
+		
+		PrintWriter out=response.getWriter();
+		
 		try {
-			oDao.doSave(prod);
+			      
+			      System.out.println("ris oDao "+(oDao.doRetrieveOcchiale(idOcchiale).getIdGlasses()==null));
+			if (oDao.doRetrieveOcchiale(idOcchiale).getIdGlasses()==null)
+					{
+						out.print("non presente nel db");
+						oDao.doSave(prod);
+						RequestDispatcher dis=request.getRequestDispatcher("PageAmministratore.jsp");
+						dis.forward(request, response);
+					}
+					
+			else {
+				out.print("già presente nel db");
+				RequestDispatcher dis=request.getRequestDispatcher("Amministratore?action=aggiungi");
+				dis.forward(request, response);
+			}
 		}
 		catch (SQLException e) {
 			System.out.println("Errore nella ServletAggiungiProdAdmin: " + e.getMessage());
 		}	
-		RequestDispatcher dis=request.getRequestDispatcher("PageAmministratore.jsp");
-		dis.forward(request, response);
+		
 	}
 }
