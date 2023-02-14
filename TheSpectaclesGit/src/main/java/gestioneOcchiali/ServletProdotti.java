@@ -1,6 +1,7 @@
 package gestioneOcchiali;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ public class ServletProdotti extends HttpServlet {
 			request.setAttribute("id", request.getParameter("id"));
 			session.setAttribute("carrello", car);
 
-		
+		PrintWriter out=response.getWriter();
 		String azione= request.getParameter("action");
 		
 		System.out.println("Action value: "+ azione);
@@ -75,11 +76,14 @@ public class ServletProdotti extends HttpServlet {
 			
 			System.out.println("Sono nell'if aggiungi ");
 			OcchialeBean occhiale= (OcchialeBean) request.getAttribute("descrizione");
-			System.out.println("occhaile bean carrello: "+occhiale);
+			System.out.println("occhiale bean carrello: "+occhiale);
 			if (!car.searchProdotto(occhiale.getIdGlasses())) {
 			car.addCarrello(occhiale);
 			car.getPrezzoTotale(1, valori.get(0));
-			
+			out.print("aggiunto");
+			}
+			else {
+				out.print("Occhiale già nel carrello");
 			}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
 				dispatcher.forward(request, response);

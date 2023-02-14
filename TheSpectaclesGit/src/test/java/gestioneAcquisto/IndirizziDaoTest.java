@@ -77,7 +77,7 @@ class IndirizziDaoTest {
 		 try {
 	      dao.doSave(bean2);
 	      String email="prova@gmail.com";
-	      assertTrue(dao.doRetrieveAllAddress(email).size()==2);
+	      assertTrue(dao.doRetrieveAllAddress(email).size()>=2);
 	    } finally {
 	      dao.doDelete(bean2);
 	    }

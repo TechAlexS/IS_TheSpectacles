@@ -53,9 +53,9 @@ class TestRegistrazioneServlet {
 	   
 	  }
 	 
-	 //TC_1.2_1 - Email non esistente
+	 //TC_1.7 Dati corretti, email non presente
 	  @Test
-	  public void testCase_1_2_1() throws ServletException, IOException{
+	  public void testCase_1_7() throws ServletException, IOException{
 	   
 	   
 	   PrintWriter out = Mockito.mock(PrintWriter.class);
