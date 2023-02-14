@@ -35,7 +35,7 @@ public class TestUtenteDao {
 	}
 			
 	@Test 
-	void testDoRetrieveByKey() throws SQLException {		
+	void tcd1_5() throws SQLException {		
 		ArrayList<String> param=new ArrayList<String>();
 		param.add(bean.getEmail());
 		param.add(bean.getPass());
@@ -48,7 +48,7 @@ public class TestUtenteDao {
 	}
 
 	@Test
-	void testDoSave() throws SQLException {
+	void tcd1_3() throws SQLException {
 		UtenteBean bean2=new UtenteBean("email2@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12), 0);
 		
 		try {
@@ -65,5 +65,49 @@ public class TestUtenteDao {
 	@Test
 	void testEsisteEmail() throws SQLException {	   
 		assertTrue(dao.esisteEmail(bean.getEmail()));
-	}	  
+	}	
+	//Parametri non conformi inviati a doSave
+	@Test
+	void tcd1_1() throws SQLException {	   
+		
+            UtenteBean bean2=new UtenteBean();
+		
+        assertThrows(NullPointerException.class, () -> {
+                  dao.doSave(bean2);
+              });
+	}
+	
+	//Parametri conformi e chiave già presente inviati  a doSave
+	@Test
+	void tcd1_2() throws SQLException {	   
+		
+			UtenteBean bean2=new UtenteBean("email2@gmail.com", "Password1", "Nome", "Cognome",new Date(2000, 12, 12), 0);
+		
+		try {
+			dao.doSave(bean2);  
+			 assertThrows(SQLException.class, () -> {
+                 dao.doSave(bean2);
+             });
+		    
+		} finally {
+			dao.doDelete(bean2);  
+		}	  
+		
+       
+	}
+	//attributo ricerca non presente
+	@Test 
+	void tcd1_4() throws SQLException {		
+		ArrayList<String> param=new ArrayList<String>();
+		param.add("email inesistente");
+		param.add("password inesistente");
+		
+		 assertTrue(dao.doRetrieveByKey(param).getEmail()==null);
+         
+		
+	}
+	
+
+	
+	
 }
