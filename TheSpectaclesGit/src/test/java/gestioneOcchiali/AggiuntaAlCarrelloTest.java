@@ -23,15 +23,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import gestioneAcquisto.Checkout;
+
 import gestioneCarrello.Carrello;
 import gestioneOcchiali.OcchialeBean;
 import gestioneOcchiali.OcchialeDao;
 import gestioneOcchiali.ServletProdotti;
-import gestioneOrdini.OcchialeOrdineDao;
-import gestioneOrdini.OrdineBean;
-import gestioneOrdini.OrdineDao;
-import gestioneUtenza.UtenteBean;
+
+
 
 class AggiuntaAlCarrelloTest {
 

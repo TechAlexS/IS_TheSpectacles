@@ -1,4 +1,4 @@
-package gestioneAcquisto;
+package gestioneIndirizzi;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

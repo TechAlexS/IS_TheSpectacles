@@ -1,5 +1,5 @@
 <%@page import="gestioneUtenza.UtenteBean"%>
-<%@page import="gestioneAcquisto.IndirizziBean"%>
+<%@page import="gestioneIndirizzi.IndirizziBean"%>
 <%@page import="gestioneCarrello.Carrello"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

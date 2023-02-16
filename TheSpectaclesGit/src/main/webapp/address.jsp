@@ -1,5 +1,5 @@
 <%@page import="gestioneUtenza.UtenteBean"%>
-<%@page import="gestioneAcquisto.IndirizziBean"%>
+<%@page import="gestioneIndirizzi.IndirizziBean"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -47,9 +47,9 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
     <div class="row">
 		<div class="col-md-12">
 			<ul class="list-inline dashboard-menu text-center">
-				<li><a href="CronologiaOrdini">Ordini</a></li>
-				<li><a class="active" href="Indirizzo?page=ok">Indirizzi</a></li>										
+				<li><a href="CronologiaOrdini">Ordini</a></li>							
 				<li><a  href="Profile">Dettagli Profilo</a></li>
+				<li><a class="active" href="Indirizzo?page=ok">Indirizzi</a></li>	
 			</ul>
         <div class="dashboard-wrapper user-dashboard">
           <div class="table-responsive">
@@ -62,7 +62,7 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
                   <th>Città</th>
                   <th>CAP</th>
                   <th class="col-md-2 col-sm-3">Telefono</th>
-                  <th></th>
+                 
                 </tr>
               </thead>
                <tbody>
@@ -77,12 +77,7 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
                   <td><%= bean.getCity() %>, <%= bean.getProvince() %> </td>
                   <td><%= bean.getCap() %></td>
                   <td><%= bean.getTelefono() %></td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-default"><i class="tf-pencil2" aria-hidden="true"></i></button>
-                      <button type="button" class="btn btn-default"><i class="tf-ion-close" aria-hidden="true"></i></button>
-                    </div>
-                  </td>
+                  
                 </tr>
               
               </tbody>
@@ -93,7 +88,7 @@ Collection<?> indirizzi = (Collection<?>) request.getAttribute("indirizzi");
         </div>
       </div>
     </div>
-    <a href="aggiungiIndirizzo.jsp" class="btn btn-main pull-right">Aggiungi Indirizzo</a>
+    <a href="aggiungiIndirizzo2.jsp" class="btn btn-main pull-right">Aggiungi Indirizzo</a>
   </div>
 </section>
 

@@ -1,4 +1,4 @@
-package gestioneAcquisto;
+package gestioneOrdini;
 
 
 import java.util.Date;
@@ -26,6 +26,7 @@ import gestioneOrdini.OrdineBean;
 import gestioneOrdini.OrdineDao;
 import gestioneUtenza.UtenteBean;
 import gestioneOcchiali.OcchialeBean;
+import gestioneIndirizzi.*;
 
 /**
  * Questa classe e' un control che si occupa di passare le informazioni di un acquisto a OrdineDao, OcchialeOrdineDao e OcchialeDao 

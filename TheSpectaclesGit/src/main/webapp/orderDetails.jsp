@@ -46,9 +46,9 @@ OrdineBean ordine= (OrdineBean) request.getAttribute("ordine");
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="list-inline dashboard-menu text-center">
-					 <li><a href="order.jsp">Ordini</a></li>
-			          <li><a class="active" href="Indirizzo?page='ok'">Indirizzi</a></li>
-			          <li><a href="profile-details.jsp">Dettagli Profilo</a></li>
+					 <li><a href="CronologiaOrdini">Ordini</a></li>
+			          <li><a class="active" href="Indirizzo?page=ok">Indirizzi</a></li>
+			          <li><a href="Profile">Dettagli Profilo</a></li>
 				</ul>
 				<div class="dashboard-wrapper user-dashboard">
 					<div class="table-responsive">

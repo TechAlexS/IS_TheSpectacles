@@ -1,4 +1,4 @@
-package gestioneAcquisto;
+package gestioneIndirizzi;
 
 import java.io.IOException;
 import java.sql.SQLException;

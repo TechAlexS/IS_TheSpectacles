@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import javax.sql.DataSource;
 
-import gestioneAcquisto.IndirizziBean;
+import gestioneIndirizzi.IndirizziBean;
 import util.Model;
 
 import java.util.Date;

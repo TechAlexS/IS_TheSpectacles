@@ -1,4 +1,4 @@
-package gestioneAcquisto;
+package gestioneIndirizzi;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -79,8 +79,19 @@ public class ServletAddAddress extends HttpServlet {
 		} catch(SQLException e) {
 			System.out.println("Errore Servelt aggiungi indirizzo: " + e.getMessage());
 		}
-		RequestDispatcher dis=getServletContext().getRequestDispatcher("/Indirizzo");
-		dis.forward(request, response);
+		
+		String page=request.getParameter("page");
+		
+		if(page.equals("ok")) {
+			RequestDispatcher dis=getServletContext().getRequestDispatcher("/Indirizzo?page=ok");
+			dis.forward(request, response);
+		}
+			
+		else {
+			RequestDispatcher dis=getServletContext().getRequestDispatcher("/Indirizzo");
+			dis.forward(request, response);
+		}
+		
 	}
 
 	/**

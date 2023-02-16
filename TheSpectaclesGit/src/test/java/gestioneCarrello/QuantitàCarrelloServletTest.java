@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import gestioneAcquisto.Checkout;
+import gestioneOrdini.Checkout;
 import gestioneOcchiali.OcchialeBean;
 import gestioneOrdini.OcchialeOrdineDao;
 import gestioneOrdini.OrdineBean;

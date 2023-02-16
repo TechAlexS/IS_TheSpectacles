@@ -1,4 +1,4 @@
-package gestioneAcquisto;
+package gestioneIndirizzi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.sql.Connection;
-import gestioneAcquisto.*;
+import gestioneIndirizzi.*;
 import gestioneUtenza.UtenteBean;
 import gestioneUtenza.UtenteDao;
 import util.ConnectionPool;
