@@ -4504,19 +4504,6 @@
       ],
       "value": ""
     }, {
-      "id": "d69811c4-2f3a-42f1-b74a-f6f03e12afa0",
-      "comment": "",
-      "command": "type",
-      "target": "id=expiry",
-      "targets": [
-        ["id=cvv", "id"],
-        ["name=cvv", "name"],
-        ["css=#cvv", "css:finder"],
-        ["xpath=//input[@id='cvv']", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
-      ],
-      "value": "10/12"
-    }, {
       "id": "7842d4f3-de8e-4f48-8e1c-20a85497a471",
       "comment": "",
       "command": "click",
@@ -4529,6 +4516,19 @@
         ["xpath=//div[3]/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "d69811c4-2f3a-42f1-b74a-f6f03e12afa0",
+      "comment": "",
+      "command": "type",
+      "target": "id=cvv",
+      "targets": [
+        ["id=cvv", "id"],
+        ["name=cvv", "name"],
+        ["css=#cvv", "css:finder"],
+        ["xpath=//input[@id='cvv']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "123"
     }, {
       "id": "e98fc695-5c82-4625-a870-ad66f17d1a8e",
       "comment": "",
