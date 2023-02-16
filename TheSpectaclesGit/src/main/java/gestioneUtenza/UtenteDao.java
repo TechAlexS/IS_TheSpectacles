@@ -290,7 +290,7 @@ import util.*;
 			prep.setString(4, utente.getEmail());
 			prep.setString(5, utente.getPass());
 			prep.setInt(6, utente.getRole());				
-			System.out.println("il birth : "+utente.getBirthday());
+			System.out.println("DoSave Utente : "+prep);
 			prep.executeUpdate();
 			} finally {
 				prep.close();

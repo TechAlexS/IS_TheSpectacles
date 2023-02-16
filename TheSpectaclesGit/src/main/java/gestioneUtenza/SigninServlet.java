@@ -88,9 +88,10 @@ public class SigninServlet extends HttpServlet {
 		try {
 			//System.out.println((utenteModel.doRetrieveByMail(email).getEmail()==null));
 			if(utenteModel.doRetrieveByMail(email).getEmail()==null) {
-				utenteModel.doSave(newUtente);
-				UtenteBean client=utenteModel.doRetrieveByKey(value);
+				utenteModel.doSave(newUtente); 
+				UtenteBean client=utenteModel.doRetrieveByMail(email);
 				request.getSession().setAttribute("auth", client);
+				System.out.println("Registrato bean: "+client.toString());
 				out.print("Utente");
 			}
 			else

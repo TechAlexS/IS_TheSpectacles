@@ -53,7 +53,7 @@ class TestRegistrazioneServlet {
 	   
 	  }
 	 
-	 //TC_1.7 Dati corretti, email non presente
+	 //TC_1.7 Dati corretti, ed email non presente nel db
 	  @Test
 	  public void testCase_1_7() throws ServletException, IOException{
 	   
