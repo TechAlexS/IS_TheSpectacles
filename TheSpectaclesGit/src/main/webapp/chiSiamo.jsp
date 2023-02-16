@@ -86,7 +86,7 @@ width: 100%;
 				<div class="content">
 					<h1 class="page-name">Chi Siamo</h1>
 					<ol class="breadcrumb">
-						<li><a href="index.html">Home</a></li>
+						<li><a href="http://localhost/TheSpectacles/OcchialeControl">Home</a></li>
 						<li class="active">chi siamo</li>
 					</ol>
 				</div>
@@ -106,7 +106,7 @@ hanno pensato di realizzare un e-commerce finalizzato alla vendita di occhiali p
 <div>
 	<div>
 		<div class="container">
-			<img src="images/team/roberto.jpg" class="imge"><br><br>
+			<img src="images/team/roberto.jpeg" class="imge"><br><br>
    		</div>
 					<p><b>Roberto Piscopo</b><br>
 
@@ -127,7 +127,7 @@ hanno pensato di realizzare un e-commerce finalizzato alla vendita di occhiali p
 <div align="center">
 	<div>
 		<div class="container">
-			<img src="images/team/mario.jpg" class="imge"><br><br>
+			<img src="images/team/mario.jpeg" class="imge"><br><br>
    		</div>
 					<p><b>Mario Ranieri</b><br>
 						Studente di Informatica all'Università degli Studi di Salerno.<br>
@@ -155,6 +155,23 @@ hanno pensato di realizzare un e-commerce finalizzato alla vendita di occhiali p
 								<a href="https://github.com/TechAlexS">Github.com/TechAlexS</a>
 						</p>
 	</div>
+</div>
+
+<div align="center">
+	<div>
+		<div class="container">
+			<img src="images/team/luca.jpeg" class="imge"><br><br>
+   		</div>
+					<p><b>Luca Di Meglio</b><br>
+						Studente di Informatica all'Università degli Studi di Salerno.<br>
+						</p>
+						<p>
+								<br>Contatti:<br>
+
+								l.dimeglio@studenti.unisa.it<br>					
+								<a href="https://github.com/LucaDiMeglio31">Github.com/LucaDiMeglio31</a></p>
+	</div>
+
 </div>
 </div>
 
