@@ -2,7 +2,7 @@
   "id": "c313eff5-4498-4975-a088-b454130dc369",
   "version": "2.0",
   "name": "TheSpectacles",
-  "url": "http://localhost/TheSpectacles/ShopControl",
+  "url": "http://localhost/TheSpectacles",
   "tests": [{
     "id": "ce102dba-c2f3-484f-beb8-249166e0ec9d",
     "name": "TC_1.1",
@@ -5170,6 +5170,94 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "7f53e07e-8bce-43b7-8d83-1ca29c2fed66",
+    "name": "TC_9.1",
+    "commands": [{
+      "id": "607b620c-af56-4161-9937-b2980360397c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/TheSpectacles/OcchialeControl",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9a6a7bf-f20a-4169-99da-c0179f96a4cd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x652",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "df316b6c-b261-4966-be14-0fc1f4171318",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav > .dropdown:nth-child(2) > .dropdown-toggle",
+      "targets": [
+        ["css=.nav > .dropdown:nth-child(2) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Shop')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'shop.jsp')]", "xpath:href"],
+        ["xpath=//div[2]/ul/li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6597e84b-f1a7-48ef-a6da-05ca0a4b70d2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.open li:nth-child(3) > a",
+      "targets": [
+        ["css=.open li:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Tutti gli occhiali')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li[2]/div/div/div/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'shop.jsp')])[2]", "xpath:href"],
+        ["xpath=//li[2]/div/div/div/ul/li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ae679285-7c8b-4a68-9de6-095ba4c0c1b8",
+    "name": "TC_9.2",
+    "commands": [{
+      "id": "4763100b-19fd-42c5-990c-0fc00a14fb01",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/TheSpectacles/OcchialeControl",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fb203a83-e26c-4871-b3bf-1f267a2ee24f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x652",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2bdf1bd7-d3a3-499e-84e5-f68e3efa68b1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav > .dropdown:nth-child(2) > .dropdown-toggle",
+      "targets": [
+        ["css=.nav > .dropdown:nth-child(2) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Shop')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'shop.jsp')]", "xpath:href"],
+        ["xpath=//div[2]/ul/li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9c8f263-fd4b-4f4b-829b-750c81a82170",
+      "comment": "",
+      "command": "click",
+      "target": "css=.open li:nth-child(3) > a",
+      "targets": [
+        ["css=.open li:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Tutti gli occhiali')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li[2]/div/div/div/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'shop.jsp')])[2]", "xpath:href"],
+        ["xpath=//li[2]/div/div/div/ul/li[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "6cc88a91-94c7-4585-a79d-96f03579ea7e",
@@ -5241,6 +5329,13 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["53a8291e-2410-481a-9187-75b5a74d525e", "cdfb9d1b-b5e6-4203-8808-65d7047d2902"]
+  }, {
+    "id": "d7b3e79e-582f-4a9e-a655-6c1202a81a6e",
+    "name": "Mostra catalogo",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["7f53e07e-8bce-43b7-8d83-1ca29c2fed66", "ae679285-7c8b-4a68-9de6-095ba4c0c1b8"]
   }],
   "urls": ["http://localhost/", "http://localhost/TheSpectacles/signin.jsp", "http://localhost/TheSpectacles/login.jsp", "http://localhost/TheSpectacles", "http://localhost/TheSpectacles/OcchialeControl", "http://localhost/TheSpectacles/carrello.jsp", "http://localhost/TheSpectacles/Amministratore", "http://localhost/TheSpectacles/ControlloAdmin?azione=ordiniData", "http://localhost/TheSpectacles/aggiungiIndirizzo.jsp", "http://localhost/TheSpectacles/Indirizzo?page=%27%27", "http://localhost/TheSpectacles/ShopControl"],
   "plugins": []
