@@ -28,25 +28,38 @@ public class ServletControlloAdmin extends HttpServlet {
 	 * @throws ServletException, IOException
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String azione=request.getParameter("azione");
-		UtenteBean utente=(UtenteBean) request.getSession().getAttribute("auth");
-		request.setAttribute("admin", utente);
 		
-		if(azione!=null && azione.equalsIgnoreCase("controllo")) {
-			RequestDispatcher dis=request.getRequestDispatcher("/PageAmministratore.jsp");
+		if(request.getSession().getAttribute("auth")!=null) {
+		
+			UtenteBean cerca=(UtenteBean) request.getSession().getAttribute("auth");
+			if(cerca.getRole()==1) {
+				String azione=request.getParameter("azione");
+				
+				request.setAttribute("admin", cerca);
+				
+				if(azione!=null && azione.equalsIgnoreCase("controllo")) {
+					RequestDispatcher dis=request.getRequestDispatcher("/PageAmministratore.jsp");
+					dis.forward(request, response);
+				}
+				if(azione!=null && azione.equalsIgnoreCase("ordiniNominativo")) {
+					RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniAdmin.jsp");
+					dis.forward(request, response);
+				}
+				if(azione!=null && azione.equalsIgnoreCase("ordiniData")) {
+					RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniDataAdmin.jsp");
+					dis.forward(request, response);
+				}
+				if(azione==null) {
+				RequestDispatcher dis=request.getRequestDispatcher("/ControlloAmministratore.jsp");
+				dis.forward(request, response);
+				}
+			}else {
+				RequestDispatcher dis=getServletContext().getRequestDispatcher("/index.jsp");
+				dis.forward(request, response);
+			}
+		}else {
+			RequestDispatcher dis=getServletContext().getRequestDispatcher("/login.jsp");
 			dis.forward(request, response);
-		}
-		if(azione!=null && azione.equalsIgnoreCase("ordiniNominativo")) {
-			RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniAdmin.jsp");
-			dis.forward(request, response);
-		}
-		if(azione!=null && azione.equalsIgnoreCase("ordiniData")) {
-			RequestDispatcher dis=request.getRequestDispatcher("/ControlloOrdiniDataAdmin.jsp");
-			dis.forward(request, response);
-		}
-		if(azione==null) {
-		RequestDispatcher dis=request.getRequestDispatcher("/ControlloAmministratore.jsp");
-		dis.forward(request, response);
 		}
 	}
 

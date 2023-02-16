@@ -54,7 +54,6 @@ public class ServletAmministratore extends HttpServlet {
 					
 							
 						request.setAttribute("admin", cerca);
-						
 						request.removeAttribute("occhiali");
 						request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(null));
 						
