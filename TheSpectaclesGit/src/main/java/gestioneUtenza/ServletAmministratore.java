@@ -46,43 +46,62 @@ public class ServletAmministratore extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			request.removeAttribute("occhiali");
-			request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(null));
-			UtenteBean cerca=(UtenteBean) request.getSession().getAttribute("auth");
-			request.setAttribute("admin", cerca);
-			String azione=request.getParameter("action");
-			System.out.println("Servlet Amministratore: "+azione);
 			
-			if(azione!=null && azione.equalsIgnoreCase("dettagli")) {
-				ArrayList<String> valori=new ArrayList<String>();
-				valori.add(request.getParameter("id"));
-				System.out.println("sono in dettagli: "+valori.get(0));
-			  //errore qui
-				request.removeAttribute("des");
-				request.setAttribute("des", modelOcchiale.singleProduct(valori));	
-				RequestDispatcher dis=getServletContext().getRequestDispatcher("/ProdottiDesAmministratore.jsp");
-				dis.forward(request, response);
-				return;
-			}
-			if(azione!=null && azione.equalsIgnoreCase("modifica")) {
-				ArrayList<String> valori=new ArrayList<String>();
-				valori.add(request.getParameter("id"));
-				System.out.println("sono in modifica: "+valori.get(0));
-				request.setAttribute("modifica", modelOcchiale.singleProduct(valori));	
-				RequestDispatcher dis=getServletContext().getRequestDispatcher("/ModificaAmministratore.jsp");
-				dis.forward(request, response);	
-				return;
-			}
-			if(azione!=null && azione.equalsIgnoreCase("aggiungi")) {
-				RequestDispatcher dis=getServletContext().getRequestDispatcher("/AggiungiProdAdmin.jsp");
-				dis.forward(request, response);	
-				return;
-			}
+			if(request.getSession().getAttribute("auth")!=null) {
+				
+				UtenteBean cerca=(UtenteBean) request.getSession().getAttribute("auth");
+				if(cerca.getRole()==1) {
+					
+							
+						request.setAttribute("admin", cerca);
+						
+						request.removeAttribute("occhiali");
+						request.setAttribute("occhiali", modelOcchiale.doRetrieveAll(null));
+						
+						String azione=request.getParameter("action");
+						System.out.println("Servlet Amministratore: "+azione);
+						
+						if(azione!=null && azione.equalsIgnoreCase("dettagli")) {
+							ArrayList<String> valori=new ArrayList<String>();
+							valori.add(request.getParameter("id"));
+							System.out.println("sono in dettagli: "+valori.get(0));
+						  //errore qui
+							request.removeAttribute("des");
+							request.setAttribute("des", modelOcchiale.singleProduct(valori));	
+							RequestDispatcher dis=getServletContext().getRequestDispatcher("/ProdottiDesAmministratore.jsp");
+							dis.forward(request, response);
+							return;
+						}
+						if(azione!=null && azione.equalsIgnoreCase("modifica")) {
+							ArrayList<String> valori=new ArrayList<String>();
+							valori.add(request.getParameter("id"));
+							System.out.println("sono in modifica: "+valori.get(0));
+							request.setAttribute("modifica", modelOcchiale.singleProduct(valori));	
+							RequestDispatcher dis=getServletContext().getRequestDispatcher("/ModificaAmministratore.jsp");
+							dis.forward(request, response);	
+							return;
+						}
+						if(azione!=null && azione.equalsIgnoreCase("aggiungi")) {
+							RequestDispatcher dis=getServletContext().getRequestDispatcher("/AggiungiProdAdmin.jsp");
+							dis.forward(request, response);	
+							return;
+						}
+							RequestDispatcher dis=getServletContext().getRequestDispatcher("/PageAmministratore.jsp");
+							dis.forward(request, response);
+						}
+						else {
+							RequestDispatcher dis=getServletContext().getRequestDispatcher("/index.jsp");
+							dis.forward(request, response);
+						}
+				}
+				else {
+					RequestDispatcher dis=getServletContext().getRequestDispatcher("/login.jsp");
+					dis.forward(request, response);
+				}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher dis=getServletContext().getRequestDispatcher("/PageAmministratore.jsp");
-		dis.forward(request, response);
+		
 	}
 	
 	/**
